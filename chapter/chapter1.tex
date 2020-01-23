@@ -1,0 +1,71 @@
+%% 第一章--chapter1.tex
+\chapter{在使用之前\ldots}
+这是一份北京化工大学本科生毕业论文模板的使用指南。
+这份文档亦由该模板编译而成。
+本指南的目的在于帮助北化本科毕业生掌握此模板的使用方法，从而写出符合北化《本科生毕业设计（论文）撰写规范》要求的毕业论文。
+
+本模板的内容范围仅限于毕业设计（论文）文本，且不含论文封面。任务书、中期检查表、评阅意见表及其说明、评分手册与优秀毕业设计（论文）简介等非毕业设计（论文）文本部分不在其中。
+
+	\section{概述}
+	本写作模板基于\CTeX{}的book 文类，所以 book 的选项对于本模板也是有效的，且默认编码为 UTF-8。
+	本模板已在Windows\ 10(64bit)操作系统下，\TeX{}Live 2019，使用 XeLaTeX 编译通过，
+	至于Mac和Linux系统不能保证完美运行。
+	由于此模板的\emph{参考文献}使用\BibTeX{}，所以完整的编译链为:
+	XeLaTeX $\rightarrow$ BibTeX{}$\rightarrow$ XeLaTeX{}$\rightarrow$ XeLaTeX{}。
+		\subsection{开源说明}
+			本项目开源于GitHub\footnote{\url{https://github.com/Miracle0565/BUCTthesis}}，若要反馈bug(s)请于此提交Issues。本模板不做任何商业用途。
+		\subsection{模板组成}
+		在表~\ref{tab:mainfile}中罗列了本模板所包含的文件。
+		\begin{table}%[H]
+			\centering
+			\caption{主要文件}
+			\label{tab:mainfile}
+			\begin{tabular}{ll}
+				\hline 
+				文件(夹)名 & 简述 \\ 
+				\hline 
+				\texttt{buctthesis.tex} & 主文件 \\
+				\texttt{buctthesis.sty} & \LaTeX{}宏包文件\\
+				\texttt{buctthesis.pdf} & 使用指南，即您正在阅读的这个文件\\
+				\texttt{gbt7714-2005.bst} & \BibTeX{}用到的参考文献格式模板\\
+				\texttt{thesisbib.bib}		& \BibTeX{}参考文献数据库文件\\
+				\texttt{chapter/} & 各个“章”的源文件路径\\
+				\texttt{code/} & 源代码的路径\\
+				\texttt{figure/} & 图片的路径\\
+				\texttt{scanPDF/} & 存放已扫描的封面等文件的路径\\
+				\hline 
+			\end{tabular} 
+		\end{table}
+		以下是各个文件（夹）的详细介绍：
+		\subsubsection{\texttt{buctthesis.tex}}主文件。
+		内含少量注释，一般您需要做的有：
+		删改中英文标题的名称、增添正文的章节、增添附录的章节。
+		具体方式请参考第\ref{chap:CodeIntro}章。
+		编译此文件以形成PDF。
+		\subsubsection{\texttt{buctthesis.sty}}
+		\LaTeX{}宏包文件，起到格式控制作用。
+		该文档已经做了较为充分的注释，若您觉得依此宏包编译出的文档有不美观甚至有错误的地方，
+		可以在其中对应处做些许修改。
+		\subsubsection{\texttt{gbt7714-2005.bst}}
+		用于生成符合格式要求的\emph{参考文献}部分。此文件包含其作者信息。
+		\subsubsection{\texttt{chapter/}、\texttt{figure/}和\texttt{code/}}
+		这三个文件夹分别存放对应的文件，在第\ref{chap:CodeIntro}章会讲述如何将各个章节、图片和源代码等插入至文章的相应位置中。
+		
+
+	\section{一些IDE的初始配置}
+		开始之前，最好能使用最新的发行版\LaTeX{}，使用旧版可能会有潜在的问题。
+		\subsection{\href{http://texstudio.sourceforge.net}{\TeX{} Studio}}
+			编译时选择\XeLaTeX{}：
+			\emph{选项(O)} $\rightarrow$ \emph{设置 TeX Studio} $\rightarrow$ \emph{构建} $\rightarrow$ \emph{默认编译器} 中选择\texttt{XeLaTeX}，编译时会根据实际情况判断是否执行一个完整的编译链。
+
+		\subsection{\href{https://code.visualstudio.com}{Visual Studio Code}}
+		初次使用做如下配置：
+		\begin{itemize}
+			\item 在\emph{应用商店}（Extensions，快捷键Ctrl+Shift+X）中下载扩展：\texttt{LaTeX Workshop}.
+			\item 在\emph{设置}（Settings，快捷键Ctrl+,）中的搜索框输入\texttt{latex}，单击搜索显示的第一项\texttt{在setting.json中编辑}，并添加如下代码：（此代码也能在\texttt{code/}文件夹中找到）
+			\lstinputlisting[caption=使用VS Code编译\LaTeX{}的配置文件]{code/setting.json}
+			其中第81行代码的作用是：使源代码在视区宽度处自动折行。若不需要可以删除。
+			编译时，工具栏中选择LaTeX（快捷键Ctrl+Alt+X），并在\texttt{COMMANDS}中选择所需的编译方式。内含完整的编译链，可手动选择。
+	
+		\end{itemize}
+		

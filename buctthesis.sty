@@ -1,0 +1,396 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                      buctthesis.sty                       %%% 
+%%%                  Copyright Miracle0565                    %%%
+%%%          https://github.com/Miracle0565/BUCTthesis        %%%
+%%%                           v0.9.0                          %%%
+%%%                          Jan.2020                         %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ProvidesPackage{buctthesis}[v0.9.0]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Frontmatter Settings  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% 日期
+\ctexset{today=big}
+
+%% 诚信声明
+\newenvironment{declear}{
+    \clearpage
+    \setlength{\baselineskip}{2em}
+    \section*{\songti \zihao{3} 诚信申明}
+    \subsection*{\zihao{4} 本人申明：}
+    \def\addsign{\par \raggedleft \vspace{4ex} 本人签名：\ \underline{\phantom{在此写上你的大名}}}
+    \def\addsigndate{\hspace{4ex} 签字日期：\ \underline{\phantom{在此写上完成日期}}}
+}
+
+%% 摘要
+
+% 中、英文摘要同一页：
+% 中文摘要
+\newenvironment{abstractsame}
+{
+    \clearpage
+    \ctexset{
+        section={
+            beforeskip=0pt,
+            afterskip=0pt,
+        }
+    }
+    \section*{\Large \bf{\thesistitle}}
+    \section*{\bf{摘\quad 要}}
+}
+
+% 英文摘要
+\newenvironment{abstractsameen}
+{
+    \vspace{1em}
+    \ctexset{
+        section={
+            beforeskip=0pt,
+            afterskip=0pt,
+        }
+    }
+    \section*{\Large \bf{\thesistitleen}}
+    \section*{\large \bf{ABSTRACT}}
+}
+
+% 中、英文摘要分为两页：
+% 中文摘要
+\newenvironment{abstract}
+{
+    \clearpage
+    \section*{\Large \bf{\thesistitle}}
+    \section*{\bf{摘\quad 要}}
+}
+
+%英文摘要
+\newenvironment{abstracten}
+{   
+    \clearpage
+    \section*{\Large \bf{\thesistitleen}}
+    \section*{\large \bf{ABSTRACT}}
+}
+
+% 使用环境的前言
+\newenvironment{foreword}
+{
+    \clearpage
+    \chapter*{前\quad 言}
+    
+}
+
+% 结论，编入目录
+\newenvironment{CONCLUSION}
+{
+    \chapter*{结\quad 论}
+    \addcontentsline{toc}{chapter}{结论}
+}
+
+% 符号说明，编入目录
+\newenvironment{denotation}
+{
+    \chapter*{符号说明}
+    \addcontentsline{toc}{chapter}{符号说明}
+}
+
+% 致谢，编入目录
+\newenvironment{acknowledgement}
+{
+    \chapter*{致\quad 谢}
+    \addcontentsline{toc}{chapter}{致谢}
+}
+
+%% 目录
+% 设置subsubsection在正文中不编号为“1.1.1.1”的形式，且不出现在目录里
+\setcounter{secnumdepth}{3} 
+\setcounter{tocdepth}{2}
+
+% 以下参考：https://www.jianshu.com/p/ccd14653a128 和 https://www.latexstudio.net/archives/10586.html、titlesec.pdf
+
+%设置目录格式
+%\RequirePackage[nottoc]{tocbibind}	%增加目录，使用nottoc取消目录中显示目录本身。对本宏包而言，这一行所起作用仅仅是加入“参考文献”部分，但不可与bibliography.tex增加目录的命令同时使用。
+\RequirePackage{titletoc}
+
+% “目录”二字的格式，且设置PDF带有目录的书签，而“目录”本身不编入目录
+\renewcommand\contentsname{\centerline{\heiti \bf \zihao{-3}\pdfbookmark{目录}{toc}{目\quad 录}}}
+
+%\titlecontents{章节名称}[左端距离]
+%    {标题字体、与上文间距等}
+%    {标题序号}{空}
+%    {引导符和页码}
+%    [与下文间距]
+\titlecontents{chapter}[0mm]
+    {\heiti\zihao{4} \vspace{8pt}}
+    {\thecontentslabel\hspace{10pt}}{}
+    {\hspace{.5ex}\titlerule*[3pt]{$\cdot$}\hspace{-0.5ex}\bf\contentspage}
+\titlecontents{section}[5mm]
+    {\songti \zihao{4}}
+    {\thecontentslabel\hspace{10pt}}{}
+    {\hspace{.5ex}\titlerule*[5pt]{$\cdot$}\hspace{0.2ex}\contentspage}
+\titlecontents{subsection}[10mm]
+    {\songti \zihao{4}}
+    {\thecontentslabel\hspace{10pt}}{}
+    {\hspace{.5ex}\titlerule*[7pt]{$\cdot$}\hspace{-.2ex}\contentspage}
+
+% 待改进：插图编目录
+%\def\listfigurename{插图}
+%\titlecontents{figure}[10mm]
+%    {\songti \zihao{4}}
+%    {\thecontentslabel\hspace{10pt}}{}
+%    {\hspace{.5ex}\titlerule*[7pt]{$\cdot$}\contentspage}
+
+% 待改进：表格编目录
+%\def\listfigurename{表格}
+%\titlecontents{table}[10mm]
+%    {\songti \zihao{4}}
+%    {\thecontentslabel\hspace{10pt}}{}
+%    {\hspace{.5ex}\titlerule*[7pt]{$\cdot$}\contentspage}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Mainmatter Settings   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 生成诸如错落有致的LaTeX的logo
+\RequirePackage{bxtexlogo}
+
+% 这个宏包会和\maketitle冲突
+%\RequirePackage{doc}
+
+% 这个宏包没用到，可以用来控制章节等的标题格式
+%\RequirePackage{titlesec}
+
+% 以下设置参考ctex.pdf中\ctexset命令
+% 正文部分的章、节、小节、小小节标题
+\ctexset{
+    chapter={
+        name = {第,章},                                     % 形成“第X章”的格式
+        number = {\arabic{chapter}},                        % X是阿拉伯数字
+        format = {\heiti \bf \centering \zihao{-3}},        % 黑体、居中、三号
+        beforeskip = 12 pt,                                 % 段前和段后稍微空一点距离
+        afterskip = 24 pt,
+        fixskip = true,                                     % 抑制多余间距
+        aftername = \qquad,                                 % 在“第X章”三个字后，空两格
+    },
+    section={
+        name = {第,节},
+        format = {\heiti \centering \zihao{-3}},
+        %number ={\arabic{chapter}.\arabic{section}},        % 形成“第X.Y节”的格式 ·注：若加上此行，附录部分就不对了
+        aftername = \quad,                                  % 在“第X.Y节”后，空一格
+    },
+    subsection = {
+        format = {\songti \raggedright \zihao{-4}},
+        aftername = \quad,
+    },
+    subsubsection={
+        name = {(,)},
+        format = {\songti \zihao{-4}},
+        number = {\arabic{subsubsection}},                  % 仅保留subsubsection部分的数字，而不是“X.Y.Z.A”
+        beforeskip=3pt,
+        afterskip=3pt,
+        aftername = \hspace{1mm},
+        indent = 12pt,                                       % 首行缩进
+    },
+}
+
+%% 脚注带圈圈，参考《LaTeX 入门》P119
+%%\renewcommand\thefootnote{\textcircled{\arabic{footnote}}}    %不美观，用下面两行
+\RequirePackage{pifont}
+%\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
+
+%% 列表环境：参考《LaTeX 入门》P100，方法同上；enumitem.pdf
+% enumerate环境，一级列表标签改为带圈数字
+\renewcommand\theenumi{\ding{\numexpr171+\value{enumi}}}
+\renewcommand\labelenumi{\theenumi}
+\RequirePackage{enumitem}
+\setlist{
+    leftmargin = 2em,
+    topsep = 0.5em,
+    parsep = 0em,
+    itemsep = 0em,
+}
+
+%% 上标引用
+\newcommand{\scite}[1]{\textsuperscript{\cite{#1}}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%     Basic Packages     %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\RequirePackage{ctex}
+
+%% 西文字体
+% 下面这个宏包不适用于PDFLaTeX编译
+% 以下设置参考《LaTeX 入门》P70
+\RequirePackage{fontspec}
+\setmainfont{Times New Roman}       % 罗马字体
+\setsansfont{Arial}                 % 无衬线字体
+\setmonofont{Consolas}              % 等宽字体
+
+% 国际单位制
+\RequirePackage{siunitx}
+
+% 化学
+\RequirePackage[version=4]{mhchem}
+
+%% 数学
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{amssymb}
+% 下面这个宏包有可能会因为字体（或字号）的原因报 Warning(s)，如果不需要请不要使用
+%\RequirePackage{mathrsfs}
+\newtheorem{axiom}{公理}
+\newtheorem{theorem}{定理}
+\newtheorem{corollary}{推论}
+\newtheorem{conclusion}{结论}
+\newtheorem{remark}{注解}
+\newtheorem{assumption}{假设}
+\newtheorem{algorithm}{算法}
+\newtheorem{definition}{定义}
+\newtheorem{property}{性质}
+\newtheorem{proposition}{命题}
+\newtheorem{lemma}{引理}
+
+\renewcommand{\proofname}{证明}
+
+% “注：”的环境
+%\RequirePackage{manfnt}
+\newenvironment{note}{
+%    %\par\noindent{\makebox[0pt][r]{\textdbend}}
+    \hangindent = 4em
+    \slshape 注：}
+
+%% 表格
+\RequirePackage{longtable}
+\RequirePackage{threeparttable}
+\RequirePackage{dcolumn}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+\RequirePackage{booktabs}
+
+%% 图形
+\RequirePackage{graphicx}
+\RequirePackage{subfigure}
+\RequirePackage{caption}
+\RequirePackage{float}
+
+% 图、表、方程caption格式
+\renewcommand{\captionfont}{\kaishu \zihao{5}}  
+\renewcommand{\captionlabelfont}{\kaishu \zihao{5}}
+\DeclareCaptionLabelSeparator{capspace}{\quad}
+\captionsetup{labelsep=capspace}
+
+% 位置间距控制
+\captionsetup[table]{
+    position = top,
+    aboveskip = 0.5em,
+    belowskip = 0.5em,
+}
+
+\captionsetup[figure]{
+    position = bottom,
+    aboveskip = 0.5em,
+    belowskip = 0.5em,
+}
+
+% 改为“表X-x”、“图X-x”、“式X-x"，X为数字章号
+\renewcommand{\tablename}{表}
+\renewcommand{\thetable}{\arabic{chapter}-\arabic{table}}
+\renewcommand{\figurename}{图}
+\renewcommand{\thefigure}{\arabic{chapter}-\arabic{figure}}
+\renewcommand{\theequation}{式\arabic{chapter}-\arabic{equation}}
+
+%% 代码
+\RequirePackage{listings}
+
+% 以下设置参考listings.pdf
+\lstset{
+    aboveskip = 0.5em,
+    belowskip = 0.5em,                                      % 前后间距
+    tabsize = 4,                                            % tab等于4个空格
+    basicstyle = \ttfamily \zihao{5},                       % 字体设定为等宽、五号
+    frame=single,                                           % 外围单线框
+    commentstyle = \ttfamily \itshape \color{gray},         % 注释
+    keywordstyle = \ttfamily \color{blue},                  % 关键字蓝色.若加上 \bf,则会使用罗马字体族（本文Times New Roman
+    backgroundcolor = \color{lightgray!15},                 % 背景颜色为15%的浅灰色
+    showtabs = false,                                       % 不显示 TAB
+    showspaces = false,                                     % 非字符串中，不显示空格
+    showstringspaces = true,                                % 字符串中，显示空格
+    captionpos = t,                                         % 标题位置
+    breaklines = true,                                      % 自动断行
+    numbers = left,                                         % 左侧显示行号
+    numberstyle = \tiny \color{gray},                       % 行号为小字
+    stepnumber = 1,                                         % 行号逐行递增
+    extendedchars = false,                                  % 防止因为代码跨页时，章节标题、页眉等汉字不显示的问题
+    escapechar = {@*},                                      % 逃逸字符，可以返回至LaTeX代码环境里
+}
+\renewcommand{\lstlistingname}{代码}
+
+% 待改进：改为如“代码2-1”
+% \renewcommand{\thelstlisting}{\arabic{chapter}-\arabic{lstlisting}}
+
+%% 色彩
+\RequirePackage{xcolor}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%     Pages Settings     %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% 页边距
+% 以下参考geometry.pdf
+\RequirePackage{geometry}
+\geometry{
+    a4paper,
+    top=3.5cm,bottom=2.6cm,left=2.7cm,right=2.7cm,          % 上3.5cm，下2.6cm，左2.7cm，右2.7cm，
+    headheight=1.1cm, footskip=0.6cm                        % 页眉2.4cm，页脚2cm
+}
+
+%% 页眉页脚
+% 以下参考fancyhdr.pdf 和《LaTeX 入门》2.4.3
+\RequirePackage{fancyhdr}
+
+% 设置正文页眉页脚
+\pagestyle{fancy}
+    \fancyhf{}
+    \fancyfoot[C]{\zihao{-5}\songti\thepage}                           % 页脚居中插入页码
+    \fancyhead[C]{\zihao{-5}\songti{北京化工大学毕业设计（论文）}}       % 页眉
+    \renewcommand\headrulewidth{0.6pt}                                 % 页眉线，默认为0.4pt
+    \renewcommand\footrulewidth{0pt}                                   % 页脚线，默认为Opt
+
+%设置章所在页的页眉页脚（同上）
+\fancypagestyle{plain}{%
+    \fancyfoot[C]{\zihao{-5}\songti\thepage}
+    \fancyhead[C]{\zihao{-5}\songti{北京化工大学毕业设计（论文）}}
+    \renewcommand\headrulewidth{0.6pt}
+    \renewcommand\footrulewidth{0pt}
+}
+
+\renewcommand{\frontmatter}{
+    \pagenumbering{Roman}
+    \pagestyle{plain}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%     Other Settings     %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{hyperref}
+\hypersetup{
+    colorlinks=false,               % 不使用彩色文字链接
+    linkcolor=black,
+    bookmarksnumbered=true,         % 书签中，章节编号
+    bookmarksopenlevel=\maxdimen,   % 书签目录层次
+    citecolor=green,                % 引用标记颜色
+    pdfhighlight=/N,                % 点击链接时:/N外观不变;/P黑色半框;/O黑色边框
+    breaklinks=true,                % 允许断行
+}

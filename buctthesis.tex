@@ -1,0 +1,72 @@
+%-*- coding:UTF-8 -*-
+%buctthesis.tex
+\documentclass[a4paper,12pt,UTF8,oneside]{ctexbook}
+\usepackage{buctthesis}
+
+% 中英文标题
+\def\thesistitle{BUCTthesis写作指南}
+\def\thesistitleen{How To \TeX{} With BUCTthesis}
+
+% 作者中英文名
+\def\theauthor{Miracle0565}
+%\def\theauthoren{Miracle0565}		%暂无使用
+\author{\theauthor}
+
+% 班级与学号，暂无使用
+%\def\stucls{某某****}
+%\def\stunum{20*******}
+
+% 日期
+\date{\today}
+
+\begin{document}
+
+% 正文开始前，以大写罗马数字编页码
+\frontmatter
+
+% 生成封面
+\title{\thesistitle}
+\maketitle
+
+% 诚信申明
+\include{chapter/declear}
+
+% 摘要
+\include{chapter/abstract}
+
+% 生成主目录，目录后强制分页
+\tableofcontents
+
+% 前言
+\include{chapter/foreword}
+
+% 正文开始处，以阿拉伯数字编页码
+\mainmatter
+
+% 正文开始=================
+
+	\include{chapter/chapter1}
+	\include{chapter/chapter2}
+	\include{chapter/chapter3}
+
+% 正文结束=================
+
+%\backmatter
+
+% 结论
+\include{chapter/conclusion}
+
+% 参考文献
+\input{chapter/bibliography}
+
+% 符号说明
+\include{chapter/denotation}
+
+% 致谢
+\include{chapter/acknowledgement}
+
+\appendix
+	\include{chapter/app1}
+	\include{chapter/app2}
+
+\end{document}
