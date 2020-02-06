@@ -1,40 +1,44 @@
 %-*- coding:UTF-8 -*-
-%buctthesis.tex
-\documentclass[a4paper,12pt,UTF8,oneside]{ctexbook}
+% 主文件--buctthesis.tex
+\documentclass[a4paper,zihao=-4,UTF8,oneside]{ctexbook}
 \usepackage{buctthesis}
 
 % 中英文标题
-\def\thesistitle{BUCTthesis写作指南}
+\def\thesistitle{BUCTthesis 写作指南}
 \def\thesistitleen{How To \TeX{} With BUCTthesis}
 
 % 作者中英文名
 \def\theauthor{Miracle0565}
-%\def\theauthoren{Miracle0565}		%暂无使用
+\def\theauthoren{Miracle0565}
 \author{\theauthor}
 
-% 班级与学号，暂无使用
-%\def\stucls{某某****}
-%\def\stunum{20*******}
+% 班级与学号
+\def\stucls{某某1024}
+\def\stunum{2034567890}
+
+% 导师
+\def\thesupervisor{阿不思·邓布利多教授}
+\def\thesupervisoren{Professor Albus Dumbledore}
 
 % 日期
-\date{\today}
+%\date{\today}
 
 \begin{document}
 
 % 正文开始前，以大写罗马数字编页码
 \frontmatter
 
-% 生成封面
+% 生成封面。因学校统一印制封面，正式写作可删去。
 \title{\thesistitle}
 \maketitle
 
-% 诚信申明
+% 诚信声明
 \include{chapter/declear}
 
 % 摘要
 \include{chapter/abstract}
 
-% 生成主目录，目录后强制分页
+% 生成主目录
 \tableofcontents
 
 % 前言
@@ -43,16 +47,15 @@
 % 正文开始处，以阿拉伯数字编页码
 \mainmatter
 
-% 正文开始=================
+% 正文开始=========================
 
 	\include{chapter/chapter1}
 	\include{chapter/chapter2}
 	\include{chapter/chapter3}
 
-% 正文结束=================
+% 正文结束=========================
 
 %\backmatter
-
 % 结论
 \include{chapter/conclusion}
 
@@ -62,9 +65,13 @@
 % 符号说明
 \include{chapter/denotation}
 
+% 翻译
+\include{chapter/translation}
+
 % 致谢
 \include{chapter/acknowledgement}
 
+% 附录
 \appendix
 	\include{chapter/app1}
 	\include{chapter/app2}

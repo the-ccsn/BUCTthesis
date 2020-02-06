@@ -2,11 +2,11 @@
 %%%                      buctthesis.sty                       %%% 
 %%%                  Copyright Miracle0565                    %%%
 %%%          https://github.com/Miracle0565/BUCTthesis        %%%
-%%%                           v0.9.0                          %%%
-%%%                          Jan.2020                         %%%
+%%%                           v0.9.1                          %%%
+%%%                          Feb.2020                         %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesPackage{buctthesis}[v0.9.0]
+\ProvidesPackage{buctthesis}[v0.9.1]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Frontmatter Settings  %%
@@ -21,57 +21,81 @@
     \setlength{\baselineskip}{2em}
     \section*{\songti \zihao{3} 诚信申明}
     \subsection*{\zihao{4} 本人申明：}
-    \def\addsign{\par \raggedleft \vspace{4ex} 本人签名：\ \underline{\phantom{在此写上你的大名}}}
+    \def\addsign{\raggedleft \vspace{2em} 本人签名：\ \underline{\phantom{在此写上你的大名}}}
     \def\addsigndate{\hspace{4ex} 签字日期：\ \underline{\phantom{在此写上完成日期}}}
-}
+}{\par}
 
 %% 摘要
 
 % 中、英文摘要同一页：
 % 中文摘要
-\newenvironment{abstractsame}
+\newenvironment{abstract*}
 {
     \clearpage
     \ctexset{
         section={
-            beforeskip=0pt,
-            afterskip=0pt,
+            beforeskip = -6 pt,
+            afterskip = -2 pt,
         }
     }
-    \section*{\Large \bf{\thesistitle}}
-    \section*{\bf{摘\quad 要}}
-}
+    \setlist{
+        leftmargin = 2em,
+        topsep = 0em,
+        parsep = 0em,
+        itemsep = 0em,
+    }
+    \section*{\zihao{3}\songti\thesistitle}
+    \centerline{\zihao{5} 作者：\theauthor\quad 班级：\stucls\quad 学号：\stunum}
+    \centerline{\zihao{5}指导教师：\thesupervisor}\vspace{-6pt}
+    \section*{\zihao{4}\heiti{摘\quad 要}}
+    \newcommand{\keywords}{\par\vspace{-0.5ex}\noindent\zihao{4}\heiti 关键词:\,}
+}{}
 
 % 英文摘要
-\newenvironment{abstractsameen}
+\newenvironment{abstracten*}
 {
-    \vspace{1em}
     \ctexset{
         section={
-            beforeskip=0pt,
-            afterskip=0pt,
+            beforeskip = -6 pt,
+            afterskip = -2 pt,
         }
     }
-    \section*{\Large \bf{\thesistitleen}}
-    \section*{\large \bf{ABSTRACT}}
-}
+    \setlist{
+        leftmargin = 2em,
+        topsep = 0em,
+        parsep = 0em,
+        itemsep = 0em,
+    }
+    \section*{\zihao{3}\textbf{\thesistitleen}}
+    %\centerline{\small Author:\,\theauthoren\quad Class:\,\stucls\quad Number:\,\stunum}
+    %\centerline{\small Thesis Supervisor:\,\thesupervisoren}
+    \vspace{-6pt}
+    \section*{\zihao{4}\textbf{ABSTRACT}}
+    \newcommand{\keywordsen}{\par\vspace{-0.5em}\noindent\zihao{4}\sffamily Keywords:~}
+}{}
 
 % 中、英文摘要分为两页：
 % 中文摘要
 \newenvironment{abstract}
 {
     \clearpage
-    \section*{\Large \bf{\thesistitle}}
-    \section*{\bf{摘\quad 要}}
-}
+    \section*{\zihao{3}\songti\thesistitle}\vspace{-3pt}
+    \centerline{\zihao{5} 作者：\theauthor\quad 班级：\stucls\quad 学号：\stunum}
+    \centerline{\zihao{5}指导教师：\thesupervisor}
+    \section*{\zihao{4}\heiti{摘\quad 要}}\vspace{-3pt}
+    \newcommand{\keywords}{\par\vspace{1em}\noindent\zihao{4}\heiti 关键词:\,}
+}{}
 
 %英文摘要
 \newenvironment{abstracten}
 {   
     \clearpage
-    \section*{\Large \bf{\thesistitleen}}
-    \section*{\large \bf{ABSTRACT}}
-}
+    \section*{\zihao{3}\textbf{\thesistitleen}}\vspace{-3pt}
+    \centerline{\small Author:\,\theauthoren\quad Class:\,\stucls\quad Number:\,\stunum}
+    \centerline{\small Thesis Supervisor:\,\thesupervisoren}
+    \section*{\zihao{4}\textbf{ABSTRACT}}\vspace{-3pt}
+    \newcommand{\keywordsen}{\par\vspace{1em}\noindent\zihao{4}\sffamily Keywords:~}
+}{}
 
 % 使用环境的前言
 \newenvironment{foreword}
@@ -79,74 +103,62 @@
     \clearpage
     \chapter*{前\quad 言}
     
-}
+}{}
 
 % 结论，编入目录
-\newenvironment{CONCLUSION}
-{
-    \chapter*{结\quad 论}
+\newenvironment{conclusion}{
+    \chapter*{结论}
     \addcontentsline{toc}{chapter}{结论}
-}
+}{}
 
 % 符号说明，编入目录
-\newenvironment{denotation}
-{
+\newenvironment{denotation}{
     \chapter*{符号说明}
     \addcontentsline{toc}{chapter}{符号说明}
-}
+}{}
+
+% 翻译，编入目录
+\newenvironment{translation}{
+    \chapter*{翻\quad 译}
+    \addcontentsline{toc}{chapter}{翻译}
+}{}
 
 % 致谢，编入目录
-\newenvironment{acknowledgement}
-{
+\newenvironment{acknowledgement}{
     \chapter*{致\quad 谢}
     \addcontentsline{toc}{chapter}{致谢}
-}
+}{}
 
 %% 目录
-% 设置subsubsection在正文中不编号为“1.1.1.1”的形式，且不出现在目录里
 \setcounter{secnumdepth}{3} 
 \setcounter{tocdepth}{2}
 
-% 以下参考：https://www.jianshu.com/p/ccd14653a128 和 https://www.latexstudio.net/archives/10586.html、titlesec.pdf
 
 %设置目录格式
-%\RequirePackage[nottoc]{tocbibind}	%增加目录，使用nottoc取消目录中显示目录本身。对本宏包而言，这一行所起作用仅仅是加入“参考文献”部分，但不可与bibliography.tex增加目录的命令同时使用。
 \RequirePackage{titletoc}
 
 % “目录”二字的格式，且设置PDF带有目录的书签，而“目录”本身不编入目录
-\renewcommand\contentsname{\centerline{\heiti \bf \zihao{-3}\pdfbookmark{目录}{toc}{目\quad 录}}}
+\renewcommand\contentsname{\centerline{\zihao{-3}\pdfbookmark{目录}{toc}{目\quad 录}}}
 
-%\titlecontents{章节名称}[左端距离]
-%    {标题字体、与上文间距等}
-%    {标题序号}{空}
-%    {引导符和页码}
-%    [与下文间距]
-\titlecontents{chapter}[0mm]
-    {\heiti\zihao{4} \vspace{8pt}}
-    {\thecontentslabel\hspace{10pt}}{}
+\titlecontents{chapter}[0em]
+    {\heiti \zihao{4} \vspace{4pt}}
+    {\thecontentslabel\hspace{8pt}}{}
     {\hspace{.5ex}\titlerule*[3pt]{$\cdot$}\hspace{-0.5ex}\bf\contentspage}
-\titlecontents{section}[5mm]
-    {\songti \zihao{4}}
-    {\thecontentslabel\hspace{10pt}}{}
+\titlecontents{section}[1.5em]
+    {\songti \zihao{4} \vspace{-2pt}}
+    {\thecontentslabel\hspace{8pt}}{}
     {\hspace{.5ex}\titlerule*[5pt]{$\cdot$}\hspace{0.2ex}\contentspage}
-\titlecontents{subsection}[10mm]
-    {\songti \zihao{4}}
-    {\thecontentslabel\hspace{10pt}}{}
+\titlecontents{subsection}[3em]
+    {\songti \zihao{4} \vspace{-2pt}}
+    {\thecontentslabel\hspace{8pt}}{}
     {\hspace{.5ex}\titlerule*[7pt]{$\cdot$}\hspace{-.2ex}\contentspage}
 
-% 待改进：插图编目录
-%\def\listfigurename{插图}
-%\titlecontents{figure}[10mm]
-%    {\songti \zihao{4}}
-%    {\thecontentslabel\hspace{10pt}}{}
-%    {\hspace{.5ex}\titlerule*[7pt]{$\cdot$}\contentspage}
 
-% 待改进：表格编目录
-%\def\listfigurename{表格}
-%\titlecontents{table}[10mm]
-%    {\songti \zihao{4}}
-%    {\thecontentslabel\hspace{10pt}}{}
-%    {\hspace{.5ex}\titlerule*[7pt]{$\cdot$}\contentspage}
+% 设计图纸
+\newcounter{designfigcnt}[chapter]
+%\renewcommand{\thedesignfigcnt}{\thechapter-\arabic{designfigcnt}}
+%newcommand{\designfig}[1]{\stepcounter{designfigcnt}\addcontentsline{toc}{subsection}{\hspace{2.5em}设计图纸\thedesignfigcnt\hspace{1em}{#1}} }
+\newcommand{\designfig}[1]{\addcontentsline{toc}{subsection}{\hspace{2.5em}设计图纸\thefigure \hspace{1em}{#1}} }
 
 
 
@@ -157,33 +169,37 @@
 % 生成诸如错落有致的LaTeX的logo
 \RequirePackage{bxtexlogo}
 
-% 这个宏包会和\maketitle冲突
-%\RequirePackage{doc}
+% 文章中表示命令的样式
+\newcommand\cmd[1]{\texttt{\textbackslash{}#1}}
 
-% 这个宏包没用到，可以用来控制章节等的标题格式
-%\RequirePackage{titlesec}
+%% 行距
+%\RequirePackage{setspace}
+\linespread{1.52}
 
-% 以下设置参考ctex.pdf中\ctexset命令
 % 正文部分的章、节、小节、小小节标题
 \ctexset{
     chapter={
         name = {第,章},                                     % 形成“第X章”的格式
         number = {\arabic{chapter}},                        % X是阿拉伯数字
-        format = {\heiti \bf \centering \zihao{-3}},        % 黑体、居中、三号
-        beforeskip = 12 pt,                                 % 段前和段后稍微空一点距离
-        afterskip = 24 pt,
+        format = {\bfseries \centering \zihao{-3}},         % 黑体、居中、三号(字母、数字使用罗马粗体)
+        beforeskip = 12 pt,
+        afterskip = 24 pt,                                  % 段前和段后稍微空一点距离（以距离代替《规范》中“标准行”）
         fixskip = true,                                     % 抑制多余间距
         aftername = \qquad,                                 % 在“第X章”三个字后，空两格
     },
     section={
         name = {第,节},
         format = {\heiti \centering \zihao{-3}},
-        %number ={\arabic{chapter}.\arabic{section}},        % 形成“第X.Y节”的格式 ·注：若加上此行，附录部分就不对了
+        %number ={\arabic{chapter}.\arabic{section}},       % 形成“第X.Y节”的格式 ·注：若加上此行，附录部分就不对了
         aftername = \quad,                                  % 在“第X.Y节”后，空一格
+        beforeskip = 12 pt,
+        afterskip = 12 pt,
     },
     subsection = {
         format = {\songti \raggedright \zihao{-4}},
         aftername = \quad,
+        beforeskip = 3 pt,
+        afterskip = 3 pt,
     },
     subsubsection={
         name = {(,)},
@@ -191,28 +207,31 @@
         number = {\arabic{subsubsection}},                  % 仅保留subsubsection部分的数字，而不是“X.Y.Z.A”
         beforeskip=3pt,
         afterskip=3pt,
-        aftername = \hspace{1mm},
+        aftername = \hspace{0.5em},
         indent = 12pt,                                       % 首行缩进
     },
 }
 
-%% 脚注带圈圈，参考《LaTeX 入门》P119
-%%\renewcommand\thefootnote{\textcircled{\arabic{footnote}}}    %不美观，用下面两行
-\RequirePackage{pifont}
-%\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
-
-%% 列表环境：参考《LaTeX 入门》P100，方法同上；enumitem.pdf
+%% 列表环境：
 % enumerate环境，一级列表标签改为带圈数字
-\renewcommand\theenumi{\ding{\numexpr171+\value{enumi}}}
-\renewcommand\labelenumi{\theenumi}
 \RequirePackage{enumitem}
+
 \setlist{
     leftmargin = 2em,
-    topsep = 0.5em,
+    topsep = 3pt,
     parsep = 0em,
     itemsep = 0em,
 }
-
+\setlist[enumerate,1]{
+    label = {\ding{\numexpr171+\value{enumi}}},
+    labelsep = 2pt,
+}
+\setlist[enumerate,2]{
+    labelsep = 6pt,
+}
+\setlist[description]{
+    labelsep= 1em,
+}
 %% 上标引用
 \newcommand{\scite}[1]{\textsuperscript{\cite{#1}}}
 
@@ -222,35 +241,47 @@
 %%     Basic Packages     %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\RequirePackage{ctex}
-
 %% 西文字体
 % 下面这个宏包不适用于PDFLaTeX编译
-% 以下设置参考《LaTeX 入门》P70
 \RequirePackage{fontspec}
 \setmainfont{Times New Roman}       % 罗马字体
 \setsansfont{Arial}                 % 无衬线字体
 \setmonofont{Consolas}              % 等宽字体
+
+%% 数学
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{amssymb}
+\RequirePackage{upgreek}
+\RequirePackage{mathtools}
+\RequirePackage{bm}
+
+%\RequirePackage[cmintegrals]{newtxmath} % 数学公式样式
+%\setmainfont{Times New Roman}           % 正文罗马字体
+
+% 下面这个宏包有可能会因为字体（或字号）的原因报 Warning(s)，如果不需要请不要使用
+%\RequirePackage{mathrsfs}
 
 % 国际单位制
 \RequirePackage{siunitx}
 
 % 化学
 \RequirePackage[version=4]{mhchem}
+\RequirePackage{chemfig}
 
-%% 数学
-\RequirePackage{amsmath}
-\RequirePackage{amsthm}
-\RequirePackage{amssymb}
-% 下面这个宏包有可能会因为字体（或字号）的原因报 Warning(s)，如果不需要请不要使用
-%\RequirePackage{mathrsfs}
+% 算法
+%\RequirePackage[ruled]{algorithm2e}
+\RequirePackage{algorithm}
+\RequirePackage{algorithmic}
+\floatname{algorithm}{算法}
+\renewcommand{\algorithmicrequire}{\textbf{输入：}} 
+\renewcommand{\algorithmicensure}{\textbf{输出：}}
+
 \newtheorem{axiom}{公理}
 \newtheorem{theorem}{定理}
 \newtheorem{corollary}{推论}
-\newtheorem{conclusion}{结论}
 \newtheorem{remark}{注解}
 \newtheorem{assumption}{假设}
-\newtheorem{algorithm}{算法}
 \newtheorem{definition}{定义}
 \newtheorem{property}{性质}
 \newtheorem{proposition}{命题}
@@ -259,11 +290,14 @@
 \renewcommand{\proofname}{证明}
 
 % “注：”的环境
-%\RequirePackage{manfnt}
 \newenvironment{note}{
-%    %\par\noindent{\makebox[0pt][r]{\textdbend}}
-    \hangindent = 4em
-    \slshape 注：}
+    \vspace{-0.5em}
+    \slshape
+    {注：}\par
+	%\hangindent = 2em
+	\setlength{\leftskip}{2em}
+	\setlength{\parindent}{2em}
+}{\par}
 
 %% 表格
 \RequirePackage{longtable}
@@ -311,29 +345,27 @@
 
 % 以下设置参考listings.pdf
 \lstset{
+    %lineskip = -3pt,
     aboveskip = 0.5em,
     belowskip = 0.5em,                                      % 前后间距
     tabsize = 4,                                            % tab等于4个空格
     basicstyle = \ttfamily \zihao{5},                       % 字体设定为等宽、五号
     frame=single,                                           % 外围单线框
-    commentstyle = \ttfamily \itshape \color{gray},         % 注释
-    keywordstyle = \ttfamily \color{blue},                  % 关键字蓝色.若加上 \bf,则会使用罗马字体族（本文Times New Roman
-    backgroundcolor = \color{lightgray!15},                 % 背景颜色为15%的浅灰色
+    commentstyle = \ttfamily \itshape \color{gray},         % 注释斜体、灰色
+    keywordstyle = \bfseries \ttfamily \color{blue},        % 关键字加粗、蓝色
+    backgroundcolor = \color{lightgray!10},                 % 背景颜色为10%的浅灰色
     showtabs = false,                                       % 不显示 TAB
     showspaces = false,                                     % 非字符串中，不显示空格
     showstringspaces = true,                                % 字符串中，显示空格
     captionpos = t,                                         % 标题位置
     breaklines = true,                                      % 自动断行
     numbers = left,                                         % 左侧显示行号
-    numberstyle = \tiny \color{gray},                       % 行号为小字
+    numberstyle = \tiny \color{gray},                       % 行号为小字6pt
     stepnumber = 1,                                         % 行号逐行递增
     extendedchars = false,                                  % 防止因为代码跨页时，章节标题、页眉等汉字不显示的问题
     escapechar = {@*},                                      % 逃逸字符，可以返回至LaTeX代码环境里
 }
 \renewcommand{\lstlistingname}{代码}
-
-% 待改进：改为如“代码2-1”
-% \renewcommand{\thelstlisting}{\arabic{chapter}-\arabic{lstlisting}}
 
 %% 色彩
 \RequirePackage{xcolor}
@@ -360,8 +392,8 @@
 % 设置正文页眉页脚
 \pagestyle{fancy}
     \fancyhf{}
-    \fancyfoot[C]{\zihao{-5}\songti\thepage}                           % 页脚居中插入页码
-    \fancyhead[C]{\zihao{-5}\songti{北京化工大学毕业设计（论文）}}       % 页眉
+    \fancyfoot[C]{\zihao{-5}\songti\thepage}                          % 页脚居中插入页码
+    \fancyhead[C]{\zihao{-5}\songti{北京化工大学毕业设计（论文）}}      % 页眉
     \renewcommand\headrulewidth{0.6pt}                                 % 页眉线，默认为0.4pt
     \renewcommand\footrulewidth{0pt}                                   % 页脚线，默认为Opt
 
@@ -379,18 +411,24 @@
 }
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%     Other Settings     %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% 脚注带圈圈
+\RequirePackage{pifont}
+%%\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
+\RequirePackage{tikz}
+\RequirePackage{etoolbox}
+\newcommand*{\footnotecircled}[1]{\lower 0.2em\hbox{\tikz\draw (0pt, 0pt)circle (0.5 em) node {#1};}}
+\robustify{\footnotecircled}
+\renewcommand\thefootnote{\footnotecircled{\arabic{footnote}}}
+
 \RequirePackage{hyperref}
 \hypersetup{
-    colorlinks=false,               % 不使用彩色文字链接
-    linkcolor=black,
+    colorlinks=true,                % 使用彩色文字链接（禁用链接外的方框）
+    %hidelinks,
     bookmarksnumbered=true,         % 书签中，章节编号
-    bookmarksopenlevel=\maxdimen,   % 书签目录层次
-    citecolor=green,                % 引用标记颜色
-    pdfhighlight=/N,                % 点击链接时:/N外观不变;/P黑色半框;/O黑色边框
+    pdfhighlight=/N,                % 点击链接时的外观
     breaklinks=true,                % 允许断行
 }
