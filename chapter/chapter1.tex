@@ -1,10 +1,10 @@
 %% 第一章--chapter1.tex
-\chapter{在使用之前\ldots}
+\chapter{模板使用之前}
 这是一份北京化工大学本科生毕业论文模板的使用指南。
 这份文档亦由该模板编译而成。
 本指南的目的在于帮助北化本科毕业生掌握此模板的使用方法，从而写出符合北化《本科生毕业设计（论文）撰写规范》要求的毕业论文。
 
-本模板的内容范围仅限于毕业设计（论文）文本，且不含论文封面。任务书、中期检查表、评阅意见表及其说明、评分手册与优秀毕业设计（论文）简介等非毕业设计（论文）文本部分不在其中。
+本模板的内容范围仅限于毕业设计（论文）文本，且不含论文封面。开题报告、任务书、中期检查表、评阅意见表及其说明、评分手册与优秀毕业设计（论文）简介等非毕业设计（论文）文本部分不在其中。
 
 	\section{概述}
 	本写作模板基于\CTeX{}的book 文类，所以 book 的选项对于本模板也是有效的，且默认编码为 UTF-8。
@@ -15,7 +15,7 @@
 		\subsection{开源说明}
 			本项目开源于GitHub\footnote{\url{https://github.com/Miracle0565/BUCTthesis}}，若要反馈bug(s)请于此提交Issues。本模板不做任何商业用途。
 		\subsection{模板组成}
-		在表~\ref{tab:mainfile}中罗列了本模板所包含的文件。
+		在表 \ref{tab:mainfile} 中罗列了本模板所包含的文件。
 		\begin{table}%[H]
 			\centering
 			\caption{主要文件}
@@ -24,36 +24,37 @@
 				\hline 
 				文件(夹)名 & 简述 \\ 
 				\hline 
-				\texttt{buctthesis.tex} & 主文件 \\
-				\texttt{buctthesis.sty} & \LaTeX{}宏包文件\\
-				\texttt{buctthesis.pdf} & 使用指南，即您正在阅读的这个文件\\
-				\texttt{gbt7714-2005.bst} & \BibTeX{}用到的参考文献格式模板\\
-				\texttt{thesisbib.bib}		& \BibTeX{}参考文献数据库文件\\
-				\texttt{chapter/} & 各个“章”的源文件路径\\
-				\texttt{code/} & 源代码的路径\\
-				\texttt{figure/} & 图片的路径\\
-				\texttt{scanPDF/} & 存放已扫描的封面等文件的路径\\
+				\textsf{buctthesis.tex} & 主文件 \\
+				\textsf{buctthesis.sty} & \LaTeX{}宏包文件\\
+				\textsf{buctthesis.pdf} & 使用指南，即您正在阅读的这个文件\\
+				\textsf{gbt7714-2005.bst} & \BibTeX{}用到的参考文献格式模板\\
+				\textsf{thesisbib.bib}		& \BibTeX{}参考文献数据库文件\\
+				\textsf{chapter/} & 各个“章”的源文件路径\\
+				\textsf{code/} & 源代码的路径\\
+				\textsf{figure/} & 图片的路径\\
+				\textsf{scanPDF/} & 存放已扫描的封面等文件的路径\\
 				\hline 
 			\end{tabular} 
 		\end{table}
 		以下是各个文件（夹）的详细介绍：
-		\subsubsection{\texttt{buctthesis.tex}}主文件。
+		\subsubsection{\textsf{buctthesis.tex}}主文件。
 		内含少量注释，一般您需要做的有：
 		删改中英文标题的名称、增添正文的章节、增添附录的章节。
-		具体方式请参考第\ref{chap:CodeIntro}章。
+		具体方式请参考第 \ref{chap:CodeIntro} 章。
 		编译此文件以形成PDF。
-		\subsubsection{\texttt{buctthesis.sty}}
+		\subsubsection{\textsf{buctthesis.sty}}
 		\LaTeX{}宏包文件，起到格式控制作用。
 		该文档已经做了较为充分的注释，若您觉得依此宏包编译出的文档有不美观甚至有错误的地方，
 		可以在其中对应处做些许修改。
-		\subsubsection{\texttt{gbt7714-2005.bst}}
-		用于生成符合格式要求的\emph{参考文献}部分。此文件包含其作者信息。
-		\subsubsection{\texttt{chapter/}、\texttt{figure/}和\texttt{code/}}
-		这三个文件夹分别存放对应的文件，在第\ref{chap:CodeIntro}章会讲述如何将各个章节、图片和源代码等插入至文章的相应位置中。
-		
+		\subsubsection{\textsf{gbt7714-2005.bst}}
+		参考文献格式控制文件，使得\emph{参考文献}部分符合规范。此文件包含其制作者信息。
+		\subsubsection{\textsf{chapter/}、\textsf{figure/}和\textsf{code/}}
+		这三个文件夹分别存放对应的文件，在第 \ref{chap:CodeIntro} 章会讲述如何将各个章节、图片和源代码等插入至文章的相应位置中。
 
-	\section{一些IDE的初始配置}
-		开始之前，最好能使用最新的发行版\LaTeX{}，使用旧版可能会有潜在的问题。
+	\section{一些编辑器的初始配置}
+		开始之前，最好能使用最新的发行版\LaTeX{}，使用旧版可能会有潜在的问题；同时在查看环境变量（此电脑$\rightarrow$ 属性$\rightarrow$ 高级系统设置$\rightarrow$ 环境变量$\rightarrow$ 系统变量\,中），请确保\texttt{C:\cmd{Windows}\cmd{system32}}\footnote{盘符 C 表示系统所在盘}位于其中。
+
+		以下仅介绍 Win10 系统下一些常用的编辑器的基本配置。
 		\subsection{\href{http://texstudio.sourceforge.net}{\TeX{} Studio}}
 			编译时选择\XeLaTeX{}：
 			\emph{选项(O)} $\rightarrow$ \emph{设置 TeX Studio} $\rightarrow$ \emph{构建} $\rightarrow$ \emph{默认编译器} 中选择\texttt{XeLaTeX}，编译时会根据实际情况判断是否执行一个完整的编译链。
@@ -61,11 +62,11 @@
 		\subsection{\href{https://code.visualstudio.com}{Visual Studio Code}}
 		初次使用做如下配置：
 		\begin{itemize}
-			\item 在\emph{应用商店}（Extensions，快捷键Ctrl+Shift+X）中下载扩展：\texttt{LaTeX Workshop}.
-			\item 在\emph{设置}（Settings，快捷键Ctrl+,）中的搜索框输入\texttt{latex}，单击搜索显示的第一项\texttt{在setting.json中编辑}，并添加如下代码：（此代码也能在\texttt{code/}文件夹中找到）
-			\lstinputlisting[caption=使用VS Code编译\LaTeX{}的配置文件]{code/setting.json}
-			其中第81行代码的作用是：使源代码在视区宽度处自动折行。若不需要可以删除。
-			编译时，工具栏中选择LaTeX（快捷键Ctrl+Alt+X），并在\texttt{COMMANDS}中选择所需的编译方式。内含完整的编译链，可手动选择。
-	
+			\item 将\TeX{}Live下的 \texttt{\dots \cmd{textlive}\cmd{2019}\cmd{bin}\cmd{win32}} 加入至系统环境变量之中，这是您所安装 \TeX{}Live 的路径；
+			\item 在\emph{应用商店}（Extensions）中下载扩展：\textsf{LaTeX Workshop}，您也可以在\href{https://github.com/James-Yu/LaTeX-Workshop}{这里}查看关于此扩展的详细说明；
+			\item 在\emph{设置}（Settings）中的搜索框输入 latex，单击搜索显示的第一项\emph{在setting.json中编辑}，并添加\textsf{code/setting.json}的代码。
 		\end{itemize}
 		
+		编译时，在工具栏中\texttt{COMMANDS}内\texttt{Build LaTeX project}选择所需的编译方式。已配置默认编译为 XeLaTeX，且可手动选择完整的编译链。
+
+		若您偏好于其它的一些编辑器如 \href{http://www.lyx.org/}{LyX}，在线编译器如 \href{https://www.overleaf.com/}{Overleaf}，或是 \TeX{}Live 自带的 TeXworks， 因作者能力有限，无法一一介绍其配置及操作，还请您自己在网上寻求更多帮助。

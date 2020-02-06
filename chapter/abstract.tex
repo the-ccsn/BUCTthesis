@@ -1,20 +1,19 @@
 %% 摘要&ABSTRACT--abstract.tex
-%% 使用下面的环境，会将中英文摘要排版在同一页上。
 
-%\begin{abstractsame}
+%% 使用下面的环境，会将中英文摘要排版在同一页上。
+%\begin{abstract*}
 %	\addcontentsline{toc}{chapter}{摘要}
+%	\setlength{\baselineskip}{18pt}				% 行间距控制
 %	在此键入摘要
-%	\vspace{0.5em}
-%	% 这里空一行
-%	\heiti{关键词:}\quad {关键字1}\quad {关键字2} \quad  关键%字3}
-%\end{abstractsame}
-%\begin{abstractsameen}
-%	\addcontentsline{toc}{chapter}{ABSTRACT}
-%	Abstract and keywords here.
-%	\vspace{0.5em}
+%	\keywords{关键词}
+%\end{abstract*}
 %
-%	\textbf{KEYWORDS:}\quad {keywords1}\quad {keywords2}%\quad {keywords3}
-%\end{abstracten}
+%\begin{abstracten*}
+%	\addcontentsline{toc}{chapter}{ABSTRACT}
+%	\setlength{\baselineskip}{16pt}
+%	Abstract and keywords here.
+%	\keywordsen{KEYWORDS}
+%\end{abstracten*}
 
 %% 使用下面的环境，会将中英文摘要排版在不同页上。
 \begin{abstract}
@@ -31,33 +30,33 @@
 	\begin{enumerate}
 		\item 开发了第一份适用于北京化工大学的\LaTeX{}本科生毕业论文模板；
 		\item 以自身为示例展示此模板的使用方法；
-		\item 这是第三个列表环境。
+		\item 这是编号列表环境的第三项。
 	\end{enumerate}
-	
-	（这里总共约300字）
-	\vspace{1em}
 
-	\heiti{关键词:}\quad {\LaTeX}\quad {论文} \quad  {模板}
+	这里是一些废话，用于填充文本。在后面的部分也会以类似的方式插入无关的文字，
+	以此来更好地展示例子。这一段话的作用是将中文摘要写到 300 个字。
+
+	（这里总共约 300 字）
+	\keywords{论文 \quad \LaTeX{} \quad 模板}
 \end{abstract}
+
 \begin{abstracten}
 	\addcontentsline{toc}{chapter}{ABSTRACT}
 	Abstract and keywords here.
 	
-	In the abstract, you may introduce the main contents of your research, as well as the methods, results and some innovation points. There should be one Chinese version and one foreign version, while the foreign one should generally be written in English except for some special occasions. Each of the context of them takes up half of an A4-page. What's more, the foreign abstract should be in correspondence to the Chinese one, and the narrative pattern is supposed to be similar. Chinese abstract adds up to normally 300 Chinese characters, while English abstract totaled around 1,500 printed characters, including Chinese and English keywords.
+	In the abstract, you may introduce the main contents of your research, as well as the methods, results and some innovation points. There should be one Chinese version and one foreign version, while the foreign one should generally be written in English except for some special occasions. Each of the context of them takes up half of an A4-page. What's more, the foreign abstract should be in correspondence to the Chinese one, and the narrative pattern is supposed to be similar. The Chinese abstract adds up to normally 300 Chinese characters, while the English abstract totaled around 1500 printed characters, including Chinese and English keywords.
 
 	Oh, here're just 900 letters total. So I have to add something nonsense\dots 
 
-	One dollar and eighty-seven cents. That was all. And sixty cents of it was in pennies. Pennies saved one and two at a time by bulldozing the grocer and the vegetable man and the butcher until one's cheeks burned with the silent imputation of parsimony that such close dealing implied. Three times Della counted it. One dollar and eighty-seven cents. And the next day would be Christmas. There was clearly nothing to do but flop down on the shabby little couch and howl. So Della did it. Which instigates the moral reflection that life is made up of sobs, sniffles, and smiles, with sniffles predominating. (\textit{THE GIFT OF THE MAGI by O.Henry})
+	One dollar and eighty-seven cents. That was all. And sixty cents of it was in pennies. Pennies saved one and two at a time by bulldozing the grocer and the vegetable man and the butcher until one's cheeks burned with the silent imputation of parsimony that such close dealing implied. Three times Della counted it. One dollar and eighty-seven cents. And the next day would be Christmas. There was clearly nothing to do but flop down on the shabby little couch and howl. So Della did it. (\textit{THE GIFT OF THE MAGI by O.Henry})
 	
 	Innovations in the research:
 	\begin{itemize}
 		\item Developing the first \LaTeX{} writting template for BUCT undergraduate thesis;
 		\item Using the PDF itself as an example to show how to use the template;
-		\item Here is the third itemize.
+		\item This is the third item of an unnumbered list.
 	\end{itemize}
 
-	(Around \si{1500} letters total)
-	\vspace{1em}
-
-	\textbf{{KEYWORDS:}\quad {\LaTeX}\quad {thesis}\quad {template}}
+	(Around 1500 letters total)
+	\keywordsen{thesis \quad \LaTeX \quad template}
 \end{abstracten}
