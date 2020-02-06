@@ -9,17 +9,14 @@
     "tools": [
         "latexmk"
     ]
-  },
-  
-  {
+  },{
     "name": "xelatex -> bibtex -> xelatex*2",
     "tools": [
         "xelatex",
         "bibtex",
         "xelatex",
         "xelatex"
-    ]
-  }
+    ]}
   ],
   "latex-workshop.latex.tools": [{
   "name": "latexmk",
@@ -29,27 +26,27 @@
     "-interaction=nonstopmode",
     "-file-line-error",
     "-pdf",
-    "%DOC%"
+    "%DOCFILE%"
   ]
-  }, {
+  },{
   "name": "xelatex",
   "command": "xelatex",
   "args": [
     "-synctex=1",
     "-interaction=nonstopmode",
     "-file-line-error",
-    "%DOC%"
+    "%DOCFILE%"
   ]
-  }, {
+  },{
   "name": "pdflatex",
   "command": "pdflatex",
   "args": [
     "-synctex=1",
     "-interaction=nonstopmode",
     "-file-line-error",
-    "%DOC%"
+    "%DOCFILE%"
   ]
-  }, {
+  },{
   "name": "bibtex",
   "command": "bibtex",
   "args": [
