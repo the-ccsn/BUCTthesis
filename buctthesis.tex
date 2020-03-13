@@ -1,27 +1,18 @@
 %-*- coding:UTF-8 -*-
 % 主文件--buctthesis.tex
-\documentclass[a4paper,zihao=-4,UTF8,oneside]{ctexbook}
-\usepackage{buctthesis}
-
+\documentclass[zihao=-4,UTF8,oneside]{ctexbook}
+\usepackage[%
+	%TextBlack,			% 所有文本设置为黑色
+	%LessTOC,			% 不将“第一章”之前的部分编目
+]{buctthesis}
+%\usepackage{showframe}
 % 中英文标题
 \def\thesistitle{BUCTthesis 写作指南}
-\def\thesistitleen{How To \TeX{} With BUCTthesis}
+\def\thesistitleen{How To \TeX\ With BUCTthesis}
 
-% 作者中英文名
+% 作者中文名。因学校统一印制封面，正式写作可删去。
 \def\theauthor{Miracle0565}
-\def\theauthoren{Miracle0565}
 \author{\theauthor}
-
-% 班级与学号
-\def\stucls{某某1024}
-\def\stunum{2034567890}
-
-% 导师
-\def\thesupervisor{阿不思·邓布利多教授}
-\def\thesupervisoren{Professor Albus Dumbledore}
-
-% 日期
-%\date{\today}
 
 \begin{document}
 
@@ -33,7 +24,7 @@
 \maketitle
 
 % 诚信声明
-\include{chapter/declear}
+\include{chapter/declare}
 
 % 摘要
 \include{chapter/abstract}
@@ -49,9 +40,9 @@
 
 % 正文开始=========================
 
-	\include{chapter/chapter1}
-	\include{chapter/chapter2}
-	\include{chapter/chapter3}
+\include{chapter/chapter1}
+\include{chapter/chapter2}
+\include{chapter/chapter3}
 
 % 正文结束=========================
 
@@ -60,7 +51,8 @@
 \include{chapter/conclusion}
 
 % 参考文献
-\input{chapter/bibliography}
+\bibliographystyle{gbt7714-2005}
+\bibliography{thesisbib.bib}
 
 % 符号说明
 \include{chapter/denotation}
@@ -73,7 +65,7 @@
 
 % 附录
 \appendix
-	\include{chapter/app1}
-	\include{chapter/app2}
+\include{chapter/app1}
+\include{chapter/app2}
 
 \end{document}

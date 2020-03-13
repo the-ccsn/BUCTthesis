@@ -1,434 +1,505 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%                      buctthesis.sty                       %%% 
-%%%                  Copyright Miracle0565                    %%%
-%%%          https://github.com/Miracle0565/BUCTthesis        %%%
-%%%                           v0.9.1                          %%%
-%%%                          Feb.2020                         %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%		buctthesis.sty
+%%		Copyright Miracle0565
+%%
+%%		https://github.com/Miracle0565/BUCTthesis
+%%
+%%		Beta.v0.9.2, Mar.2020
+%%
+%%	This file may be distributed and/or modified under
+%%	the conditions of the LaTeX Project Public License,
+%%	either version 1.2 of this license or (at your option)
+%%	any later version. The latest version of this license
+%%	is in:
+%%
+%%  http://www.latex-project.org/lppl.txt
+%%
+%%	and version 1.2 or later is part of all distributions
+%%	of LaTeX version 1999/12/01 or later.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ProvidesPackage{buctthesis}[v0.9.1]
+\NeedsTeXFormat{LaTeX2e}
+
+\newcommand\cmd[1]{\texttt{\textbackslash{}#1}}
+\ctexset{today=big}
+
+%% package info
+\ProvidesPackage{buctthesis}[2020/03/06 Beta.v0.9.2]
+\newif\ifbuct@textblack
+\newif\ifbuct@lesstoc
+\DeclareOption{TextBlack}{\buct@textblacktrue}
+\DeclareOption{LessTOC}{\buct@lesstoctrue}
+\newcommand{\buct@less@toc}[1]{
+	\ifbuct@lesstoc\else\addcontentsline{toc}{chapter}{#1}\fi
+}
+%\ExecuteOptions{}
+\ProcessOptions\relax
+
+% XeLaTeX required
+\RequirePackage{ifxetex}
+\RequireXeTeX
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%	 	Basic Packages	 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 西文字体 fonts
+\RequirePackage{fontspec}
+% 目录 contents
+\RequirePackage{titletoc}
+% 数学公式 math
+\RequirePackage{amsmath,amsthm,amssymb}
+\RequirePackage[Symbol]{upgreek}
+\RequirePackage{mathtools,bm}
+% 国际单位制 SI units
+\RequirePackage{siunitx}
+% 无机化学式 chemical fomular
+\RequirePackage[version=4]{mhchem}
+% 算法 algorithm
+%\RequirePackage[ruled]{algorithm2e}
+\RequirePackage{algorithm,algorithmic}
+% 表格 tables
+\RequirePackage{longtable,dcolumn,tabularx,multirow,booktabs}
+% 图片 figures
+\RequirePackage{graphicx}
+\RequirePackage[labelformat=simple]{subcaption}
+% 浮动体 floats
+\RequirePackage{caption,float}
+% 代码 codes
+\RequirePackage{listings}
+% 色彩 colors
+\RequirePackage{xcolor}
+% 参考文献 bibliography
+\RequirePackage[square,numbers,super,sort&compress]{natbib}
+% 列 column
+\RequirePackage{paracol}
+% TeX logo
+\RequirePackage{bxtexlogo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%	   Fonts Settings	 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% 主要字体 text fonts
+% 中文字体 zh
+\xeCJKsetup{EmboldenFactor=2.2,SlantFactor=1.67}
+\let\songti\relax
+\newCJKfontfamily\songti{SimSun}[AutoFakeBold,AutoFakeSlant]
+\let\heiti\relax
+\newCJKfontfamily\heiti{SimHei}[AutoFakeBold]
+% 英文字体 en
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+%\setmonofont{Times New Roman}
+
+% 页眉页脚 pages
+\newcommand{\buct@headfont}{\zihao{-5}\songti}
+\newcommand{\buct@footfont}{\zihao{-5}\songti}
+
+%% 摘要 abstracts
+% 中文摘要 zh
+\newcommand{\buct@abstitfont}{\zihao{3}}
+\newcommand{\buct@absabsfont}{\zihao{4}\heiti}
+\newcommand{\buct@keywordsfont}{\zihao{4}\heiti}
+% 英文摘要 en
+\newcommand{\buct@abstitfonten}{\zihao{3}\bfseries}
+\newcommand{\buct@absabsfonten}{\zihao{4}\bfseries}
+\newcommand{\buct@keywordsfonten}{\zihao{4}\sffamily}
+
+%% 目录 contents
+\newcommand{\buct@toc@tocfont}{\mdseries\heiti\zihao{4}}
+\newcommand{\buct@toc@chapfont}{\bfseries\zihao{4}}
+\newcommand{\buct@toc@secfont}{\songti\zihao{4}}
+\newcommand{\buct@toc@ssecfont}{\songti\zihao{4}}
+\newcommand{\buct@toc@dsgfigfont}{\buct@toc@ssecfont}
+
+%% 正文各级标题 chapters
+\newcommand{\buct@chapfont}{\songti\bfseries\centering\zihao{-3}}
+\newcommand{\buct@secfont}{\songti\bfseries\centering \zihao{-3}}
+\newcommand{\buct@ssecfont}{\songti\bfseries\raggedright\zihao{-4}}
+\newcommand{\buct@sssecfont}{\songti\zihao{-4}}
+
+% 代码 code
+\newcommand{\buct@codefont}{\ttfamily\songti\zihao{5}}
+\newcommand{\buct@codecomfont}{%
+	\ttfamily\slshape
+	\ifbuct@textblack\else\color{gray!80!black}\fi}
+\newcommand{\buct@codekeyfont}{%
+	\ttfamily\bfseries
+	\ifbuct@textblack\else\color{blue!80!black}\fi}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%	 Pages Settings		%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 纸张边距 page margins
+\RequirePackage{geometry}
+\geometry{
+	a4paper,nomarginpar,
+	top=3.5cm,bottom=2.6cm,left=2.7cm,right=2.7cm,
+	headheight=1.1cm, footskip=0.6cm}
+
+% 页眉页脚 header & footer
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\buct@headfont\thepage}
+\fancyhead[C]{\buct@footfont{北京化工大学毕业设计（论文）}}
+\renewcommand\headrulewidth{0.6pt}
+\renewcommand\footrulewidth{0pt}
+
+\fancypagestyle{plain}{%
+	\fancyfoot[C]{\buct@headfont\thepage}
+	\fancyhead[C]{\buct@footfont{北京化工大学毕业设计（论文）}}
+	\renewcommand\headrulewidth{0.6pt}
+	\renewcommand\footrulewidth{0pt}
+}
+
+% 页码样式 page number
+\renewcommand{\frontmatter}{
+	\pagenumbering{Roman}
+	\pagestyle{plain}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Frontmatter Settings  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% 日期
-\ctexset{today=big}
-
 %% 诚信声明
-\newenvironment{declear}{
-    \clearpage
-    \setlength{\baselineskip}{2em}
-    \section*{\songti \zihao{3} 诚信申明}
-    \subsection*{\zihao{4} 本人申明：}
-    \def\addsign{\raggedleft \vspace{2em} 本人签名：\ \underline{\phantom{在此写上你的大名}}}
-    \def\addsigndate{\hspace{4ex} 签字日期：\ \underline{\phantom{在此写上完成日期}}}
-}{\par}
+\newenvironment{declare}{%
+	\phantomsection{}%
+	\buct@less@toc{诚信声明}
+	\setlength{\baselineskip}{2em}%
+	\centerline{\songti\zihao{3} 诚信声明}\par\vspace{1em}%
+	\leftline{\songti\zihao{4}\noindent 本人声明：}%
+	\def\addsign{本人签名:\hspace{7em}}
+	\def\addsigndate{\hspace{7em}年\hspace{2.5em}月\hspace{2.5em}日}
+}{\par\vspace{2em}\hfill\addsign\addsigndate}
 
 %% 摘要
-
 % 中、英文摘要同一页：
 % 中文摘要
-\newenvironment{abstract*}
-{
-    \clearpage
-    \ctexset{
-        section={
-            beforeskip = -6 pt,
-            afterskip = -2 pt,
-        }
-    }
-    \setlist{
-        leftmargin = 2em,
-        topsep = 0em,
-        parsep = 0em,
-        itemsep = 0em,
-    }
-    \section*{\zihao{3}\songti\thesistitle}
-    \centerline{\zihao{5} 作者：\theauthor\quad 班级：\stucls\quad 学号：\stunum}
-    \centerline{\zihao{5}指导教师：\thesupervisor}\vspace{-6pt}
-    \section*{\zihao{4}\heiti{摘\quad 要}}
-    \newcommand{\keywords}{\par\vspace{-0.5ex}\noindent\zihao{4}\heiti 关键词:\,}
+\newenvironment{abstract*}{%
+	\phantomsection{}%
+	\buct@less@toc{摘要}
+	\centerline{\buct@abstitfont\thesistitle}\vspace{-3pt}%
+	\centerline{\buct@absabsfont{摘\quad 要}}\vspace{-3pt}%
+	\newcommand{\keywords}{\par\vspace{-0.5ex}\noindent\buct@keywordsfont 关键词：}
 }{}
-
 % 英文摘要
-\newenvironment{abstracten*}
-{
-    \ctexset{
-        section={
-            beforeskip = -6 pt,
-            afterskip = -2 pt,
-        }
-    }
-    \setlist{
-        leftmargin = 2em,
-        topsep = 0em,
-        parsep = 0em,
-        itemsep = 0em,
-    }
-    \section*{\zihao{3}\textbf{\thesistitleen}}
-    %\centerline{\small Author:\,\theauthoren\quad Class:\,\stucls\quad Number:\,\stunum}
-    %\centerline{\small Thesis Supervisor:\,\thesupervisoren}
-    \vspace{-6pt}
-    \section*{\zihao{4}\textbf{ABSTRACT}}
-    \newcommand{\keywordsen}{\par\vspace{-0.5em}\noindent\zihao{4}\sffamily Keywords:~}
+\newenvironment{abstracten*}{%
+	\phantomsection{}%
+	\buct@less@toc{ABSTRACT}
+	\centerline{\buct@abstitfonten{\thesistitleen}}\vspace{-6pt}%
+	\centerline{\buct@absabsfonten {ABSTRACT}}\vspace{-3pt}%
+	\newcommand{\keywordsen}{\par\vspace{-0.5ex}\noindent\buct@keywordsfonten Keywords:~}
 }{}
-
 % 中、英文摘要分为两页：
 % 中文摘要
-\newenvironment{abstract}
-{
-    \clearpage
-    \section*{\zihao{3}\songti\thesistitle}\vspace{-3pt}
-    \centerline{\zihao{5} 作者：\theauthor\quad 班级：\stucls\quad 学号：\stunum}
-    \centerline{\zihao{5}指导教师：\thesupervisor}
-    \section*{\zihao{4}\heiti{摘\quad 要}}\vspace{-3pt}
-    \newcommand{\keywords}{\par\vspace{1em}\noindent\zihao{4}\heiti 关键词:\,}
+\newenvironment{abstract}{%
+	\clearpage%
+	\phantomsection{}%
+	\buct@less@toc{摘要}
+	\centerline{\buct@abstitfont\thesistitle}\vspace{6pt}%
+	\centerline{\buct@absabsfont{摘\quad 要}}\vspace{3pt}%
+	\newcommand{\keywords}{\par\vspace{1em}\noindent\buct@keywordsfont 关键词：}
+
+}{}
+% 英文摘要
+\newenvironment{abstracten}{%
+	\clearpage%
+	\phantomsection{}%
+	\buct@less@toc{ABSTRACT}
+	\centerline{\buct@abstitfonten{\thesistitleen}}\vspace{6pt}%
+	\centerline{\buct@absabsfonten{ABSTRACT}}\vspace{3pt}%
+	\newcommand{\keywordsen}{\par\vspace{1em}\noindent\buct@keywordsfonten Keywords:~}
 }{}
 
-%英文摘要
-\newenvironment{abstracten}
-{   
-    \clearpage
-    \section*{\zihao{3}\textbf{\thesistitleen}}\vspace{-3pt}
-    \centerline{\small Author:\,\theauthoren\quad Class:\,\stucls\quad Number:\,\stunum}
-    \centerline{\small Thesis Supervisor:\,\thesupervisoren}
-    \section*{\zihao{4}\textbf{ABSTRACT}}\vspace{-3pt}
-    \newcommand{\keywordsen}{\par\vspace{1em}\noindent\zihao{4}\sffamily Keywords:~}
-}{}
-
-% 使用环境的前言
-\newenvironment{foreword}
-{
-    \clearpage
-    \chapter*{前\quad 言}
-    
-}{}
-
-% 结论，编入目录
-\newenvironment{conclusion}{
-    \chapter*{结论}
-    \addcontentsline{toc}{chapter}{结论}
-}{}
-
-% 符号说明，编入目录
-\newenvironment{denotation}{
-    \chapter*{符号说明}
-    \addcontentsline{toc}{chapter}{符号说明}
-}{}
-
-% 翻译，编入目录
-\newenvironment{translation}{
-    \chapter*{翻\quad 译}
-    \addcontentsline{toc}{chapter}{翻译}
-}{}
-
-% 致谢，编入目录
-\newenvironment{acknowledgement}{
-    \chapter*{致\quad 谢}
-    \addcontentsline{toc}{chapter}{致谢}
-}{}
-
-%% 目录
-\setcounter{secnumdepth}{3} 
+%% 目录 Contents
+\setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{2}
 
+% 参考文献编目
+\RequirePackage[nottoc]{tocbibind}
 
-%设置目录格式
-\RequirePackage{titletoc}
+% 目录标题样式
+\renewcommand\tableofcontents{%
+	\pdfbookmark{目录}{toc}%
+	\chapter*{\buct@toc@tocfont 目\quad 录}%
+	\@starttoc{toc}}
 
-% “目录”二字的格式，且设置PDF带有目录的书签，而“目录”本身不编入目录
-\renewcommand\contentsname{\centerline{\zihao{-3}\pdfbookmark{目录}{toc}{目\quad 录}}}
-
+% 目录样式
 \titlecontents{chapter}[0em]
-    {\heiti \zihao{4} \vspace{4pt}}
-    {\thecontentslabel\hspace{8pt}}{}
-    {\hspace{.5ex}\titlerule*[3pt]{$\cdot$}\hspace{-0.5ex}\bf\contentspage}
+{\buct@toc@chapfont\vspace{3pt}}
+{\thecontentslabel\hspace{8pt}}{}
+{\hspace{.5ex}\titlerule*[3pt]{$\cdot$}\hspace{-.5ex}\bfseries\contentspage}
 \titlecontents{section}[1.5em]
-    {\songti \zihao{4} \vspace{-2pt}}
-    {\thecontentslabel\hspace{8pt}}{}
-    {\hspace{.5ex}\titlerule*[5pt]{$\cdot$}\hspace{0.2ex}\contentspage}
+{\buct@toc@secfont\vspace{-3pt}}
+{\thecontentslabel\hspace{8pt}}{}
+{\hspace{.5ex}\titlerule*[5pt]{$\cdot$}\hspace{.2ex}\contentspage}
 \titlecontents{subsection}[3em]
-    {\songti \zihao{4} \vspace{-2pt}}
-    {\thecontentslabel\hspace{8pt}}{}
-    {\hspace{.5ex}\titlerule*[7pt]{$\cdot$}\hspace{-.2ex}\contentspage}
+{\buct@toc@ssecfont\vspace{-3pt}}
+{\thecontentslabel\hspace{8pt}}{}
+{\hspace{.5ex}\titlerule*[7pt]{$\cdot$}\hspace{-.2ex}\contentspage}%
 
-
-% 设计图纸
+% 设计图纸编目命令 designfig
 \newcounter{designfigcnt}[chapter]
-%\renewcommand{\thedesignfigcnt}{\thechapter-\arabic{designfigcnt}}
-%newcommand{\designfig}[1]{\stepcounter{designfigcnt}\addcontentsline{toc}{subsection}{\hspace{2.5em}设计图纸\thedesignfigcnt\hspace{1em}{#1}} }
-\newcommand{\designfig}[1]{\addcontentsline{toc}{subsection}{\hspace{2.5em}设计图纸\thefigure \hspace{1em}{#1}} }
+\newcommand{\designfig}[1]{%
+	\addcontentsline{toc}{subsection}%
+	{\hspace{2.5em}设计图纸\thefigure\hspace{1em}{#1}}}
 
-
+%% 前言
+\newenvironment{foreword}{%
+	\chapter*{前\quad 言}
+	\buct@less@toc{前言}
+}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Mainmatter Settings   %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 生成诸如错落有致的LaTeX的logo
-\RequirePackage{bxtexlogo}
-
-% 文章中表示命令的样式
-\newcommand\cmd[1]{\texttt{\textbackslash{}#1}}
-
-%% 行距
-%\RequirePackage{setspace}
+% 行间距
 \linespread{1.52}
 
-% 正文部分的章、节、小节、小小节标题
-\ctexset{
-    chapter={
-        name = {第,章},                                     % 形成“第X章”的格式
-        number = {\arabic{chapter}},                        % X是阿拉伯数字
-        format = {\bfseries \centering \zihao{-3}},         % 黑体、居中、三号(字母、数字使用罗马粗体)
-        beforeskip = 12 pt,
-        afterskip = 24 pt,                                  % 段前和段后稍微空一点距离（以距离代替《规范》中“标准行”）
-        fixskip = true,                                     % 抑制多余间距
-        aftername = \qquad,                                 % 在“第X章”三个字后，空两格
-    },
-    section={
-        name = {第,节},
-        format = {\heiti \centering \zihao{-3}},
-        %number ={\arabic{chapter}.\arabic{section}},       % 形成“第X.Y节”的格式 ·注：若加上此行，附录部分就不对了
-        aftername = \quad,                                  % 在“第X.Y节”后，空一格
-        beforeskip = 12 pt,
-        afterskip = 12 pt,
-    },
-    subsection = {
-        format = {\songti \raggedright \zihao{-4}},
-        aftername = \quad,
-        beforeskip = 3 pt,
-        afterskip = 3 pt,
-    },
-    subsubsection={
-        name = {(,)},
-        format = {\songti \zihao{-4}},
-        number = {\arabic{subsubsection}},                  % 仅保留subsubsection部分的数字，而不是“X.Y.Z.A”
-        beforeskip=3pt,
-        afterskip=3pt,
-        aftername = \hspace{0.5em},
-        indent = 12pt,                                       % 首行缩进
-    },
+%% 各级标题样式
+\ctexset{%
+	chapter = {%
+		name = {第,章},
+		number = {\arabic{chapter}},
+		format = {\buct@chapfont},
+		beforeskip = 12 pt,
+		afterskip = 32 pt,
+		fixskip = true,
+		aftername = \qquad,
+	},
+	section = {%
+		name = {第,节},
+		format = {\buct@secfont},
+		aftername = \quad,
+		beforeskip = 29 pt,
+		afterskip = 32 pt,
+		fixskip = true,
+	},
+	subsection = {%
+			format = {\buct@ssecfont},
+			aftername = \quad,
+			beforeskip = 3 pt,
+			afterskip = 3 pt,
+		},
+	subsubsection = {%
+			name = {(,)},
+			format = {\buct@sssecfont},
+			number = {\arabic{subsubsection}},
+			beforeskip = 3pt,
+			afterskip = 3pt,
+			aftername = \hspace{0.5em},
+			indent = 0.5em,
+		},
+	figurename = 图,
+	tablename = 表,
+	bibname = 参考文献,
 }
 
-%% 列表环境：
-% enumerate环境，一级列表标签改为带圈数字
+% 结论，编入目录
+\newenvironment{conclusion}{%
+	\chapter*{结\quad 论}
+	\addcontentsline{toc}{chapter}{结论}
+}{}
+% 符号说明，编入目录
+\newenvironment{denotation}[2]{%
+	\chapter*{符号说明}%
+	\addcontentsline{toc}{chapter}{符号说明}
+	\begin{longtable}[c]{p{#1}p{#2}}
+		\toprule
+		\textbf{符号} & \textbf{说明}\\* \midrule
+		\endfirsthead
+		\multicolumn{2}{r}{\songti\small\textbf{（接上表）}}\\
+		\toprule
+		\textbf{符号} & \textbf{说明}\\* \midrule
+		\endhead
+		\bottomrule
+		\endfoot
+		\endlastfoot
+		}{\bottomrule\end{longtable}}
+
+% 翻译，编入目录
+\newenvironment{translation}{%
+	\chapter*{翻\quad 译}
+	\addcontentsline{toc}{chapter}{翻译}
+}{}
+
+% 致谢，编入目录
+\newenvironment{acknowledgement}{%
+	\chapter*{致\quad 谢}
+	\addcontentsline{toc}{chapter}{致谢}
+}{}
+
+% 列表环境 lists
 \RequirePackage{enumitem}
 
-\setlist{
-    leftmargin = 2em,
-    topsep = 3pt,
-    parsep = 0em,
-    itemsep = 0em,
+\setlist{%
+	leftmargin = 2em,
+	nosep,
 }
-\setlist[enumerate,1]{
-    label = {\ding{\numexpr171+\value{enumi}}},
-    labelsep = 2pt,
+\setlist[enumerate,1]{%
+	label = \lower 0.1em\hbox{\large{\ding{\numexpr191+\value{enumi}}}},
+	labelsep = 2pt,
 }
-\setlist[enumerate,2]{
-    labelsep = 6pt,
+\setlist[enumerate,2]{%
+	labelsep = 6pt,
 }
-\setlist[description]{
-    labelsep= 1em,
+\setlist[description]{%
+	labelsep= 1em,
 }
-%% 上标引用
-\newcommand{\scite}[1]{\textsuperscript{\cite{#1}}}
 
+%% 数学 math settings
+% 定理 theorem
+\newtheoremstyle{buctthm}	% name
+{3pt}						% Space above
+{3pt}						% Space below
+{}							% Body font
+{}							% Indent amount
+{\bfseries\songti}			% Theorem head font
+{:}							% Punctuation after theorem head
+{.5em}						% Space after theorem head
+{}							% Theorem head spec
+\theoremstyle{buctthm}
+\newtheorem{axiom}{公理}[chapter]
+\newtheorem{theorem}{定理}[chapter]
+\newtheorem{corollary}{推论}[chapter]
+\newtheorem{remark}{注解}[chapter]
+\newtheorem{assumption}{假设}[chapter]
+\newtheorem{definition}{定义}[chapter]
+\newtheorem{property}{性质}[chapter]
+\newtheorem{proposition}{命题}[chapter]
+\newtheorem{lemma}{引理}[chapter]
+% 证明 proof
+\renewenvironment{proof}[1][\proofname]{\par
+	\pushQED{\qed}%
+	\normalfont \topsep6\p@\@plus6\p@\relax
+	\trivlist
+	\item\relax
+	{#1\@addpunct{.}}\hspace\labelsep\ignorespaces
+}{\popQED\endtrivlist\@endpefalse}
 
+%% SI 单位
+\sisetup{%
+	list-final-separator = { 和 },
+	list-pair-separator = { 和 },
+	range-phrase = {$\sim$},
+}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%     Basic Packages     %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% 西文字体
-% 下面这个宏包不适用于PDFLaTeX编译
-\RequirePackage{fontspec}
-\setmainfont{Times New Roman}       % 罗马字体
-\setsansfont{Arial}                 % 无衬线字体
-\setmonofont{Consolas}              % 等宽字体
-
-%% 数学
-\RequirePackage{amsmath}
-\RequirePackage{amsthm}
-\RequirePackage{amssymb}
-\RequirePackage{upgreek}
-\RequirePackage{mathtools}
-\RequirePackage{bm}
-
-%\RequirePackage[cmintegrals]{newtxmath} % 数学公式样式
-%\setmainfont{Times New Roman}           % 正文罗马字体
-
-% 下面这个宏包有可能会因为字体（或字号）的原因报 Warning(s)，如果不需要请不要使用
-%\RequirePackage{mathrsfs}
-
-% 国际单位制
-\RequirePackage{siunitx}
-
-% 化学
-\RequirePackage[version=4]{mhchem}
-\RequirePackage{chemfig}
-
-% 算法
-%\RequirePackage[ruled]{algorithm2e}
-\RequirePackage{algorithm}
-\RequirePackage{algorithmic}
+% 汉化算法标签 algorithm
 \floatname{algorithm}{算法}
-\renewcommand{\algorithmicrequire}{\textbf{输入：}} 
+\renewcommand{\algorithmicrequire}{\textbf{输入：}}
 \renewcommand{\algorithmicensure}{\textbf{输出：}}
 
-\newtheorem{axiom}{公理}
-\newtheorem{theorem}{定理}
-\newtheorem{corollary}{推论}
-\newtheorem{remark}{注解}
-\newtheorem{assumption}{假设}
-\newtheorem{definition}{定义}
-\newtheorem{property}{性质}
-\newtheorem{proposition}{命题}
-\newtheorem{lemma}{引理}
-
-\renewcommand{\proofname}{证明}
-
-% “注：”的环境
-\newenvironment{note}{
-    \vspace{-0.5em}
-    \slshape
-    {注：}\par
-	%\hangindent = 2em
-	\setlength{\leftskip}{2em}
-	\setlength{\parindent}{2em}
-}{\par}
-
-%% 表格
-\RequirePackage{longtable}
-\RequirePackage{threeparttable}
-\RequirePackage{dcolumn}
-\RequirePackage{array}
-\RequirePackage{tabularx}
-\RequirePackage{multirow}
-\RequirePackage{booktabs}
-
-%% 图形
-\RequirePackage{graphicx}
-\RequirePackage{subfigure}
-\RequirePackage{caption}
-\RequirePackage{float}
-
-% 图、表、方程caption格式
-\renewcommand{\captionfont}{\kaishu \zihao{5}}  
-\renewcommand{\captionlabelfont}{\kaishu \zihao{5}}
+% 图、表、方程标签格式 caption of floats
+\renewcommand{\captionfont}{\zihao{5}}
+\renewcommand{\captionlabelfont}{\zihao{5}}
 \DeclareCaptionLabelSeparator{capspace}{\quad}
 \captionsetup{labelsep=capspace}
-
-% 位置间距控制
-\captionsetup[table]{
-    position = top,
-    aboveskip = 0.5em,
-    belowskip = 0.5em,
+% spaces
+\captionsetup[table]{%
+	position = top,
+	aboveskip = 0.5em,
+	belowskip = 0.5em,
 }
-
-\captionsetup[figure]{
-    position = bottom,
-    aboveskip = 0.5em,
-    belowskip = 0.5em,
+\captionsetup[figure]{%
+	position = bottom,
+	aboveskip = 0.5em,
+	belowskip = -0.5em,
 }
-
-% 改为“表X-x”、“图X-x”、“式X-x"，X为数字章号
-\renewcommand{\tablename}{表}
+\renewcommand{\thesubtable}{(\alph{subtable})}
 \renewcommand{\thetable}{\arabic{chapter}-\arabic{table}}
-\renewcommand{\figurename}{图}
+\renewcommand{\thesubfigure}{(\alph{subfigure})}
 \renewcommand{\thefigure}{\arabic{chapter}-\arabic{figure}}
 \renewcommand{\theequation}{式\arabic{chapter}-\arabic{equation}}
 
-%% 代码
-\RequirePackage{listings}
+% 附录
+\let\buct@appendix\appendix
+\renewcommand{\appendix}{%
+	\buct@appendix
+	\renewcommand{\thetable}{\Alph{chapter}-\arabic{table}}
+	\renewcommand{\thefigure}{\Alph{chapter}-\arabic{figure}}
+	\renewcommand{\theequation}{式\Alph{chapter}-\arabic{equation}}
+}
 
-% 以下设置参考listings.pdf
-\lstset{
-    %lineskip = -3pt,
-    aboveskip = 0.5em,
-    belowskip = 0.5em,                                      % 前后间距
-    tabsize = 4,                                            % tab等于4个空格
-    basicstyle = \ttfamily \zihao{5},                       % 字体设定为等宽、五号
-    frame=single,                                           % 外围单线框
-    commentstyle = \ttfamily \itshape \color{gray},         % 注释斜体、灰色
-    keywordstyle = \bfseries \ttfamily \color{blue},        % 关键字加粗、蓝色
-    backgroundcolor = \color{lightgray!10},                 % 背景颜色为10%的浅灰色
-    showtabs = false,                                       % 不显示 TAB
-    showspaces = false,                                     % 非字符串中，不显示空格
-    showstringspaces = true,                                % 字符串中，显示空格
-    captionpos = t,                                         % 标题位置
-    breaklines = true,                                      % 自动断行
-    numbers = left,                                         % 左侧显示行号
-    numberstyle = \tiny \color{gray},                       % 行号为小字6pt
-    stepnumber = 1,                                         % 行号逐行递增
-    extendedchars = false,                                  % 防止因为代码跨页时，章节标题、页眉等汉字不显示的问题
-    escapechar = {@*},                                      % 逃逸字符，可以返回至LaTeX代码环境里
+% 代码 code
+\lstset{%
+	%lineskip = -3pt,
+	aboveskip = 0.5em,
+	belowskip = 0.5em,
+	tabsize = 4,
+	basicstyle = \buct@codefont,
+	frame = single,
+	basewidth = {.55em,.45em},
+	xleftmargin = 1.5em,
+	xrightmargin = 1.5em,
+	commentstyle = \buct@codecomfont,
+	keywordstyle = \buct@codekeyfont,
+	backgroundcolor = \color{lightgray!10},
+	showtabs = false,
+	showspaces = false,
+	showstringspaces = false,
+	captionpos = t,
+	breaklines = true,
+	numbers = left,
+	numberstyle = \tiny,
+	numbersep = 6 pt,
+	stepnumber = 1,
+	extendedchars = false,
+	escapechar = {@*},
 }
 \renewcommand{\lstlistingname}{代码}
 
-%% 色彩
-\RequirePackage{xcolor}
+% 参考文献 bib
+\setlength{\bibsep}{3pt}
 
+%%%%%%%%%%%%%%%%%%%%%%%
+%%	 Other Settings	 %%
+%%%%%%%%%%%%%%%%%%%%%%%
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%     Pages Settings     %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% 页边距
-% 以下参考geometry.pdf
-\RequirePackage{geometry}
-\geometry{
-    a4paper,
-    top=3.5cm,bottom=2.6cm,left=2.7cm,right=2.7cm,          % 上3.5cm，下2.6cm，左2.7cm，右2.7cm，
-    headheight=1.1cm, footskip=0.6cm                        % 页眉2.4cm，页脚2cm
-}
-
-%% 页眉页脚
-% 以下参考fancyhdr.pdf 和《LaTeX 入门》2.4.3
-\RequirePackage{fancyhdr}
-
-% 设置正文页眉页脚
-\pagestyle{fancy}
-    \fancyhf{}
-    \fancyfoot[C]{\zihao{-5}\songti\thepage}                          % 页脚居中插入页码
-    \fancyhead[C]{\zihao{-5}\songti{北京化工大学毕业设计（论文）}}      % 页眉
-    \renewcommand\headrulewidth{0.6pt}                                 % 页眉线，默认为0.4pt
-    \renewcommand\footrulewidth{0pt}                                   % 页脚线，默认为Opt
-
-%设置章所在页的页眉页脚（同上）
-\fancypagestyle{plain}{%
-    \fancyfoot[C]{\zihao{-5}\songti\thepage}
-    \fancyhead[C]{\zihao{-5}\songti{北京化工大学毕业设计（论文）}}
-    \renewcommand\headrulewidth{0.6pt}
-    \renewcommand\footrulewidth{0pt}
-}
-
-\renewcommand{\frontmatter}{
-    \pagenumbering{Roman}
-    \pagestyle{plain}
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%     Other Settings     %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% 脚注带圈圈
+%% 脚注 footnote
 \RequirePackage{pifont}
-%%\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
 \RequirePackage{tikz}
-\RequirePackage{etoolbox}
-\newcommand*{\footnotecircled}[1]{\lower 0.2em\hbox{\tikz\draw (0pt, 0pt)circle (0.5 em) node {#1};}}
-\robustify{\footnotecircled}
-\renewcommand\thefootnote{\footnotecircled{\arabic{footnote}}}
+\newcommand{\footnotecircled}[1]{
+	\lower 0.15em\hbox{
+		\tikz\draw (0pt, 0pt)circle (0.4 em) node {#1};
+		}
+}
+\renewcommand\thefootnote{\protect\footnotecircled{\tiny\arabic{footnote}}}
+
+\renewcommand{\@makefntext}[1]{%
+	\setlength{\leftskip}{1.5\ccwd}%
+	\noindent\llap{\lower 1pt \hbox{\@thefnmark}\,}#1
+}
+
+%% URL链接断行 line breaks in URL
+\RequirePackage{url}
+\urlstyle{same}
+\g@addto@macro\UrlBreaks{%
+	\do0\do1\do2\do3\do4\do5\do6\do7\do8\do9%
+	\do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M
+	\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z
+	\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m
+	\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z
+}
+\Urlmuskip=0mu plus 0.1mu
+
 
 \RequirePackage{hyperref}
-\hypersetup{
-    colorlinks=true,                % 使用彩色文字链接（禁用链接外的方框）
-    %hidelinks,
-    bookmarksnumbered=true,         % 书签中，章节编号
-    pdfhighlight=/N,                % 点击链接时的外观
-    breaklinks=true,                % 允许断行
+\hypersetup{%
+	colorlinks=true,
+	bookmarksnumbered=true,
+	pdfhighlight=/N,
+	breaklinks=true,
+	citecolor=cyan,
 }
+\ifbuct@textblack
+	\hypersetup{hidelinks}
+\fi
+
+%% End of file `buctthesis.sty'.
