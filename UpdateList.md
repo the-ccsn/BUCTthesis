@@ -1,7 +1,7 @@
 # Update List
 
 <<<<<<< HEAD
-## Beta.V0.9.4 - 2020.3
+## Beta.V0.9.2 - 2020.3.14
 
 ### Fixed
 
