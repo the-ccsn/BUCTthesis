@@ -1,10 +1,33 @@
 %% 附录第一章--app1.tex
-\chapter{这里是附录第一部分}\label{app:1}
-未尽事宜可将其列在附录中加以说明。
-论文有关的数据表、符号说明、计算程序、运行结果、
-主要设备、仪器仪表的性能指标和测试分析结果、精度等
-均可列在附录中。
+\chapter{这里是附录}\label{app:1}
+未尽事宜可将其列在附录中加以说明。论文有关的数据表、符号说明、计算程序、运行结果、
+主要设备、仪器仪表的性能指标和测试分析结果、精度等均可列在附录中。
 \section{附录的节}
 与正文类似。
-    \subsection{附录的小节}
-    与正文类似。
+\begin{table}[ht]
+	\centering
+	\caption{测试表格}\label{tab:mytable}
+	\begin{tabular}{cc}
+		\toprule
+		测试 & 测试   \\
+		\midrule
+		甲   & 乙丙丁 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection{附录的小节}
+
+
+\begin{equation}
+	a^2+b^3=c^4
+\end{equation}
+
+\begin{definition}
+	这是定义。\footnote{这是测试脚注}
+\end{definition}
+
+\begin{lstlisting}[language=c++,caption=一个测试,label=mycode]
+#define mian main
+	\end{lstlisting}
+

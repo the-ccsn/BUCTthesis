@@ -1,4 +1,6 @@
 {
+<<<<<<< Updated upstream
+=======
     "latex-workshop.latex.recipes": [{
     "name": "xelatex",
     "tools": [
@@ -17,63 +19,205 @@
         "xelatex",
         "xelatex"
     ]}
-  ],
-  "latex-workshop.latex.tools": [{
-  "name": "latexmk",
-  "command": "latexmk",
-  "args": [
-    "-synctex=1",
-    "-interaction=nonstopmode",
-    "-file-line-error",
-    "-pdf",
-    "%DOCFILE%"
-  ]
-  },{
-  "name": "xelatex",
-  "command": "xelatex",
-  "args": [
-    "-synctex=1",
-    "-interaction=nonstopmode",
-    "-file-line-error",
-    "%DOCFILE%"
-  ]
-  },{
-  "name": "pdflatex",
-  "command": "pdflatex",
-  "args": [
-    "-synctex=1",
-    "-interaction=nonstopmode",
-    "-file-line-error",
-    "%DOCFILE%"
-  ]
-  },{
-  "name": "bibtex",
-  "command": "bibtex",
-  "args": [
-    "%DOCFILE%"
-  ]
-  }],
-  "latex-workshop.view.pdf.viewer": "tab",
-  "latex-workshop.latex.clean.fileTypes": [
-  "*.aux",
-  "*.bbl",
-  "*.blg",
-  "*.idx",
-  "*.ind",
-  "*.lof",
-  "*.lot",
-  "*.out",
-  "*.toc",
-  "*.acn",
-  "*.acr",
-  "*.alg",
-  "*.glg",
-  "*.glo",
-  "*.gls",
-  "*.ist",
-  "*.fls",
-  "*.log",
-  "*.fdb_latexmk"
-  ],
+{
+>>>>>>> Stashed changes
+	"latex-workshop.latex.tools": [
+	{
+		"name": "xelatex",
+		"command": "xelatex",
+		"args": [
+			"-synctex=1",
+			"-interaction=nonstopmode",
+			"-file-line-error",
+			"%DOCFILE%"
+		]
+	},
+	{
+		"name": "xelatex-with-shell-escape",
+		"command": "xelatex",
+		"args": [
+			"--shell-escape",
+			"-synctex=1",
+			"-interaction=nonstopmode",
+			"-file-line-error",
+			"%DOCFILE%"
+		]
+	},
+	{
+		"name": "xelatex-latexmk",
+		"command": "latexmk",
+		"args": [
+			"-synctex=1",
+			"-interaction=nonstopmode",
+			"-file-line-error",
+			"-xelatex",
+			"-outdir=%OUTDIR%",
+			"%DOCFILE%"
+		]
+	},
+	{
+		"name": "xelatex-latexmk-with-shell-escape",
+		"command": "latexmk",
+		"args": [
+			"--shell-escape",
+			"-synctex=1",
+			"-interaction=nonstopmode",
+			"-file-line-error",
+			"-xelatex",
+			"-outdir=%OUTDIR%",
+			"%DOCFILE%"
+		]
+	},
+	{
+		"name": "pdflatex",
+		"command": "pdflatex",
+		"args": [
+			"-synctex=1",
+			"-interaction=nonstopmode",
+			"-file-line-error",
+			"%DOCFILE%"
+		]
+	},
+	{
+		"name": "pdflatex-with-shell-escape",
+		"command": "pdflatex",
+		"args": [
+			"--shell-escape",
+			"-synctex=1",
+			"-interaction=nonstopmode",
+			"-file-line-error",
+			"%DOCFILE%"
+		]
+	},
+	{
+		"name": "pdflatex-latexmk",
+		"command": "latexmk",
+		"args": [
+			"-synctex=1",
+			"-interaction=nonstopmode",
+			"-file-line-error",
+			"-pdf",
+			"-outdir=%OUTDIR%",
+			"%DOCFILE%"
+		]
+	},
+	{
+		"name": "pdflatex-latexmk-with-shell-escape",
+		"command": "latexmk",
+		"args": [
+			"--shell-escape",
+			"-synctex=1",
+			"-interaction=nonstopmode",
+			"-file-line-error",
+			"-pdf",
+			"-outdir=%OUTDIR%",
+			"%DOCFILE%"
+		]
+	},
+	{
+		"name": "latexmk",
+		"command": "latexmk",
+		"args": [
+			"-synctex=1",
+			"-interaction=nonstopmode",
+			"-file-line-error",
+			"-pdf",
+			"%DOCFILE%"
+		]
+	},
+	{
+		"name": "bibtex",
+		"command": "bibtex",
+		"args": [
+			"%DOCFILE%"
+		]
+	},
+],
+"latex-workshop.latex.recipes": [
+		{
+		"name": "XeLaTeX",
+		"tools": [
+			"xelatex"
+		]
+	},
+	{
+		"name": "XeLaTeX -> BibTeX -> XeLaTeX*2",
+		"tools": [
+			"xelatex",
+			"bibtex",
+			"xelatex",
+			"xelatex"
+		]
+	},
+	{
+		"name": "XeLaTeX with Shell Escape",
+		"tools": [
+			"xelatex-with-shell-escape"
+		]
+	},
+	{
+		"name": "XeLaTeX Auto",
+		"tools": [
+			"xelatex-latexmk"
+		]
+	},
+	{
+		"name": "XeLaTeX Auto with Shell Escape",
+		"tools": [
+			"xelatex-latexmk-with-shell-escape"
+		]
+	},
+	{
+		"name": "latexmk",
+		"tools": [
+			"latexmk"
+		]
+	},
+	{
+		"name": "BibTeX",
+		"tools": [
+			"bibtex"
+		]
+	},
+],
+<<<<<<< Updated upstream
+	"latex-workshop.view.pdf.viewer": "external",
+	"latex-workshop.view.pdf.ref.viewer":"external",
+	"latex-workshop.view.pdf.external.viewer.command": "D:/APPs&Tools/SumatraPDF/SumatraPDF.exe",
+	"latex-workshop.view.pdf.external.viewer.args": [
+		"-inverse-search",
+		"\"D:/APPs&Tools/Microsoft VS Code/Code.exe\" \"D:/APPs&Tools/Microsoft VS Code/resources/app/out/cli.js\" -r -g \"%f:%l\"",
+		"%PDF%"
+		],
+	"latex-workshop.view.pdf.external.synctex.command": "D:/APPs&Tools/SumatraPDF/SumatraPDF.exe",
+	"latex-workshop.view.pdf.external.synctex.args":[
+		"-forward-search",
+		"%TEX%",
+		"%LINE%",
+		"%PDF%",
+	],
+=======
+>>>>>>> Stashed changes
+	"latex-workshop.latex.clean.fileTypes": [
+	"*.aux",
+	"*.bbl",
+	"*.blg",
+	"*.idx",
+	"*.ind",
+	"*.lof",
+	"*.lot",
+	"*.out",
+	"*.toc",
+	"*.acn",
+	"*.acr",
+	"*.alg",
+	"*.glg",
+	"*.glo",
+	"*.gls",
+	"*.ist",
+	"*.fls",
+	"*.log",
+	"*.fdb_latexmk"
+	],
 "editor.wordWrap": "on",
 }
