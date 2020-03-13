@@ -1,6 +1,5 @@
 # Update List
 
-<<<<<<< HEAD
 ## Beta.V0.9.2 - 2020.3.14
 
 ### Fixed
@@ -36,15 +35,6 @@
 ### Added
 
 * 宏包载入多了选项：`TextBlack` 用于将超链接全部设置为黑色，`LessTOC` 将会取消将“第一章”之前的所有内容编目（这与《规范》的示例相同）。
-=======
-
-
-## Beta.v0.9.0 - 2020.01.23
-
-The first version.
-
-
->>>>>>> parent of e2db23b... Beta.v0.9.2
 
 ## Beta.v0.9.1 - 2020.02.06
 
@@ -78,10 +68,6 @@ The first version.
 
 * 增加了化学类的宏包、算法的宏包
 
-<<<<<<< HEAD
 ## Beta.v0.9.0 - 2020.01.23
 
 The first version.Hello World!
-=======
-
->>>>>>> parent of e2db23b... Beta.v0.9.2
