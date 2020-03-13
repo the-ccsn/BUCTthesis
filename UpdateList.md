@@ -1,6 +1,6 @@
 # Update List
 
-## Beta.V0.9.2 - 2020.3.14
+## Beta.V0.9.2 - 2020.03.14
 
 ### Fixed
 
