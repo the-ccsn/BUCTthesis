@@ -1,4 +1,26 @@
 {
+<<<<<<< Updated upstream
+=======
+    "latex-workshop.latex.recipes": [{
+    "name": "xelatex",
+    "tools": [
+        "xelatex"
+    ]
+  }, {
+    "name": "latexmk",
+    "tools": [
+        "latexmk"
+    ]
+  },{
+    "name": "xelatex -> bibtex -> xelatex*2",
+    "tools": [
+        "xelatex",
+        "bibtex",
+        "xelatex",
+        "xelatex"
+    ]}
+{
+>>>>>>> Stashed changes
 	"latex-workshop.latex.tools": [
 	{
 		"name": "xelatex",
@@ -158,6 +180,7 @@
 		]
 	},
 ],
+<<<<<<< Updated upstream
 	"latex-workshop.view.pdf.viewer": "external",
 	"latex-workshop.view.pdf.ref.viewer":"external",
 	"latex-workshop.view.pdf.external.viewer.command": "D:/APPs&Tools/SumatraPDF/SumatraPDF.exe",
@@ -173,6 +196,8 @@
 		"%LINE%",
 		"%PDF%",
 	],
+=======
+>>>>>>> Stashed changes
 	"latex-workshop.latex.clean.fileTypes": [
 	"*.aux",
 	"*.bbl",
