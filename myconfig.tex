@@ -1,0 +1,40 @@
+% myconfig.tex---The file for your beloved packages, commands and customization.
+
+%% Packages
+%\usepackage{threeparttable}	% 可以在表格底下写脚注
+%\usepackage{paracol}	% 一个可以排版双语对照翻译的宏包
+%
+
+%% Commands
+%自定义命令格式为：\newcommand{<命令>}[<参数个数>][<首参默认值>]{<具体的定义>}
+% add a single fig. Usage:\addfig[Width]{Path}{Caption}{Lable}
+\newcommand{\addfig}[4][.5\textwidth]{%
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width = #1]{#2}
+		\caption{#3}\label{#4}
+	\end{figure}}
+
+%% Maths
+\newcommand\Vector{\symbfit}
+\newcommand\Matrix{\symbfit}
+
+
+%% A sample thesis cover
+\title{\thesistitle}
+\author{Miracle0565}
+\ctexset{today=big}
+
+
+%%=======开发区域========
+%\usepackage{showframe}
+%\usepackage{showkeys}
+%%以下仅编译《指南》所需
+\newcommand{\cmd}[1]{\texttt{\textbackslash#1}}
+\newcommand{\file}{\textsf}
+\newcommand{\pkg}{\textsf}
+\newcommand{\env}{\texttt}
+\newcommand{\opt}{\texttt}
+\newcommand{\argu}[1]{\{$\langle$\textit{#1}$\rangle$\}}
+\newcommand{\cargu}[1]{$\langle$\textit{#1}$\rangle$}
+%%=======================
