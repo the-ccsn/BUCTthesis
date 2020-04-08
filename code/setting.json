@@ -1,6 +1,4 @@
 {
-<<<<<<< Updated upstream
-=======
     "latex-workshop.latex.recipes": [{
     "name": "xelatex",
     "tools": [
@@ -20,7 +18,6 @@
         "xelatex"
     ]}
 {
->>>>>>> Stashed changes
 	"latex-workshop.latex.tools": [
 	{
 		"name": "xelatex",
@@ -180,24 +177,6 @@
 		]
 	},
 ],
-<<<<<<< Updated upstream
-	"latex-workshop.view.pdf.viewer": "external",
-	"latex-workshop.view.pdf.ref.viewer":"external",
-	"latex-workshop.view.pdf.external.viewer.command": "D:/APPs&Tools/SumatraPDF/SumatraPDF.exe",
-	"latex-workshop.view.pdf.external.viewer.args": [
-		"-inverse-search",
-		"\"D:/APPs&Tools/Microsoft VS Code/Code.exe\" \"D:/APPs&Tools/Microsoft VS Code/resources/app/out/cli.js\" -r -g \"%f:%l\"",
-		"%PDF%"
-		],
-	"latex-workshop.view.pdf.external.synctex.command": "D:/APPs&Tools/SumatraPDF/SumatraPDF.exe",
-	"latex-workshop.view.pdf.external.synctex.args":[
-		"-forward-search",
-		"%TEX%",
-		"%LINE%",
-		"%PDF%",
-	],
-=======
->>>>>>> Stashed changes
 	"latex-workshop.latex.clean.fileTypes": [
 	"*.aux",
 	"*.bbl",

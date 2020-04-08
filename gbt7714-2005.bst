@@ -1437,23 +1437,7 @@ FUNCTION {bachelorthesis} {                       % void Entry::bachelorthesis()
   "D" set.mark                                    %   set_mark("D");
   thesis.impl                                     %   thesis_impl();
 }                                                 % }
-                                                  %
-%================================================================================add_by_Miracle0565_GitHUB
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                                  %
-FUNCTION {mastersthesis} {                         % void Entry::masterthesis() {
-  "D" set.mark                                    %   set_mark("D");
-  thesis.impl                                     %   thesis_impl();
-}                                                 % }
-                                                  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                                  %
-FUNCTION {bachelorsthesis} {                       % void Entry::bachelorthesis() {
-  "D" set.mark                                    %   set_mark("D");
-  thesis.impl                                     %   thesis_impl();
-}                                                 % }
-                                                  %
-%================================================================================End							  
+                                                  %					  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                   %
 FUNCTION {techreport} {                           % void Entry::techreport() {
