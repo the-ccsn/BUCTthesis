@@ -2,15 +2,15 @@
 \chapter{代码说明}\label{chap:CodeIntro}
 本章将简单说明编译文档所需代码，推荐将本文档与源代码结合起来阅读。
 
-\section{宏包载入选项}\label{sec:loadsty}
+\section{载入选项}\label{sec:loadsty}
 主文件\file{buctthesis.tex}以
 \begin{lstlisting}
-\usepackage[%
+\documentclass[
 	TextBlack,
 	LessTOC,
 ]{buctthesis}
 \end{lstlisting}
-命令载入宏包，用以控制全文格式。这里预设了两个选项，可根据需要使用：
+命令载入文档类，用以控制全文格式。这里预设了两个选项，可根据需要使用：
 \begin{itemize}
 	\item \opt{TextBlack}：将文章超链接和代码块的颜色全部设置为黑色，适合论文最终提交与付梓；
 	\item \opt{LessTOC}：将把“第一章”之前的部分，即诚信声明、任务书、中英文摘要和前言从目录中移除，
@@ -48,7 +48,7 @@
 \tableofcontents
 \listofdesignfigures
 \end{lstlisting}
-命令生成主目录和设计图纸目录。其中主目录受宏包载入时 \opt{LessTOC} 选项的影响。
+命令生成主目录和设计图纸目录。其中主目录受文档类载入时 \opt{LessTOC} 选项的影响。
 
 设计图纸需要编号，模板将其编目的命令请参见第~\ref{subsec:fig}~小节。
 
@@ -85,7 +85,7 @@
 \subsubsection{字体配置}
 \begin{enumerate}
 	\item 中文：主字体（衬线字体）为中易宋体，无衬线字体为中易黑体，二者均可加粗；楷体和仿宋均为\pkg{ctex}宏集的预设，应减少使用；
-	\item 西文： 除英文摘要关键字使用\textsf{Arial}字体（《规范》要求为黑体，这里以该字体替代），其它一律使用Times New Roman；
+	\item 西文： 除了英文摘要的关键词使用中易黑体，除公式之外一律使用 Times New Roman；
 	\item 公式：模板会根据实际字体安装情况，选择 Times 风格的 $XITSMath$ 字体或使用 \LaTeX\ 的默认字体。
 \end{enumerate}
 
@@ -97,7 +97,7 @@
 	\item 粗黑体：{\bfhei 北京化工大学 BUCT 1958} 或 \textbf{\heiti 北京化工大学 BUCT 1958}
 	\item 楷体：{\itshape 北京化工大学 BUCT 1958} 或 \textit{北京化工大学 BUCT 1958}
 	\item 仿宋：{\ttfamily 北京化工大学 BUCT 1958} 或 \texttt{北京化工大学 BUCT 1958}
-	%\item 微软雅黑与Arial： {\sffamily 北京化工大学 BUCT 1958} 或 \textsf{北京化工大学 BUCT 1958} ，粗体： \textbf{\sffamily 北京化工大学 BUCT 1958} % \footnote{这是为了替代黑体来排版无衬线西文，尽可能不要用其来排版中文。}
+	%\item 微软雅黑 {\sffamily 北京化工大学 BUCT 1958} 或 \textsf{北京化工大学 BUCT 1958} ，粗体： \textbf{\sffamily 北京化工大学 BUCT 1958} % \footnote{这是为了替代黑体来排版无衬线西文，尽可能不要用其来排版中文。}
 \end{enumerate}
 \subsection{图片}\label{subsec:fig}
 一般的图片插入使用 \env{figure} 环境。
@@ -415,7 +415,7 @@ int main()
 
 \subsection{论文的参考文献章节}
 本模板已在主文件中使用
-\begin{lstlisting}[firstnumber=52]
+\begin{lstlisting}[numbers=none]
 \bibliographystyle{gbt7714-2005}
 \bibliography{thesisbib.bib}
 	\end{lstlisting}
@@ -463,7 +463,7 @@ int main()
 \section{后置部分}\label{sec:backmatter}
 \subsection{附录}\label{sec:app}
 在\file{buctthesis.tex}中以
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none]
 \appendix
 		\end{lstlisting}
 命令作为附录部分的开始。与正文类似，只需往\file{chapter/app1.tex}等加入内容即可，
