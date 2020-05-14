@@ -25,8 +25,8 @@
 
 本文档的中、英文摘要分成了两页，
 因为若将300字的中文摘要、1500字符的英文摘要及其关键字排版在一页中，行间距会比较狭窄。
-若仍需要排版在同一页，请改用\env{abstract*}和\env{abstracten*}环境。或将源文件该部分代码
-取消注释，同时，为防止摘要部分溢出一页，模板预设了较低的标题间距，但是在内容上的间距未做调整。
+若仍需要排版在同一页，请改用\env{abstract*}和\env{abstracten*}环境，或将源文件该部分代码
+取消注释。同时，为防止摘要部分溢出一页，模板预设了较低的标题间距，但是在内容上的间距未做调整。
 若有需要，可以使用 \cmd{setlength\cmd{baselineskip}\argu{length}} 命令控制行距。
 
 插入中英文关键词分别使用 \cmd{keywords\argu{keywords}}和 \cmd{keywordsen\argu{keywords}}命令，
@@ -48,7 +48,7 @@
 \tableofcontents
 \listofdesignfigures
 \end{lstlisting}
-命令生成主目录和设计图纸目录。其中主目录受文档类载入时 \opt{LessTOC} 选项的影响。
+命令分别生成主目录和设计图纸目录。其中主目录的内容受文档类载入时 \opt{LessTOC} 选项的影响。
 
 设计图纸需要编号，模板将其编目的命令请参见第~\ref{subsec:fig}~小节。
 
@@ -84,8 +84,8 @@
 \subsection{字体}
 \subsubsection{字体配置}
 \begin{enumerate}
-	\item 中文：主字体（衬线字体）为中易宋体，无衬线字体为中易黑体，二者均可加粗；楷体和仿宋均为\pkg{ctex}宏集的预设，应减少使用；
-	\item 西文： 除了英文摘要的关键词使用中易黑体，除公式之外一律使用 Times New Roman；
+	\item 中文：主字体（衬线字体）为中易宋体，无衬线字体为中易黑体，二者均可加粗；《规范》中未规定的楷体和仿宋均为\pkg{ctex}宏集的预设，应减少使用；
+	\item 西文： 除英文摘要的关键词使用中易黑体、除公式之外的西文（数字、字母等）一律使用 Times New Roman；
 	\item 公式：模板会根据实际字体安装情况，选择 Times 风格的 $XITSMath$ 字体或使用 \LaTeX\ 的默认字体。
 \end{enumerate}
 
@@ -97,7 +97,7 @@
 	\item 粗黑体：{\bfhei 北京化工大学 BUCT 1958} 或 \textbf{\heiti 北京化工大学 BUCT 1958}
 	\item 楷体：{\itshape 北京化工大学 BUCT 1958} 或 \textit{北京化工大学 BUCT 1958}
 	\item 仿宋：{\ttfamily 北京化工大学 BUCT 1958} 或 \texttt{北京化工大学 BUCT 1958}
-	%\item 微软雅黑 {\sffamily 北京化工大学 BUCT 1958} 或 \textsf{北京化工大学 BUCT 1958} ，粗体： \textbf{\sffamily 北京化工大学 BUCT 1958} % \footnote{这是为了替代黑体来排版无衬线西文，尽可能不要用其来排版中文。}
+	%\item 微软雅黑 {\sffamily 北京化工大学 BUCT 1958} 或 \textsf{北京化工大学 BUCT 1958} ，粗体： \textbf{\sffamily 北京化工大学 BUCT 1958}
 \end{enumerate}
 \subsection{图片}\label{subsec:fig}
 一般的图片插入使用 \env{figure} 环境。
@@ -108,8 +108,6 @@
 	\includegraphics[width=0.4\textwidth]{figure/WholeLogo.ai}
 	\caption{校徽和校名}\label{fig:WholeLogo}
 \end{figure}
-
-一般来说图片使用 \cmd{centering}命令居中对齐。
 
 至于图片的并排，如果只需为组图写一个图注，只需在一个 \env{figure} 环境中使用多次 \cmd{includegraphics} 命令（可根据需要在插图之间加入空白）。
 
@@ -216,14 +214,14 @@
 
 
 \subsection{公式与数学类环境}\label{subsec:eqandmath}
-公式分为编号和不编号的两类。可以使用\env{equation}环境为公式编号，如下所示：
+公式分为编号和不编号的两类。可以使用\env{equation}环境为公式编号。
 \begin{equation}\label{eq:gougu}
 	x_{1,2}=\frac{{-b \pm \sqrt{{b^2}-4ac}}}{{2a}}.
 \end{equation}
 加上 \cmd{label}，就能使用 \cmd{ref}或 \cmd{eqref}引用了。
 代入\ref{eq:gougu}，可解得 \eqref{eq:gougu}。
 
-下面这个是不编号的公式，使用\env{equation*}环境：
+不编号的公式使用 \env{equation*} 环境。
 \begin{equation*}
 	\int_{-\infty}^{+\infty}\frac{1}{\sqrt{2\uppi}\sigma}		% 直立的 π
 	\mathrm{e}^{-\tfrac{(x-\mu)^2}{2\sigma^2}} \,\mathrm{d}x =1
@@ -351,6 +349,7 @@ int main()
 
 模板按照《规范》以 Times New Roman 字体书写代码。
 代码的关键字以粗体标出，而注释（西文）使用斜体。
+模板载入文档类时的 \opt{TextBlack} 选项将关闭代码颜色。
 
 代码 \ref{code:HelloWorld} 展示了如何从代码块中临时返回到 \LaTeX\ 中。
 
@@ -421,6 +420,7 @@ int main()
 	\end{lstlisting}
 来增加符合格式要求的参考文献章节。为罗列各条参考文献，
 需要在 \file{thesisbib.bib} 文件中增删需引用的文献数据。
+在文章中相应位置引用文献后，需执行一次全编译以确保正确显示。
 注意：至少需要引用一篇参考文献，否则执行完全编译可能会引起编译错误。
 如果暂不需要参考文献，请将这两行删除或注释掉。
 
@@ -515,22 +515,25 @@ int main()
 \end{table}
 \footnotetext{苟：如果}
 
-还有一种手动在表格底生成脚注的方法，见表~\ref{tab:ftnt2}。
-\begin{table}[htbp]
-	\centering
-	\caption{脚注示例2}
-	\label{tab:ftnt2}
-	\begin{minipage}[H]{7.5cm}
-		\begin{tabular}{llll}
-			\hline
-			昔孟母 & 择邻处 $^{*}$       & 子不学 & 断机杼 \\
-			窦燕山 & 有义方 $^{\dagger}$ & 教五子 & 名俱扬 \\
-			\hline
-		\end{tabular}\\[3pt]
-		\footnotesize
-		$^*$脚注1\\
-		$^\dagger$脚注2
-	\end{minipage}
+利用 \pkg{threeparttable} 宏包提供的 \env{threeparttable} 环境可以实现在表格底下写脚注，见表~\ref{tab:ftnt2}。
+
+\begin{table}[htb]
+\centering
+\begin{threeparttable}
+	\caption{脚注示例2}\label{tab:ftnt2}
+	\begin{tabular}{cccc}
+		\toprule
+		昔孟母	& 择邻处\tnote{*} & 子不学	& 断机杼\\
+		\midrule
+		窦燕山\tnote{$\dagger$}	& 有义方 & 教五子\tnote{$\ddagger$}	&名俱扬\\
+		\bottomrule
+	\end{tabular}
+	\begin{tablenotes}\small
+		\item [*] 脚注1。
+		\item [$\dagger$] 脚注2。
+		\item [$\ddagger$] 脚注3。
+	\end{tablenotes}
+\end{threeparttable}
 \end{table}
 
 \subsection{列表环境}\label{subsec:items}
@@ -542,9 +545,9 @@ int main()
 	\item 一条
 	\item 次条
 	\item 这一条可以分为\dots
-			\begin{itemize}
-				\item 子一条
-			\end{itemize}
+		\begin{itemize}
+			\item 子一条
+		\end{itemize}
 \end{itemize}
 稍复杂一点的，如：
 \begin{enumerate}
@@ -564,4 +567,4 @@ int main()
 	\item English
 \end{enumerate}
 
-注意：一级编号列表环境最多罗列10条，否则标签会显示错误。%，否则到第11条时，标签将从第10条的\ding{201}到第11条的\ding{202}
+注意：一级编号列表环境最多罗列10条，否则标签会显示错误。%，到第11条时，标签将从第10条的\ding{201}到第11条的\ding{202}

@@ -58,7 +58,7 @@
 % 无机化学式 chemical fomular
 \RequirePackage[version=4]{mhchem}
 % 表格 tables
-\RequirePackage{longtable,dcolumn,tabularx,multirow,booktabs}
+\RequirePackage{longtable,threeparttable,dcolumn,tabularx,multirow,booktabs}
 % 插图 figures
 \RequirePackage{graphicx}
 \RequirePackage[labelformat=simple]{subcaption}
