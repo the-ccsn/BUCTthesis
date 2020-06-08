@@ -4,7 +4,7 @@
 %%
 %%		https://github.com/Miracle0565/BUCTthesis
 %%
-%%		Beta.v0.9.4, May.2020
+%%		Beta.v0.9.4, June.2020
 %%
 %%	This file may be distributed and/or modified under
 %%	the conditions of the LaTeX Project Public License,
@@ -20,10 +20,10 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
-%% package info
-\ProvidesClass{buctthesis}[2020/04/08 Beta.v0.9.4]
+%% class info
+\ProvidesClass{buctthesis}[2020/05/24 Beta.v0.9.4]
 
-%% package options
+%% 文档类选项 class options
 \newif\ifbuct@textblack
 \newif\ifbuct@lesstoc
 \DeclareOption{TextBlack}{\buct@textblacktrue}
@@ -34,6 +34,25 @@
 %\ExecuteOptions{}
 \ProcessOptions\relax
 \LoadClass[zihao=-4,UTF8,oneside]{ctexbook}
+
+% 定义选项 options 
+\RequirePackage{xparse}
+\RequirePackage{xkeyval,kvsetkeys}
+
+\NewDocumentCommand\buct@def@key{m}{%
+	\@namedef{buct#1}##1{\@namedef{buct@#1}{##1}}%
+	\define@key{buct}{#1}{\csname buct#1\endcsname{##1}}}
+\NewDocumentCommand{\buctsetup}{m}{\kvsetkeys{buct}{#1}}
+
+\buct@def@key{Title}
+\buct@def@key{Titleen}
+\buct@def@key{Author}
+\buct@def@key{Class}
+\buct@def@key{School}
+\buct@def@key{Major}
+\buct@def@key{Supervisor}
+\buct@def@key{MajorSupervisor}
+
 % XeLaTeX required
 \RequirePackage{ifxetex}
 \RequireXeTeX
@@ -76,8 +95,9 @@
 % 脚注 footnote
 \RequirePackage[bottom,perpage]{footmisc}
 % 参考文献 bibliography
-\RequirePackage[square,numbers,super,sort&compress]{natbib}
-
+%\RequirePackage{bibentry}
+\RequirePackage[sort&compress]{gbt7714}
+%\nobibliography*{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%	   Fonts Settings	 %%
@@ -198,43 +218,54 @@
 	\leftline{\songti\zihao{4}\noindent 本人声明：}%
 	\def\addsign{本人签名：\hspace{7em}}
 	\def\addsigndate{\hspace{7em}年\hspace{2.5em}月\hspace{2.5em}日}
-}{\par\vspace{2em}\hfill\addsign\addsigndate}
+}{\par\vspace{2em}\hfill\addsign\addsigndate\clearpage}
 
 %% 任务书
 \newenvironment{taskbook}{
 	\phantomsection{}
 	\buct@less@toc{毕业设计（论文）任务书}%
 	\section*{本科生毕业设计（论文）任务书}%
-}{}
-\newcommand{\taskitem}[1]{{\raggedright\subsubsection*{#1}}}%
+}{\clearpage}
+\newcounter{taskitemcnt}
+\newcommand{\buct@taskitem}{
+	\stepcounter{taskitemcnt}%
+	\ifcase\value{taskitemcnt}\relax\or%
+	{1.设计（论文）的主要任务及目标}\or%
+	{2.设计（论文）的基本要求和内容}\or%
+	{3.主要参考文献}\or%
+	{4.进度安排}\else%
+	\ClassError{buctthesis}{Too many \protect\taskitem\space used}%
+	{Keep \protect\taskitem\space no more than 4 times.}\fi}
+\newcommand{\taskitem}{\noindent\buct@taskitem\par}%
+
 % TODO:bibitem
 \newenvironment{bibenumerate}{%
-	\begin{enumerate}[label={[}\arabic*{]},leftmargin=3em]
+	\begin{enumerate}[label={[\arabic*]},leftmargin=3em]
 }{\end{enumerate}}
 \newcommand{\taskinfo}{%
 	\noindent%
 	\begin{minipage}{\textwidth}%
 		\punctstyle{plain}\linespread{1.94}\selectfont%
-		设计（论文）题目：\underline{\makebox[27em][c]{\thesistitle}}\\[3pt]
-		学院：\underline{\makebox[10em][c]{\School}}\quad 
-		专业：\underline{\makebox[10em][c]{\Major}}\quad
-		班级：\underline{\makebox[5em][c]{\Class}}\\[3pt]
-		学生：\underline{\makebox[5em][c]{\StudentName}}\quad
-		指导教师（含职称）：\underline{\makebox[6em][c]{\Supervisor}}\quad
-		专业负责人：\underline{\makebox[4em][c]{\MajorSupervisor}}%
+		设计（论文）题目：\underline{\makebox[27em][c]{\buct@Title}}\\[3pt]
+		学院：\underline{\makebox[10em][c]{\buct@School}}\quad 
+		专业：\underline{\makebox[10em][c]{\buct@Major}}\quad
+		班级：\underline{\makebox[5em][c]{\buct@Class}}\\[3pt]
+		学生：\underline{\makebox[5em][c]{\buct@Author}}\quad
+		指导教师（含职称）：\underline{\makebox[6em][c]{\buct@Supervisor}}\quad
+		专业负责人：\underline{\makebox[4em][c]{\buct@MajorSupervisor}}%
 		\end{minipage}\vspace{2.5em}
 }
 \newcommand{\Taskinfo}{%
 	\noindent%
 	\begin{minipage}{\textwidth}%
 		\punctstyle{plain}\linespread{1.94}\selectfont%
-		设计（论文）题目：\underline{\makebox[27.25em][c]{\thesistitle}}\\[3pt]
-		学院：\underline{\makebox[15em][c]{\School}}\hspace{2em}
-		专业：\underline{\makebox[13em][c]{\Major}}\\[3pt]
-		班级：\underline{\makebox[15em][c]{\Class}}\hspace{2em}
-		学生：\underline{\makebox[13em][c]{\StudentName}}\\[3pt]
-		指导教师（含职称）：\underline{\makebox[8em][c]{\Supervisor}}\hspace{2em}
-		专业负责人：\underline{\makebox[10em][c]{\MajorSupervisor}}%
+		设计（论文）题目：\underline{\makebox[27.25em][c]{\buct@Title}}\\[3pt]
+		学院：\underline{\makebox[15em][c]{\buct@School}}\hspace{2em}
+		专业：\underline{\makebox[13em][c]{\buct@Major}}\\[3pt]
+		班级：\underline{\makebox[15em][c]{\buct@Class}}\hspace{2em}
+		学生：\underline{\makebox[13em][c]{\buct@Author}}\\[3pt]
+		指导教师（含职称）：\underline{\makebox[8em][c]{\buct@Supervisor}}\hspace{2em}
+		专业负责人：\underline{\makebox[10em][c]{\buct@MajorSupervisor}}%
 		\end{minipage}\vspace{2.5em}
 }
 %% 摘要
@@ -243,17 +274,19 @@
 \newenvironment{abstract*}{%
 	\phantomsection{}%
 	\buct@less@toc{摘要}
-	\centerline{\buct@abstitfont\thesistitle}\vspace{-3pt}%
+	\centerline{\buct@abstitfont\buct@Title}\vspace{-3pt}%
 	\centerline{\buct@absabsfont{摘\quad 要}}\vspace{-3pt}%
 	\newcommand{\keywords}{\par\vspace{-0.5ex}\noindent\buct@keywordsfont 关键词：}
+	\addtolength{\baselineskip}{-3pt}
 }{}
 % 英文摘要
 \newenvironment{abstracten*}{%
 	\phantomsection{}%
 	\buct@less@toc{ABSTRACT}
-	\centerline{\buct@abstitfonten{\thesistitleen}}\vspace{-6pt}%
+	\centerline{\buct@abstitfonten{\buct@Titleen}}\vspace{-6pt}%
 	\centerline{\buct@absabsfonten {ABSTRACT}}\vspace{-3pt}%
 	\newcommand{\keywordsen}{\par\vspace{-0.5ex}\noindent\buct@keywordsfonten Keywords:~}
+	\addtolength{\baselineskip}{-6pt}
 }{}
 % 中、英文摘要分为两页：
 % 中文摘要
@@ -261,7 +294,7 @@
 	\clearpage%
 	\phantomsection{}%
 	\buct@less@toc{摘要}
-	\centerline{\buct@abstitfont\thesistitle}\vspace{6pt}%
+	\centerline{\buct@abstitfont\buct@Title}\vspace{6pt}%
 	\centerline{\buct@absabsfont{摘\quad 要}}\vspace{3pt}%
 	\newcommand{\keywords}{\par\vspace{1em}\noindent\buct@keywordsfont 关键词：}
 
@@ -271,7 +304,7 @@
 	\clearpage%
 	\phantomsection{}%
 	\buct@less@toc{ABSTRACT}
-	\centerline{\buct@abstitfonten{\thesistitleen}}\vspace{6pt}%
+	\centerline{\buct@abstitfonten{\buct@Titleen}}\vspace{6pt}%
 	\centerline{\buct@absabsfonten{ABSTRACT}}\vspace{3pt}%
 	\newcommand{\keywordsen}{\par\vspace{1em}\noindent\buct@keywordsfonten Keywords:~}
 }{}
@@ -502,15 +535,15 @@ bibname		= 参考文献,
 \renewcommand{\theequation}{式~\arabic{chapter}-\arabic{equation}}
 \renewcommand{\thedfigure}{\arabic{chapter}-\arabic{dfigure}}
 %% 附录 appendix
-\let\buct@appendix\appendix
-\renewcommand{\appendix}{%
-	\buct@appendix
+\let\old@appendix\appendix
+\newcommand{\buct@appendix}{%
+	\old@appendix
 	\renewcommand{\thetable}{\Alph{chapter}-\arabic{table}}
 	\renewcommand{\thefigure}{\Alph{chapter}-\arabic{figure}}
 	\renewcommand{\theequation}{式~\Alph{chapter}-\arabic{equation}}
 	\renewcommand{\thedfigure}{\Alph{chapter}-\arabic{dfigure}}
 }
-
+\let\appendix\buct@appendix
 % 代码 code
 \lstset{%
 	%lineskip = -3pt,
@@ -519,7 +552,7 @@ bibname		= 参考文献,
 	tabsize			= 4,
 	basicstyle		= \buct@codefont,
 	frame			= single,
-	basewidth		= {.55em,.45em},
+	basewidth		= {.5em,.4em},
 	xleftmargin		= 1.5em,
 	xrightmargin	= 1.5em,
 	commentstyle	= \buct@codecomfont,
@@ -538,6 +571,9 @@ bibname		= 参考文献,
 	escapechar		= {@*},
 }
 \renewcommand{\lstlistingname}{代码}
+%\AtBeginDocument{
+%\renewcommand{\thelstlisting}{\arabic{chapter}-\arabic{lstlisting}}
+%}
 
 % 参考文献 bib
 \setlength{\bibsep}{3pt}
@@ -551,12 +587,12 @@ bibname		= 参考文献,
 \renewcommand{\em}{\bfsong}
 
 %% 脚注 footnote
-\newcommand{\buct@footnotecircled}[1]{%
+\newcommand{\buct@ftntcircled}[1]{%
 	\lower 0.15em\hbox{%
 		\tikz\draw (0pt, 0pt)circle (0.4 em) node {#1};%
 	}%
 }
-\renewcommand\thefootnote{\protect\buct@footnotecircled{\tiny\arabic{footnote}}}
+\renewcommand\thefootnote{\protect\buct@ftntcircled{\tiny\arabic{footnote}}}
 \renewcommand{\@makefntext}[1]{%
 	\setlength{\leftskip}{1.5\ccwd}%
 	\noindent\llap{\lower 1pt \hbox{\@thefnmark}\,}#1%

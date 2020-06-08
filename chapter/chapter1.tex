@@ -14,10 +14,11 @@ BUCTthesis是北京化工大学本科毕业论文的 \LaTeX\ 写作模板，本�
 
 
 本写作模板基于\CTeX{}的book 文类，默认编码为 UTF-8。本模板已在Windows\ 10(64bit)操作系统下，
-\TeX\ Live 2019，使用 XeLaTeX 编译通过，由于作者精力所限，模板未在Mac OS和Linux系统下测试，
-故不能保证其可行性。由于此模板的参考文献使用\BibTeX{}，所以完整的编译链为:
-XeLaTeX $\to$ BibTeX{}$\to$ XeLaTeX{}$\to$ XeLaTeX{}。
-为检查编译环境，请在开始前对模板的源文件执行一次全编译，若无报错、无警告则合适。
+\TeX\ Live 2020 发行版，使用 XeLaTeX 引擎编译通过。
+限于作者精力和水平，模板未在Mac OS和Linux系统下测试，故不能保证其可行性。
+由于此模板的参考文献使用\BibTeX{}，所以完整的编译链为：
+XeLaTeX $\to$ BibTeX{} $\to$ XeLaTeX{} $\to$ XeLaTeX{}。
+为检查编译环境，请在开始前对模板的主文件 \file{main.tex} 执行一次全编译，若无报错、无警告则合适。
 
 \subsection{免责声明}
 请您注意，至本文档编译时，北京化工大学教务处仅提供《规范》而未对本模板做任何测试或授权。
@@ -42,29 +43,26 @@ XeLaTeX $\to$ BibTeX{}$\to$ XeLaTeX{}$\to$ XeLaTeX{}。
 		\toprule
 		文件（夹）名                & 简述	\\
 		\midrule
-		\file{buctthesis.tex}   & 主文件							\\
-		\file{buctthesis.cls}   & 模板的文档类文件				\\
-		\file{buctthesis.pdf}   & 使用指南，即本文				\\
-		\file{gbt7714-2005.bst} & \BibTeX{}用到的参考文献格式模板	\\
+		\file{main.tex}			& 主文件							\\
+		\file{buctthesis.cls}   & 模板的文档类文件					\\
+		\file{main.pdf}			& 示例文档《BUCTthesis 写作指南》，即本文	\\
 		\file{thesisbib.bib}    & \BibTeX{}参考文献数据库文件		\\
-		\file{myconfig.tex}		& 自定义配置文件			\\
-		\file{chapter/}         & 各个“章”的源文件路径			\\
-		\file{code/}            & 源代码的路径					\\
+		\file{myconfig.tex}		& 自定义配置文件					\\
+		\file{chapter/}         & 各个“章”的源文件路径				\\
+		\file{code/}            & 源代码的路径						\\
 		\file{figure/}          & 图片的路径						\\
-		\file{scanPDF/}         & 存放已扫描的封面等文件的路径	\\
+		\file{scanPDF/}         & 存放已扫描的封面等文件的路径		\\
 		\bottomrule
 	\end{tabular}
 \end{table}
 以下是各个文件（夹）的详细介绍：
-\subsubsection{\file{buctthesis.tex}}
+\subsubsection{\file{main.tex}}
 主文件，用于组织文章结构。一般写作需要做的有：
 添加论文相关的信息、增添正文和附录的各章节。
 具体方式请参考第 \ref{chap:CodeIntro} 章。
 编译此文件以形成 PDF 文档。
 \subsubsection{\file{buctthesis.cls}}
 模板的文档类文件，起到控制格式的作用。
-\subsubsection{\file{gbt7714-2005.bst}}
-参考文献格式控制文件，使得参考文献符合GB/T 7714-2005规范。此文件包含其制作者信息。
 \subsubsection{\file{myconfig.tex}}
 用于自定义命令、装载宏包等。
 \subsubsection{\file{chapter/}、\file{figure/}和\file{code/}}
@@ -74,7 +72,7 @@ XeLaTeX $\to$ BibTeX{}$\to$ XeLaTeX{}$\to$ XeLaTeX{}。
 用于存放扫描的PDF文件，可以根据需要插入和替换论文中某部分。具体方式见主文件的注释部分。
 
 \section{一些编辑器的初始配置}
-开始之前，最好能使用最新的发行版\LaTeX{}，使用旧版可能会有潜在的问题；
+开始之前，最好能使用最新的 \LaTeX{} 发行版，使用旧版可能会有潜在的问题；
 同时查看环境变量Path（此电脑$\to$ 属性$\to$ 高级系统设置$\to$
 环境变量$\to$ 系统变量\,中），
 请确保\texttt{C:/Windows/system32}\footnote{盘符 C 表示系统所在盘}位于其中。
@@ -89,8 +87,7 @@ XeLaTeX $\to$ BibTeX{}$\to$ XeLaTeX{}$\to$ XeLaTeX{}。
 \subsection{\href{https://code.visualstudio.com}{Visual Studio Code}}
 初次使用做如下配置：
 \begin{itemize}
-	\item 将\TeX{}Live下的 \texttt{\dots /texlive/2019/bin/win32} 加入至系统环境变量之中，
-			这是安装 \TeX\ Live 的路径；
+	\item 将\TeX\ Live 安装路径下的 \texttt{\dots /texlive/2020/bin/win32} \footnote{这里以\TeX\ Live 2020为例} 文件夹加入至系统环境变量中；
 	\item 在\emph{应用商店}（Extensions）中下载扩展：\textsf{LaTeX Workshop}，
 			其详细说明请参见\href{https://github.com/James-Yu/LaTeX-Workshop}{这里}；%
 	\item 在\emph{设置}（Settings）中的搜索框输入 LaTeX，单击搜索显示的第一项

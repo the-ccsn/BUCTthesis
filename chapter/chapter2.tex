@@ -2,8 +2,9 @@
 \chapter{代码说明}\label{chap:CodeIntro}
 本章将简单说明编译文档所需代码，推荐将本文档与源代码结合起来阅读。
 
-\section{载入选项}\label{sec:loadsty}
-主文件\file{buctthesis.tex}以
+\section{文档选项}\label{sec:options}
+\subsection{文档类选项}
+主文件\file{main.tex}以
 \begin{lstlisting}
 \documentclass[
 	TextBlack,
@@ -16,31 +17,27 @@
 	\item \opt{LessTOC}：将把“第一章”之前的部分，即诚信声明、任务书、中英文摘要和前言从目录中移除，
 	这与学校《规定》所展示的样例相同。
 \end{itemize}
-
+\subsection{论文信息}\label{subsec:buctsetup}
+主文件 \file{main.tex} 使用 \cmd{buctsetup} 命令以 \cargu{key}$=$\cargu{value} 的形式进行论文信息的定义，包括论文的中英文标题、作者个人信息等。
 
 \section{前置部分}\label{sec:frontmatter}
+在“目录”之前的几个部分，包括“诚信声明”、“任务书”和中英文的“摘要”，分别对应于 \file{chapter/frontmatter} 中的不同环境。
+
 \subsection{摘要和关键词}\label{subsec:abstract}
-摘要部分的源文件位于\file{chapter/abstract.tex}，
-使用\env{abstract}和\env{abstracten}环境，在相应位置输入文本即可。
+摘要部分使用\env{abstract}和\env{abstracten}环境，或\env{abstract*}和\env{abstracten*}环境。
+前者会将中英文摘要分排在不同页上；而后者将会使二者尽可能压缩在一页之中，且可以使用相关命令进一步控制行距。
 
-本文档的中、英文摘要分成了两页，
-因为若将300字的中文摘要、1500字符的英文摘要及其关键字排版在一页中，行间距会比较狭窄。
-若仍需要排版在同一页，请改用\env{abstract*}和\env{abstracten*}环境，或将源文件该部分代码
-取消注释。同时，为防止摘要部分溢出一页，模板预设了较低的标题间距，但是在内容上的间距未做调整。
-若有需要，可以使用 \cmd{setlength\cmd{baselineskip}\argu{length}} 命令控制行距。
-
-插入中英文关键词分别使用 \cmd{keywords\argu{keywords}}和 \cmd{keywordsen\argu{keywords}}命令，
-参数即为相应的关键词。但是《规范》中未定义关键词之间的分隔符，
-所以模板暂未做任何设置。
+插入中英文关键词分别使用 \cmd{keywords\argu{keywords}} 和 \cmd{keywordsen\argu{keywords}}命令，
+参数即为相应的关键词。但是《规范》中未定义关键词之间的分隔符，所以模板暂未做任何设置。
 
 \subsection{任务书}\label{subsec:taskbook}
-本科生毕业设计（论文）任务书的源文件位于 \file{chapter/taskbook.tex}，使用\env{taskbook}环境，
-并请在主文件中定义论文题目，作者的学院、专业、班级和学号，指导老师（含职称），专业负责人。
-以上所定义的信息以 \cmd{taskinfo} 或 \cmd{Taskinfo} 来插入，二者的区别在于后者比前者多了一次换行，
+本科生毕业设计（论文）任务书使用\env{taskbook}环境。
+主文件中所定义的相关信息（见第 \ref{subsec:buctsetup} 小节）会作用于“任务书”的开头部分。
+而该部分使用 \cmd{taskinfo} 或 \cmd{Taskinfo} 命令来插入，二者的区别在于后者比前者多了一次换行，
 间距更为宽松，适合文字较多时使用。
 除此之外，可以选择使用 \env{bibenumerate} 环境来排版有序文献列表。
 
-源文件中已经展示了部分使用样例，只需替换文本即可。
+以上各部分在源文件中含有部分相关代码，稍作改动即可。
 
 \subsection{目录}\label{subsec:content}
 在主文件中以
@@ -60,7 +57,7 @@
 
 \section{正文}
 正文部分各个章节的源文件存放于 \file{chapter/} 文件夹，
-在 \file{buctthesis.tex} 正文部分以
+在 \file{main.tex} 正文部分以
 
 \begin{lstlisting}[numbers=none]
 \include{chapter/@*\cargu{filename}@*}
@@ -109,9 +106,8 @@
 	\caption{校徽和校名}\label{fig:WholeLogo}
 \end{figure}
 
-至于图片的并排，如果只需为组图写一个图注，只需在一个 \env{figure} 环境中使用多次 \cmd{includegraphics} 命令（可根据需要在插图之间加入空白）。
-
-但如果需要在每一个子图下写上图注，可以使用\env{sub\-figure}环境。
+至于图片的并排，如果只需为组图写一个图注，可在一个 \env{figure} 环境中使用多次 \cmd{includegraphics} 命令（可根据需要在插图之间加入空白）；
+但如果需要在每一个子图下写上图注（或需要对子图标序），可使用\env{sub\-figure}环境。
 校名见图~\ref{subfig:znname}，校徽见图~\ref{subfig:logo}，校名和校徽见图~\ref{fig:wholelogo}。
 \begin{figure}[H]
 	\centering%
@@ -194,7 +190,7 @@
 		% 控制第一、二列列宽，第三列允许折行
 		\begin{tabularx}{\textwidth}{p{4em}p{7.5em}X}
 			\toprule
-									& \multicolumn{1}{l}{原文}         & \multicolumn{1}{l}{翻译}                                                                                         \\
+									& \multicolumn{1}{c}{\em 原文}         & \multicolumn{1}{c}{\em 翻译}                                                                                         \\
 			\cmidrule(l){2-3}
 									& 亦余心之所善兮，虽九死其犹未悔。 & For the ideal that I hold dear to my heart，I will not regret a thousand times to die.                           \\
 			\cmidrule(l){2-3}
@@ -396,14 +392,14 @@ int main()
 			\end{equation}
 \end{itemize}
 
-对于至于有机化学结构式等，尽管有一些宏包可以绘制，但使用图片插入可能是一个更好
+至于有机化学结构式等，尽管有一些宏包可以绘制，但使用图片插入可能是一个更好
 的选择。
 
 \section{文献引用和参考文献}\label{sec:bib}
 \subsection{在文章中引用文献}
 模板使用 \cmd{cite\argu{CiteKey}}命令实现上标、方括号以“顺序编码制”引用参考文献，
 这是学校《规范》的要求。一个例子。\cite{abbott2016observation}而使用
-\cmd{nocite\argu{CiteKey}}命令则指明不引用但需要列出的参考文献。
+\cmd{nocite\argu{CiteKey}}命令则指明不引用但需要列出的参考文献。\nocite{*}
 
 同一处引用多个文献时，应将各篇文献的引用标签一同写在 \cmd{cite} 命令中，
 并以西文逗号“,”分隔各标签。所产生的样式为：当在同一处引用两篇参考文献时，
@@ -415,7 +411,7 @@ int main()
 \subsection{论文的参考文献章节}
 本模板已在主文件中使用
 \begin{lstlisting}[numbers=none]
-\bibliographystyle{gbt7714-2005}
+\bibliographystyle{gbt7714-numerical}
 \bibliography{thesisbib.bib}
 	\end{lstlisting}
 来增加符合格式要求的参考文献章节。为罗列各条参考文献，
@@ -456,13 +452,10 @@ int main()
 再来一个\cite{ashirov2008tetramerization} ，
 网络上的资源引用\cite{buctthesis}，等。
 
-另外，参考文献格式控制文件\file{gbt7714-2005.bst}开源于
-\href{https://github.com/Haixing-Hu/GBT7714-2005-BibTeX-Style}{GitHub}，
-其参考文献的著录可以用于参考。
 
 \section{后置部分}\label{sec:backmatter}
 \subsection{附录}\label{sec:app}
-在\file{buctthesis.tex}中以
+在 \file{main.tex} 中以
 \begin{lstlisting}[numbers=none]
 \appendix
 		\end{lstlisting}
