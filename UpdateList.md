@@ -1,10 +1,10 @@
 # Update List
 
-## Beta.v0.9.4 - 2020/??/??
+## Beta.v0.9.4 - 2020/06/08
 
 ### Fixed
 
-- 模板从宏包改为文档类
+- 格式控制从宏包改为文档类
 - 主文件 `buctthesis.tex` 更名为 `main.tex` ，并将“诚信声明” `declare.tex` 、“任务书” `taskbook.tex` 和“摘要” `abstract.tex` 整合成一个文件 `frontmatter.tex`
 - “任务书”部分代码简化
 - 英文摘要关键词的字体改为中易黑体
