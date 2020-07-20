@@ -1,8 +1,8 @@
 % !TeX encoding = UTF-8
 % 主文件--main.tex
 \documentclass[
-	%TextBlack,			% 所有文本设置为黑色
-	LessTOC,			% 不将“第一章”之前的部分编目
+	%submit,
+	openany,			% openany | openright
 ]{buctthesis}
 
 % 在这个文件里载入其他对写作有帮助的宏包，或自定义命令等
@@ -11,7 +11,7 @@
 \buctsetup{
 	%% 各选项之间不要留有空行，并以西文逗号“,”分隔
 	% 论文的中文标题
-	Title			= {BUCTthesis 写作指南},
+	Title			= {BUCTthesis写作指南},
 	% 论文的英文标题
 	Titleen			= {HOW TO \TeX\ WITH BUCTthesis},
 	% 作者姓名
@@ -28,19 +28,17 @@
 	MajorSupervisor	= {王五},
 }
 
-
-
 \begin{document}
 
 % 若排版不妥，可插入 PDF 代替。
 % Option [pages=-] will insert all pages of the document.
 %\includepdf[pages=-]{<FilePath>}
 
-% 从此以大写罗马数字编页码
-\frontmatter
-
 % 生成伪封面。实际的论文封面由学校统一印制，正式写作可删去。
 \maketitle
+
+% 从此以大写罗马数字编页码
+\frontmatter
 
 % 诚信声明、任务书、摘要
 \include{chapter/frontmatter}
@@ -48,7 +46,7 @@
 % 生成主目录
 \tableofcontents
 % 设计图纸目录，这与主目录独立。
-%\listofdesignfigures
+\listofdesignfigures
 
 % 前言
 \include{chapter/foreword}
@@ -66,7 +64,6 @@
 
 % 参考文献。
 % 注意：至少引用一篇参考文献，否则执行全编译时下面两行会引起编译错误。
-
 \bibliographystyle{gbt7714-numerical}
 \bibliography{thesisbib.bib}
 

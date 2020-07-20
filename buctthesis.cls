@@ -4,7 +4,7 @@
 %%
 %%		https://github.com/Miracle0565/BUCTthesis
 %%
-%%		Beta.v0.9.4, June.2020
+%%		Beta.v0.9.5, July.2020
 %%
 %%	This file may be distributed and/or modified under
 %%	the conditions of the LaTeX Project Public License,
@@ -21,28 +21,34 @@
 \NeedsTeXFormat{LaTeX2e}
 
 %% class info
-\ProvidesClass{buctthesis}[2020/05/24 Beta.v0.9.4]
+\ProvidesClass{buctthesis}[2020/06/30 Beta.v0.9.5]
 
-%% 文档类选项 class options
-\newif\ifbuct@textblack
-\newif\ifbuct@lesstoc
-\DeclareOption{TextBlack}{\buct@textblacktrue}
-\DeclareOption{LessTOC}{\buct@lesstoctrue}
-\newcommand{\buct@less@toc}[1]{%
-	\ifbuct@lesstoc\else\addcontentsline{toc}{chapter}{#1}\fi
+%% 定义选项 options 
+% class options
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+	family	= buct,
+	prefix	= buct@,
+	setkeys	= \kvsetkeys,
 }
-%\ExecuteOptions{}
-\ProcessOptions\relax
-\LoadClass[zihao=-4,UTF8,oneside]{ctexbook}
+\DeclareBoolOption{submit}
+\DeclareBoolOption{openany}
+\DeclareComplementaryOption{openright}{openany}
 
-% 定义选项 options 
-\RequirePackage{xparse}
-\RequirePackage{xkeyval,kvsetkeys}
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{ctexbook}}
+\ProcessKeyvalOptions*
 
-\NewDocumentCommand\buct@def@key{m}{%
-	\@namedef{buct#1}##1{\@namedef{buct@#1}{##1}}%
-	\define@key{buct}{#1}{\csname buct#1\endcsname{##1}}}
-\NewDocumentCommand{\buctsetup}{m}{\kvsetkeys{buct}{#1}}
+\PassOptionsToPackage{quiet}{xeCJK}
+\ifbuct@openany\LoadClass[zihao=-4,UTF8,oneside]{ctexbook}
+\else\LoadClass[zihao=-4,UTF8,openright]{ctexbook}\fi
+
+% \buctsetup{ <key> = <value> }
+\NewDocumentCommand{\buct@def@key}{ m }{
+	\@namedef{buct#1}##1{\@namedef{buct@#1}{##1}}
+	\define@key{buct}{#1}{\@nameuse{buct#1}{##1}}
+}
+
+\NewDocumentCommand{\buctsetup}{ m }{\kvsetkeys{buct}{#1}}
 
 \buct@def@key{Title}
 \buct@def@key{Titleen}
@@ -59,7 +65,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%	 	Basic Packages	 %%
+%%    Basic Packages     %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % 西文字体 fonts
@@ -95,23 +101,24 @@
 % 脚注 footnote
 \RequirePackage[bottom,perpage]{footmisc}
 % 参考文献 bibliography
-%\RequirePackage{bibentry}
 \RequirePackage[sort&compress]{gbt7714}
-%\nobibliography*{}
+% 命令补丁 patching commands
+\RequirePackage{xpatch}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%	   Fonts Settings	 %%
+%%    Fonts Settings     %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% 主要字体 text fonts
-% 中文字体 zh
+% 中文字体及伪粗体命令 zh
 \xeCJKsetup{EmboldenFactor=2.2,SlantFactor=0.2}
-\let\songti\relax
-\newCJKfontfamily\songti{SimSun}[AutoFakeBold,AutoFakeSlant]
-\let\heiti\relax
-\newCJKfontfamily\heiti{SimHei}[AutoFakeBold]
-\newcommand{\bfsong}{\songti\bfseries}
-\newcommand{\bfhei}{\heiti\bfseries}
+% 宋体 
+\setCJKmainfont{SimSun}[AutoFakeBold,AutoFakeSlant]
+\newcommand{\bfsong}{\bfseries}
+% 黑体 
+\setCJKsansfont{SimHei}[AutoFakeBold]
+\newcommand{\bfhei}{\sffamily\bfseries}
+
 % 英文字体 en 
 \setmainfont{Times New Roman}
 \setsansfont{Times New Roman}
@@ -144,13 +151,13 @@
 % 英文摘要 en
 \newcommand{\buct@abstitfonten}{\zihao{3}\bfseries}
 \newcommand{\buct@absabsfonten}{\zihao{4}\bfseries}
-\newcommand{\buct@keywordsfonten}{\zihao{4}\CJKfamily+{}\bfseries}
+\newcommand{\buct@keywordsfonten}{\zihao{4}\heiti\CJKfamily+{}}
 
 %% 目录 contents
-\newcommand{\buct@toc@tocfont}{\mdseries\heiti\zihao{4}}
-\newcommand{\buct@toc@chapfont}{\bfseries\zihao{4}}
-\newcommand{\buct@toc@secfont}{\songti\zihao{4}}
-\newcommand{\buct@toc@ssecfont}{\songti\zihao{4}}
+\newcommand{\buct@toc@tocfont}{\mdseries\zihao{4}\heiti}
+\newcommand{\buct@toc@chapfont}{\zihao{4}\heiti}
+\newcommand{\buct@toc@secfont}{\zihao{4}\songti}
+\newcommand{\buct@toc@ssecfont}{\zihao{4}\songti}
 \newcommand{\buct@toc@dsgfigfont}{\buct@toc@ssecfont}
 
 %% 正文各级标题 chapters
@@ -166,14 +173,14 @@
 \newcommand{\buct@codefont}{\ttfamily\songti\zihao{5}}
 \newcommand{\buct@codecomfont}{%
 	\ttfamily\slshape
-	\ifbuct@textblack\else\color{gray!80!black}\fi}
+	\ifbuct@submit\relax\else\color{gray!80!black}\fi}
 \newcommand{\buct@codekeyfont}{%
 	\ttfamily\bfseries
-	\ifbuct@textblack\else\color{blue!80!black}\fi}
+	\ifbuct@submit\relax\else\color{blue!80!black}\fi}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-%%	 Pages Settings		%%
+%%    Pages Settings    %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % 纸张边距 page margins
@@ -187,32 +194,40 @@
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyfoot[C]{\buct@headfont\thepage}
-\fancyhead[C]{\buct@footfont{北京化工大学毕业设计（论文）}}
+\fancyfoot[C]{\buct@footfont\thepage}
+\fancyhead[C]{\buct@headfont{北京化工大学毕业设计（论文）}}
 \renewcommand\headrulewidth{0.6pt}
 \renewcommand\footrulewidth{0pt}
 
 \fancypagestyle{plain}{%
-	\fancyfoot[C]{\buct@headfont\thepage}
-	\fancyhead[C]{\buct@footfont{北京化工大学毕业设计（论文）}}
+	\fancyfoot[C]{\buct@footfont\thepage}
+	\fancyhead[C]{\buct@headfont{北京化工大学毕业设计（论文）}}
 	\renewcommand\headrulewidth{0.6pt}
 	\renewcommand\footrulewidth{0pt}
 }
 
 % 页码样式 page number
-\renewcommand{\frontmatter}{
-	\pagenumbering{Roman}
-	\pagestyle{plain}
-}
+\xpatchcmd{\frontmatter}
+	{\pagenumbering{roman}}
+	{\pagenumbering{Roman}}
+	{}{}
+
+% 完全空白页 blank page
+\xpatchcmd{\cleardoublepage}
+	{\newpage}
+	{\thispagestyle{empty}\newpage}
+	{}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Frontmatter Settings  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% 诚信声明
+\newcommand{\buct@pdfmark}[2]{
+	\hypertarget{#2}{}
+	\pdfbookmark{#1}{#2}
+}
+%% 诚信声明 declare original
 \newenvironment{declare}{%
-	\phantomsection{}%
-	\buct@less@toc{诚信声明}
+	\buct@pdfmark{诚信声明}{declare}
 	\setlength{\baselineskip}{2em}%
 	\centerline{\songti\zihao{3} 诚信声明}\par\vspace{1em}%
 	\leftline{\songti\zihao{4}\noindent 本人声明：}%
@@ -220,10 +235,11 @@
 	\def\addsigndate{\hspace{7em}年\hspace{2.5em}月\hspace{2.5em}日}
 }{\par\vspace{2em}\hfill\addsign\addsigndate\clearpage}
 
-%% 任务书
+%% 任务书 taskbook
+\NewDocumentCommand{\buct@ul}{ o m }{\underline{\makebox[#1][c]{#2}}}
 \newenvironment{taskbook}{
-	\phantomsection{}
-	\buct@less@toc{毕业设计（论文）任务书}%
+	\cleardoublepage
+	\buct@pdfmark{任务书}{taskbook}
 	\section*{本科生毕业设计（论文）任务书}%
 }{\clearpage}
 \newcounter{taskitemcnt}
@@ -238,74 +254,69 @@
 	{Keep \protect\taskitem\space no more than 4 times.}\fi}
 \newcommand{\taskitem}{\noindent\buct@taskitem\par}%
 
-% TODO:bibitem
+% TODO: use bibentry pkg, or biblatex
 \newenvironment{bibenumerate}{%
 	\begin{enumerate}[label={[\arabic*]},leftmargin=3em]
 }{\end{enumerate}}
-\newcommand{\taskinfo}{%
+
+% 论文的信息 {\taskinfo} or {\taskinfo*}
+\NewDocumentCommand\taskinfo{ s }{%
 	\noindent%
 	\begin{minipage}{\textwidth}%
 		\punctstyle{plain}\linespread{1.94}\selectfont%
-		设计（论文）题目：\underline{\makebox[27em][c]{\buct@Title}}\\[3pt]
-		学院：\underline{\makebox[10em][c]{\buct@School}}\quad 
-		专业：\underline{\makebox[10em][c]{\buct@Major}}\quad
-		班级：\underline{\makebox[5em][c]{\buct@Class}}\\[3pt]
-		学生：\underline{\makebox[5em][c]{\buct@Author}}\quad
-		指导教师（含职称）：\underline{\makebox[6em][c]{\buct@Supervisor}}\quad
-		专业负责人：\underline{\makebox[4em][c]{\buct@MajorSupervisor}}%
-		\end{minipage}\vspace{2.5em}
-}
-\newcommand{\Taskinfo}{%
-	\noindent%
-	\begin{minipage}{\textwidth}%
-		\punctstyle{plain}\linespread{1.94}\selectfont%
-		设计（论文）题目：\underline{\makebox[27.25em][c]{\buct@Title}}\\[3pt]
-		学院：\underline{\makebox[15em][c]{\buct@School}}\hspace{2em}
-		专业：\underline{\makebox[13em][c]{\buct@Major}}\\[3pt]
-		班级：\underline{\makebox[15em][c]{\buct@Class}}\hspace{2em}
-		学生：\underline{\makebox[13em][c]{\buct@Author}}\\[3pt]
-		指导教师（含职称）：\underline{\makebox[8em][c]{\buct@Supervisor}}\hspace{2em}
-		专业负责人：\underline{\makebox[10em][c]{\buct@MajorSupervisor}}%
-		\end{minipage}\vspace{2.5em}
+			设计（论文）题目：\buct@ul[27em]{\buct@Title}\\[3pt]
+		\IfBooleanTF{#1}{% less lines break
+			学院：\buct@ul[10em]{\buct@School}\quad 
+			专业：\buct@ul[10em]{\buct@Major}\quad
+			班级：\buct@ul[5em]{\buct@Class}\\[3pt]
+			学生：\buct@ul[5em]{\buct@Author}\quad
+			指导教师（含职称）：\buct@ul[6em]{\buct@Supervisor}\quad
+			专业负责人：\buct@ul[4em]{\buct@MajorSupervisor}%
+		}{% more lines break
+			学院：\buct@ul[15em]{\buct@School}\qquad
+			专业：\buct@ul[13em]{\buct@Major}\\[3pt]
+			班级：\buct@ul[15em]{\buct@Class}\qquad
+			学生：\buct@ul[13em]{\buct@Author}\\[3pt]
+			指导教师（含职称）：\buct@ul[8em]{\buct@Supervisor}\qquad
+			专业负责人：\buct@ul[10em]{\buct@MajorSupervisor}%
+		}
+\end{minipage}\vspace{2.5em}
 }
 %% 摘要
-% 中、英文摘要同一页：
-% 中文摘要
+% 中、英同页 in one page
+% zh
 \newenvironment{abstract*}{%
-	\phantomsection{}%
-	\buct@less@toc{摘要}
+	\cleardoublepage
+	\buct@pdfmark{摘要}{abstract}
 	\centerline{\buct@abstitfont\buct@Title}\vspace{-3pt}%
 	\centerline{\buct@absabsfont{摘\quad 要}}\vspace{-3pt}%
 	\newcommand{\keywords}{\par\vspace{-0.5ex}\noindent\buct@keywordsfont 关键词：}
 	\addtolength{\baselineskip}{-3pt}
 }{}
-% 英文摘要
+% en
 \newenvironment{abstracten*}{%
-	\phantomsection{}%
-	\buct@less@toc{ABSTRACT}
+	\buct@pdfmark{Abstract}{abstracten}
 	\centerline{\buct@abstitfonten{\buct@Titleen}}\vspace{-6pt}%
 	\centerline{\buct@absabsfonten {ABSTRACT}}\vspace{-3pt}%
 	\newcommand{\keywordsen}{\par\vspace{-0.5ex}\noindent\buct@keywordsfonten Keywords:~}
 	\addtolength{\baselineskip}{-6pt}
 }{}
-% 中、英文摘要分为两页：
-% 中文摘要
+% 中、英不同页 in 2 pages 
+% zh
 \newenvironment{abstract}{%
-	\clearpage%
-	\phantomsection{}%
-	\buct@less@toc{摘要}
-	\centerline{\buct@abstitfont\buct@Title}\vspace{6pt}%
-	\centerline{\buct@absabsfont{摘\quad 要}}\vspace{3pt}%
+	\cleardoublepage
+	\buct@pdfmark{摘要}{abstract}
+	\centerline{\buct@abstitfont\buct@Title}\vspace{12pt}%
+	\centerline{\buct@absabsfont{摘\quad 要}}\vspace{9pt}%
 	\newcommand{\keywords}{\par\vspace{1em}\noindent\buct@keywordsfont 关键词：}
 
 }{}
-% 英文摘要
+% en
 \newenvironment{abstracten}{%
-	\clearpage%
-	\phantomsection{}%
-	\buct@less@toc{ABSTRACT}
-	\centerline{\buct@abstitfonten{\buct@Titleen}}\vspace{6pt}%
-	\centerline{\buct@absabsfonten{ABSTRACT}}\vspace{3pt}%
+	\cleardoublepage%
+	\buct@pdfmark{Abstract}{abstracten}
+	\centerline{\buct@abstitfonten{\buct@Titleen}}\vspace{12pt}%
+	\centerline{\buct@absabsfonten{ABSTRACT}}\vspace{9pt}%
 	\newcommand{\keywordsen}{\par\vspace{1em}\noindent\buct@keywordsfonten Keywords:~}
 }{}
 
@@ -313,16 +324,15 @@
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{2}
 
-% 参考文献编目
-\RequirePackage[nottoc]{tocbibind}
-
-% 目录标题样式
+% 目录标题样式 title of toc
 \renewcommand\tableofcontents{%
-	\pdfbookmark{目录}{toc}%
-	\chapter*{\buct@toc@tocfont 目\quad 录}%
-	\@starttoc{toc}}
+	\cleardoublepage
+	\pdfbookmark{\contentsname}{toc}%
+	\chapter*{\buct@toc@tocfont{目\quad 录}}%
+	\@starttoc{toc}
+}
 
-% 目录样式
+% 目录样式 format of toc
 \titlecontents{chapter}[0em]
 	{\buct@toc@chapfont\vspace{3pt}}
 	{\thecontentslabel\hspace{8pt}}{}
@@ -336,35 +346,45 @@
 	{\thecontentslabel\hspace{8pt}}{}
 	{\hspace{.5ex}\titlerule*[7pt]{$\cdot$}\hspace{-.2ex}\contentspage}
 
-% 设计图纸编如主目录 \designfig
+% 参考文献编目 bib in toc
+\renewcommand{\bibsection}{\chapter*{\bibname}\addcontentsline{toc}{chapter}{\bibname}}
+
+% 设计图纸编入主目录 \designfig
 \newcommand{\designfig}[1]{%
 	\addcontentsline{toc}{subsection}%
 	{\hspace{2.5em}设计图纸\thefigure\hspace{1em}{#1}}}
-% 设计图纸目录 TODO
+	
+% 设计图纸目录 lodf
 \newcommand{\buct@listof}[2]{%
+	\xpatchcmd{\@dottedtocline}{\hbox{.}}{\hbox{$\cdot$}}{}{}
 	\renewcommand{\@dotsep}{1.7}%
 	\@ifundefined{ext@#1}{\float@error{#1}}{%
-	\@namedef{l@#1}{\@dottedtocline{1}{0em}{2em}}%
-	\float@listhead{\buct@toc@tocfont #2}%
+	\@namedef{l@#1}{\@dottedtocline{1}{0em}{2em}}
+	\float@listhead{\buct@toc@tocfont{}#2}%
 	\begingroup\setlength{\parskip}{\z@}%
 	\buct@toc@dsgfigfont\@starttoc{\@nameuse{ext@#1}}%
 	\endgroup}}
-\newcommand{\listofdesignfigures}{\buct@listof{dfigure}{设计图纸目录}}
+\newcommand{\listofdesignfigures}{
+	\cleardoublepage%
+	\buct@pdfmark{设计图纸目录}{dfigure}%
+	\buct@listof{dfigure}{设计图纸目录}
+}
 
-%% 前言
+%% 前言 foreword
 \newenvironment{foreword}{%
+	\cleardoublepage
+	\buct@pdfmark{前言}{foreword}
 	\chapter*{前\quad 言}
-	\buct@less@toc{前言}
 }{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Mainmatter Settings   %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 行间距
+% 行距 lineskip 
 \linespread{1.52}\selectfont
 
-%% 各级标题样式
+%% 各级标题样式 title format
 \ctexset{%
 chapter = {%
 	name		= {第,章},
@@ -403,35 +423,26 @@ tablename	= 表,
 bibname		= 参考文献,
 }
 
-% 结论，编入目录
+% 结论，编入目录 conclusion
 \newenvironment{conclusion}{%
 	\chapter*{结\quad 论}
 	\addcontentsline{toc}{chapter}{结论}
 }{}
-% 符号说明，编入目录
+% 符号说明，编入目录 denotation
 \newenvironment{denotation}[2]{%
 	\chapter*{符号说明}%
 	\addcontentsline{toc}{chapter}{符号说明}
+	\vspace{-1em}%
 	\begin{longtable}[c]{p{#1}p{#2}}
-		\toprule
-		\textbf{符号} & \textbf{说明}\\* \midrule
-		\endfirsthead
-		\multicolumn{2}{r}{\songti\small\textbf{（接上表）}}\\
-		\toprule
-		\textbf{符号} & \textbf{说明}\\* \midrule
-		\endhead
-		\bottomrule
-		\endfoot
-		\endlastfoot
-}{\bottomrule\end{longtable}}
+}{\end{longtable}}
 
-% 翻译，编入目录
+% 翻译，编入目录 translation
 \newenvironment{translation}{%
 	\chapter*{翻\quad 译}
 	\addcontentsline{toc}{chapter}{翻译}
 }{}
 
-% 致谢，编入目录
+% 致谢，编入目录 ack
 \newenvironment{acknowledgement}{%
 	\chapter*{致\quad 谢}
 	\addcontentsline{toc}{chapter}{致谢}
@@ -473,7 +484,7 @@ bibname		= 参考文献,
 {3pt}%						Space below
 {}%							Body font
 {}%							Indent amount
-{\bfseries\songti}%			Theorem head font
+{\bfseries}%			Theorem head font
 {:}%						Punctuation after theorem head
 {.5em}%						Space after theorem head
 {}%							Theorem head spec
@@ -507,7 +518,7 @@ bibname		= 参考文献,
 \newfloat{dfigure}{htbp}{lodf}[chapter]
 \floatname{dfigure}{设计图纸}
 
-%% 图、表、方程标签格式 caption of floats
+%% 图、表、方程标签格式 caption of floats, eqs & codes
 \renewcommand{\captionfont}{\buct@floatfont}
 \renewcommand{\captionlabelfont}{\buct@floatfont}
 \DeclareCaptionLabelSeparator{capspace}{\quad}
@@ -528,22 +539,16 @@ bibname		= 参考文献,
 	aboveskip = 1em,
 	belowskip = 1em,
 }
-\renewcommand{\thesubtable}{(\alph{subtable})}
-\renewcommand{\thetable}{\arabic{chapter}-\arabic{table}}
-\renewcommand{\thesubfigure}{(\alph{subfigure})}
-\renewcommand{\thefigure}{\arabic{chapter}-\arabic{figure}}
-\renewcommand{\theequation}{式~\arabic{chapter}-\arabic{equation}}
-\renewcommand{\thedfigure}{\arabic{chapter}-\arabic{dfigure}}
-%% 附录 appendix
-\let\old@appendix\appendix
-\newcommand{\buct@appendix}{%
-	\old@appendix
-	\renewcommand{\thetable}{\Alph{chapter}-\arabic{table}}
-	\renewcommand{\thefigure}{\Alph{chapter}-\arabic{figure}}
-	\renewcommand{\theequation}{式~\Alph{chapter}-\arabic{equation}}
-	\renewcommand{\thedfigure}{\Alph{chapter}-\arabic{dfigure}}
+\AtBeginDocument{%
+	\renewcommand{\thesubtable}{(\alph{subtable})}
+	\renewcommand{\thetable}{\thechapter-\arabic{table}}
+	\renewcommand{\thesubfigure}{(\alph{subfigure})}
+	\renewcommand{\thefigure}{\thechapter-\arabic{figure}}
+	\renewcommand{\theequation}{式~\thechapter-\arabic{equation}}
+	\renewcommand{\thedfigure}{\thechapter-\arabic{dfigure}}
+	\renewcommand{\thelstlisting}{\thechapter-\arabic{lstlisting}}
 }
-\let\appendix\buct@appendix
+
 % 代码 code
 \lstset{%
 	%lineskip = -3pt,
@@ -571,19 +576,16 @@ bibname		= 参考文献,
 	escapechar		= {@*},
 }
 \renewcommand{\lstlistingname}{代码}
-%\AtBeginDocument{
-%\renewcommand{\thelstlisting}{\arabic{chapter}-\arabic{lstlisting}}
-%}
 
 % 参考文献 bib
 \setlength{\bibsep}{3pt}
 
 %%%%%%%%%%%%%%%%%%%%%%%
-%%	 Other Settings	 %%
+%%   Other Settings  %%
 %%%%%%%%%%%%%%%%%%%%%%%
 
 %% \emph \em 命令使用粗宋体
-\renewcommand{\emph}[1]{\textbf{\songti #1}}
+\renewcommand{\emph}[1]{\textbf{#1}}
 \renewcommand{\em}{\bfsong}
 
 %% 脚注 footnote
@@ -598,18 +600,8 @@ bibname		= 参考文献,
 	\noindent\llap{\lower 1pt \hbox{\@thefnmark}\,}#1%
 }
 
-%% URL链接断行 line breaks in URL
-\RequirePackage{url}
+%% URL
 \urlstyle{same}
-\g@addto@macro\UrlBreaks{%
-	\do0\do1\do2\do3\do4\do5\do6\do7\do8\do9%
-	\do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M%
-	\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z%
-	\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m%
-	\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z%
-}
-\Urlmuskip=0mu plus 0.1mu
-
 
 \RequirePackage{hyperref}
 \hypersetup{%
@@ -619,8 +611,10 @@ bibname		= 参考文献,
 	breaklinks=true,
 	citecolor=cyan,
 }
-\ifbuct@textblack
+\ifbuct@submit
 	\hypersetup{hidelinks}
 \fi
+
+\endinput
 
 %% End of file `buctthesis.cls'.
