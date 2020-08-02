@@ -67,7 +67,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%    Basic Packages     %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% 纸张与页面 pages
+\RequirePackage{geometry,fancyhdr}
 % 西文字体 fonts
 \RequirePackage{fontspec}
 % 目录 contents
@@ -83,7 +84,7 @@
 % 无机化学式 chemical fomular
 \RequirePackage[version=4]{mhchem}
 % 表格 tables
-\RequirePackage{longtable,threeparttable,dcolumn,tabularx,multirow,booktabs}
+\RequirePackage{longtable,threeparttable,tabularx,multirow,booktabs}
 % 插图 figures
 \RequirePackage{graphicx}
 \RequirePackage[labelformat=simple]{subcaption}
@@ -127,7 +128,7 @@
 %\IfFontExistsTF{Cambria Math}{%
 %	\setmathfont{Cambria Math}
 %}{%
-	\IfFontExistsTF{XITSMath-Regular.otf}{%
+	\IfFontExistsTF{LibertinusMath-Regular.otf}{%
 		\setmathfont{latinmodern-math.otf}
 		\setmathfont[%
 			range={%
@@ -135,7 +136,7 @@
 				it/{latin,Latin,greek},
 				bfit/{latin,Latin},
 			}
-		]{XITSMath-Regular.otf}
+		]{LibertinusMath-Regular.otf}
 	}{}
 %}
 
@@ -184,27 +185,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % 纸张边距 page margins
-\RequirePackage{geometry}
 \geometry{
 	a4paper,nomarginpar,
 	top=3.5cm,bottom=2.6cm,left=2.7cm,right=2.7cm,
 	headheight=1.1cm, footskip=0.6cm}
 
 % 页眉页脚 header & footer
-\RequirePackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyfoot[C]{\buct@footfont\thepage}
-\fancyhead[C]{\buct@headfont{北京化工大学毕业设计（论文）}}
-\renewcommand\headrulewidth{0.6pt}
-\renewcommand\footrulewidth{0pt}
-
 \fancypagestyle{plain}{%
+	\fancyhf{}
 	\fancyfoot[C]{\buct@footfont\thepage}
 	\fancyhead[C]{\buct@headfont{北京化工大学毕业设计（论文）}}
 	\renewcommand\headrulewidth{0.6pt}
 	\renewcommand\footrulewidth{0pt}
 }
+\pagestyle{plain}
 
 % 页码样式 page number
 \xpatchcmd{\frontmatter}
@@ -484,7 +478,7 @@ bibname		= 参考文献,
 {3pt}%						Space below
 {}%							Body font
 {}%							Indent amount
-{\bfseries}%			Theorem head font
+{\bfseries}%				Theorem head font
 {:}%						Punctuation after theorem head
 {.5em}%						Space after theorem head
 {}%							Theorem head spec
