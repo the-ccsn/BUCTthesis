@@ -1,4 +1,26 @@
-# Update List
+# Update List of BUCTthesis
+
+## Beta.v0.9.5 - 2020/08/17
+
+### Added
+
+- 文档类选项 `openany` | `openright` ，适用于单双页打印：前者为原先设置；而后者会在适当之处插入一完全空白页，使得章页右开
+- 现在多余的文档类选项将传递至 `ctexbook`
+
+### Fixed
+
+- 重写字体配置，修改字体切换的命令：粗体、黑体等有所变化
+- 微调双面摘要的垂直间距
+- 文档类选项 `TextBlack` 重命名为 `submit`
+- 代码的标签编号以 `-` 而不是 `.` 连接，形如 `代码 2-1`
+- “任务书”中，插入论文信息部分命令修改为带可选星号的 `\taskinfo` 命令。原定义 `\taskinfo` -> `\taskinfo*` ，`\Taskinfo` -> `\taskinfo`。类似于“摘要”的环境，带星号的是按照《规范》来定义的，无星号的则是为了应对一些变化。
+- 修改了数学公式中的字体
+
+### Deleted
+
+- 删除文档类选项 `LessTOC` ，代之以相应位置的 PDF 书签
+- 删除了“符号说明”中表格的表头
+- 删除了 `dcolumn` 宏包，其功能与 `siunitx` 有所重合
 
 ## Beta.v0.9.4 - 2020/06/08
 
@@ -88,4 +110,4 @@
 
 ## Beta.v0.9.0 - 2020/01/23
 
-The first version.Hello World!
+The first version. Hello World!
