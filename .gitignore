@@ -6,4 +6,6 @@
 *.out
 *.synctex.gz
 *.toc
-*.bat
+*.fdb_latexmk
+*.fls
+*.xdv
