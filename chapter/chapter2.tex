@@ -1,6 +1,6 @@
 %% 第二章--chapter2.tex
 \chapter{代码说明}\label{chap:CodeIntro}
-本章将简单说明编译文档所需代码，推荐将本文档与源代码结合起来阅读。
+本章将简单说明模板的使用方法 ，推荐将本文档与源代码结合起来阅读。
 
 \section{文档选项}\label{sec:options}
 \subsection{文档类选项}
@@ -11,11 +11,11 @@
 	openany,		% openany | openright
 ]{buctthesis}
 \end{lstlisting}
-命令载入文档类，用以控制全文格式。这里所预设的选项可根据需要使用：
+命令载入文档类，从而控制全文格式。这里所预设的选项可根据需要使用：
 \begin{itemize}
 	\item \opt{submit}：将文章超链接和代码块的颜色全部设置为黑色，适合论文最终提交与付梓；
 	\item \opt{openany} 或 \opt{openright}：二选一。后者将会设置每章只从奇数页开始，之前不足的页面用完全空白页补足；
-	\item 其它选项：多余的选项将传递给 \pkg{ctexbook} 文类，如 \opt{draft} 将关闭插图和部分宏包的渲染，从而加快编译速度。
+	\item 其它选项：多余的选项将传递给 \pkg{ctexbook} 文档类，如 \opt{draft} 将关闭插图和部分宏包的渲染，从而加快编译速度。
 \end{itemize}
 \subsection{论文信息}\label{subsec:buctsetup}
 主文件 \file{main.tex} 使用 \cmd{buctsetup} 命令以 \cargu{key}$=$\cargu{value} 的形式进行论文信息的定义，包括论文的中英文标题、作者个人信息等。
@@ -30,12 +30,13 @@
 区别在于：前者会将中英文摘要分排在不同页上；而后者将会使二者尽可能地压缩在一页之中，且可以使用相关命令进一步控制行距。
 
 插入中、英文关键词分别使用 \cmd{keywords\argu{keywords}} 和 \cmd{keywordsen\argu{keywords}}命令，
-参数即为相应的关键词。但是《规范》中未定义关键词之间的分隔符，所以模板暂未做任何设置。
+参数即为相应的关键词。但是《规范》中未定义关键词之间的分隔符，所以模板暂未做任何设置；
+作为示例，本文的关键词以全角空格分隔。
 
 \subsection{任务书}\label{subsec:taskbook}
-本科生毕业设计（论文）任务书使用\env{taskbook}环境。
-主文件中所定义的相关信息（见第 \ref{subsec:buctsetup} 小节）会作用于“任务书”的开头部分。
-而该部分使用 \cmd{taskinfo} 或 \cmd{taskinfo*} 命令来插入。
+“本科生毕业设计（论文）任务书”部分使用\env{taskbook}环境。
+主文件中所定义的相关信息（见第 \ref{subsec:buctsetup} 小节）
+会作用于“任务书”的开头部分，使用 \cmd{taskinfo} 或 \cmd{taskinfo*} 命令来插入。
 二者的区别在于后者比前者少了一次换行，是《规范》中示例的实现，但不适合文字较多时使用。
 除此之外，可以选择使用 \env{bibenumerate} 环境来排版有序文献列表。
 
@@ -48,7 +49,7 @@
 \listofdesignfigures
 \end{lstlisting}
 命令分别生成主目录和设计图纸目录，二者互相独立。
-但也能将二者合并，模板将设计图纸编入主目录的命令请参见第~\ref{subsec:fig}~小节。
+但由于《规范》表述不清晰，模板也能将二者合并至同一目录中，具体命令请参见第~\ref{subsec:fig}~小节。
 
 \subsection{前言}\label{subsec:foreword}
 前言部分的源代码位于\file{chapter/foreword.tex}，
@@ -81,13 +82,13 @@
 \subsection{字体}
 \subsubsection{字体配置}
 \begin{enumerate}
-	\item 中文：主字体（即罗马字体族）为宋体，无衬线字体族为黑体。%
+	\item 中文：主字体（衬线字体）为宋体，无衬线字体族为黑体，%
 	\footnote{这里指中易宋体（SimSun）和中易黑体（SimHei），二者均为 Windows 系统的预装字体。
 	对于不方便安装该字体的系统，可定位至 \file{buctthesis.cls}
 	文件中的 \cmd{setCJKmainfont}\{SimSun\} 处，将 SimSun 替换为合适的衬线字体；无衬线字体同理。}
-	宋体和黑体均可加粗为对应的伪粗体；《规范》中未规定的楷体和仿宋均为 \pkg{ctex} 宏集的预设，应减少使用；
+	且二者均可加粗为对应的伪粗体；《规范》中未规定的楷体和仿宋均为 \pkg{ctex} 宏集的预设，应减少使用；
 	\item 西文：除英文摘要的关键词使用中易黑体、除公式中的西文（数字、字母等）使用特殊字体，其它一律使用 Times New Roman；
-	\item 公式：模板会根据实际字体安装情况，选择 Times 风格的 $XITSMath$ 字体或使用 \LaTeX\ 的默认字体。
+	\item 公式：模板会根据实际字体安装情况，选择 $LibertinusMath$ 字体或使用 \LaTeX\ 的默认字体。
 \end{enumerate}
 
 \subsubsection{中文字体命令及对应西文示例}
@@ -106,7 +107,7 @@
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.4\textwidth]{figure/WholeLogo.ai}
+	\includegraphics[width=0.3\textwidth]{example/BUCT-logo.pdf}
 	\caption{校徽和校名}\label{fig:WholeLogo}
 \end{figure}
 
@@ -116,17 +117,16 @@
 \begin{figure}[H]
 	\centering%
 	\begin{subfigure}[t]{6cm}
-		\includegraphics[width=6cm]{figure/ZNName.png}
+		\includegraphics[width=6cm]{BUCT-name.pdf}
 		\caption{这是校名。如果这个标题比较长，那么它能自动换行。}\label{subfig:znname}
 	\end{subfigure}
 	\hspace{1cm}
 	\begin{subfigure}[t]{2.5cm}
-		\includegraphics[scale=0.4]{figure/Logo.pdf}
+		\includegraphics[scale=0.4]{BUCT-badge.pdf}
 		\caption{这是校徽。}\label{subfig:logo}
 	\end{subfigure}
 	\caption{校名和校徽}\label{fig:wholelogo}
 \end{figure}
-以上使用了三种不同的图片格式和三种不同的方法来控制所插入图片的大小。
 
 （机械设计等）设计图纸需要编目。模板新定义了类似 \env{figure} 的 \env{dfigure}环境。
 设计图纸的标签与普通插图不同，且计数器相互独立。
@@ -134,7 +134,7 @@
 \cmd{designfig\argu{Caption}}命令与主目录合并。
 \begin{dfigure}% [H] is also available here.
 	\centering
-	\includegraphics[height=2cm]{figure/WholeLogo.ai}
+	\includegraphics[width = \textwidth]{example/蜗轮.pdf}
 	\caption{设计图纸示例}% \designfig{设计图纸示例} %编入主目录。
 \end{dfigure}
 
@@ -187,11 +187,11 @@
 \begin{longtable}[c]{*{5}{l}r}
 	\caption{带有塑化剂的PEO-基聚合物电解质举例}\label{tab:longtab}\\
 	\toprule
-	\textbf{Entry} & \textbf{聚合物基体} & \textbf{锂盐} & \textbf{塑化剂} & \textbf{温度 (\si{\degreeCelsius})} & \textbf{离子电导率 (\si{S.cm^{-1}})}\\ \midrule
+	\textbf{Entry} & \textbf{聚合物基体} & \textbf{锂盐} & \textbf{塑化剂} & \textbf{$T$ (\si{\degreeCelsius})} & \textbf{离子电导率 (\si{S.cm^{-1}})}\\ \midrule
 	\endfirsthead
 	\multicolumn{6}{c}{\small 续表 \thetable\quad 带有塑化剂的PEO-基聚合物电解质举例} \\
 	\toprule
-	\textbf{Entry} & \textbf{聚合物基体} & \textbf{锂盐} & \textbf{塑化剂} & \textbf{温度 (\si{\degreeCelsius})} & \textbf{离子电导率 (\si{S.cm^{-1}})}\\ \midrule
+	\textbf{Entry} & \textbf{聚合物基体} & \textbf{锂盐} & \textbf{塑化剂} & \textbf{$T$ (\si{\degreeCelsius})} & \textbf{离子电导率 (\si{S.cm^{-1}})}\\ \midrule
 	\endhead
 	\bottomrule
 	\endfoot\endlastfoot
@@ -254,14 +254,13 @@
 ~\href{http://www.tablesgenerator.com}{LaTeX Tables Generator}~
 可以帮助制作更复杂的表格。
 
-
 \subsection{公式与数学类环境}\label{subsec:eqandmath}
 公式分为编号和不编号的两类。可以使用\env{equation}环境为公式编号。
 \begin{equation}\label{eq:gougu}
-	x_{1,2}=\frac{{-b \pm \sqrt{{b^2}-4ac}}}{{2a}}.
+	x_{1,2}=\frac{-b \pm \sqrt{b^2-4ac}}{2a}.
 \end{equation}
 加上 \cmd{label}，就能使用 \cmd{ref}或 \cmd{eqref}引用了。
-代入\ref{eq:gougu}，可解得 \eqref{eq:gougu}。
+代入式~\ref{eq:gougu}，可解得式~\eqref{eq:gougu}。
 
 不编号的公式使用 \env{equation*} 环境。
 \begin{equation*}
@@ -291,7 +290,7 @@
 $$\lim_{n \to \infty}\sum_{i=1}^n{\frac{1}{n}}\sin\frac{k}{n}.$$	% 极限、无穷、求和
 故
 \begin{equation}\label{eq:res}
-	\oint_{\gamma}f(z)\,\mathrm{d}z=2\uppi\symbfit{i}\sum^n_{k=1}\mathrm{I}(\gamma,a_k)\mathrm{Res}(f,a_k)
+	\oint_{\gamma}f(z)\,\mathrm{d}z=2\uppi\symbfit{i}\sum^n_{k=1}\mathrm{I}(\gamma,a_k)\mathrm{Res}(f,a_k).
 \end{equation}
 
 若要公式多行对齐，可以使用\env{align}环境。下面的例子在等号处对齐：
@@ -379,7 +378,7 @@ using namespace std;
 /*****   main function	*****/
 int main()
 {
-	cout<<"Hello World!"<<endl;		// @*输出 Hello World! ，这里是\LaTeX{}！@*
+	cout<<"Hello World!"<<endl;		@*//Print "Hello World!", I'm \LaTeX{}！@*
 	return 0;
 }
 \end{lstlisting}
@@ -465,26 +464,26 @@ int main()
 来增加符合格式要求的参考文献章节。为罗列各条参考文献，
 需要在 \file{thesisbib.bib} 文件中增删需引用的文献数据。
 在文章中相应位置引用文献后，需执行一次全编译以确保正确显示。
-注意：至少需要引用一篇参考文献，否则执行完全编译可能会引起编译错误。
-如果暂不需要参考文献，请将这两行删除或注释掉。
 
-关于如何编辑 \file{thesisbib.bib}，
-可以使用\href{http://scholar.google.com.cn/}{谷歌学术}\footnote{亦可以访问国内镜像站}%
-或\href{http://xueshu.baidu.com}{百度学术}两种方式（方法类似）导入\BibTeX{}：
+\emph{注意：至少需要引用一篇文献，否则执行完全编译可能会引起编译错误。
+如果暂不需要引用，请将这两行删除或注释掉。}
+
+关于 \file{thesisbib.bib} 文件的编辑，
+可以使用\href{http://scholar.google.com.cn/}{谷歌学术}\footnote{亦可以访问国内镜像站。}%
+或\href{http://xueshu.baidu.com}{百度学术}两种方式（方法类似）将文献数据导入\BibTeX{}数据库，大致方法如下：
 \begin{itemize}
-	\item 在搜索框中搜索题目/作者/DOI等，确定所引用的论文后点击\emph{引用}，如图~\ref{fig:addbib}；
+	\item 在搜索框中搜索题目（或作者、DOI等），确定所引用的论文后点击“引用”；并在弹出框中，单击最下方“BibTeX”的链接，如图~\ref{fig:addbib}；
+	\item 在弹出的网页中复制所有代码至 \file{thesisbib.bib} 文件；
+	\item 在论文中使用 \cmd{cite}命令引用相应的文献。
 	% 这里用了一条简单的自定义命令，用于快速插入单张图片，见 \file{myconfig.tex}文件。
-	\addfig[10cm]{figure/AddBib.png}{谷歌学术中的``引用''}{fig:addbib}
-	\item 在弹出框中，单击最下方 Bibtex 的链接；
-	\item 在弹出的网页中复制所有代码至 \file{thesisbib.bib}，并根据需要做一些改动；
-	\item 在论文中使用 \cmd{cite}引用相应的文献。
+	\addfig[12cm]{AddBib.png}{在谷歌学术中导出参考文献的步骤}{fig:addbib}
 \end{itemize}
 
-举个例子：在网页中将
+举个例子：经过图~\ref{fig:addbib} 所示步骤后，弹出的网页文本如下：
 \begin{lstlisting}
 @article{abbott2016observation,
 	title={Observation of gravitational waves from a binary black hole merger},
-	author={Abbott, Benjamin P and Abbott, Richard and % ...
+	author={Abbott, Benjamin P and Abbott, Richard and %（省略）
 	},
 	journal={Physical review letters},
 	volume={116},
@@ -494,7 +493,7 @@ int main()
 	publisher={APS}
 }
 	\end{lstlisting}
-复制进 \file{thesisbib.bib}，在论文中使用
+将以上内容复制进 \file{thesisbib.bib}，在论文中使用
 \cmd{cite\{abbott2016observation\}}即可引用此文献。
 这里的 “abbott2016observation”是该篇参考文献的引用标签，可以修改。
 再来一个\cite{ashirov2008tetramerization} ，
@@ -512,9 +511,9 @@ int main()
 
 \subsection{符号说明}\label{sec:deno}
 符号说明部分的源文件位于\file{chapter/denotation.tex}，使用\env{denotation}环境。
-《规范》中未详细规定符号说明部分的格式，模板设计了一个无线可跨页的长表格，
+《规范》中未详细规定符号说明部分的格式，模板设计了一个无框线、可跨页的长表格，
 直接在环境里填入内容即可。
-环境的接受两个参数\cargu{SymbolWid}和\cargu{DenoWid}，分别代表“符号”和“说明”二列的宽度，用于在必要时调整。
+环境接受两个参数\cargu{SymbolWid}和\cargu{DenoWid}，分别代表“符号”和“说明”二列的宽度，用于在必要时调整。
 
 \begin{lstlisting}
 \begin{denotation}@*\argu{SymbolWid}\argu{DenoWid}@*
@@ -522,7 +521,7 @@ int main()
 	符号2   &   说明2   \\
 \end{denotation}
 		\end{lstlisting}
-所生成的样式请参考本文的符号说明部分。
+所生成的样式请参考本文第~\pageref{chap*:deno}~页的符号说明部分。
 
 \subsection{致谢}
 致谢部分的源文件位于\file{chapter/acknowledgement.tex}，
@@ -538,7 +537,7 @@ int main()
 
 \subsection{脚注}\label{subsec:footnote}
 本模板采用带圈数字脚注，计数跨页重置，使用命令 \cmd{footnote\argu{text}}。
-前方高能\footnote{我是可爱的脚注}。
+前方高能\footnote{我是可爱的脚注。}。
 
 有些情况下（比如在表格环境、各种盒子内）使用 \cmd{footnote}并不能正确生成脚注。
 我们可以分两步进行，先使用 \cmd{footnotemark[\cargu{mark}]} 为脚注计数，
@@ -554,7 +553,7 @@ int main()
 		\hline
 	\end{tabular}
 \end{table}
-\footnotetext{苟：如果}
+\footnotetext{苟：如果。}
 
 利用 \pkg{threeparttable} 宏包提供的 \env{threeparttable} 环境可以实现在表格底下写脚注，见表~\ref{tab:ftnt2}。
 

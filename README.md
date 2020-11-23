@@ -11,7 +11,7 @@ BUCTthesis is a LaTeX writting template for BUCT undergraduate thesis.
 
 1. 安装 TeX 发行版，推荐使用 TeX Live。
 2. [在这里下载](https://github.com/Miracle0565/BUCTthesis/releases)模板最新发行版的压缩文件。
-3. 为检查编译环境，请于全英文路径下解压缩，并对 `master` 文件夹中的  `main.tex` 文件执行 `XeLaTex -> BibTeX -> XeLaTex -> XeLaTex` 的全编译。如果无报错、无警告则环境合适。
+3. 为检查编译环境，请于全英文路径下解压缩，并对 `master` 文件夹中的  `main.tex` 文件执行 `latexmk` 或 `xelatex -> bibtex -> xelatex -> xelatex` 的全编译。如果无报错、无警告则环境合适。
 4. 阅读本模板的说明文档 `main.pdf`，该文档简要地说明了模板的使用方法。
 5. `blank` 文件夹为空白模板，适合全新写作。在 `main.tex` 中填写作者信息；在 `chapter` 目录下编写内容并在 `main.tex` 调用；在 `figure` 和 `code` 目录下分别保存插图和源代码，以方便写作时调用；在 `thesisbib.bib` 文件中插入参考文献条目。
 6. 按第 3 步执行全编译。

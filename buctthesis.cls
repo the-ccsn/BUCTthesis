@@ -4,7 +4,7 @@
 %%
 %%		https://github.com/Miracle0565/BUCTthesis
 %%
-%%		Beta.v0.9.5, July.2020
+%%		Beta.v0.9.6, Dec.2020
 %%
 %%	This file may be distributed and/or modified under
 %%	the conditions of the LaTeX Project Public License,
@@ -21,7 +21,7 @@
 \NeedsTeXFormat{LaTeX2e}
 
 %% class info
-\ProvidesClass{buctthesis}[2020/06/30 Beta.v0.9.5]
+\ProvidesClass{buctthesis}[2020/12/10 Beta.v0.9.6]
 
 %% 定义选项 options 
 % class options
@@ -50,19 +50,19 @@
 
 \NewDocumentCommand{\buctsetup}{ m }{\kvsetkeys{buct}{#1}}
 
-\buct@def@key{Title}
-\buct@def@key{Titleen}
-\buct@def@key{Author}
-\buct@def@key{Class}
-\buct@def@key{School}
-\buct@def@key{Major}
-\buct@def@key{Supervisor}
-\buct@def@key{MajorSupervisor}
+\buct@def@key{ctitle}
+\buct@def@key{etitle}
+\buct@def@key{author}
+\buct@def@key{class}
+\buct@def@key{studentid}
+\buct@def@key{school}
+\buct@def@key{major}
+\buct@def@key{supervisor}
+\buct@def@key{msupervisor}
 
 % XeLaTeX required
 \RequirePackage{ifxetex}
 \RequireXeTeX
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%    Basic Packages     %%
@@ -146,7 +146,7 @@
 
 %% 摘要 abstracts
 % 中文摘要 zh
-\newcommand{\buct@abstitfont}{\zihao{3}}
+\newcommand{\buct@abstitfont}{\zihao{3}\songti}
 \newcommand{\buct@absabsfont}{\zihao{4}\heiti}
 \newcommand{\buct@keywordsfont}{\zihao{4}\heiti}
 % 英文摘要 en
@@ -155,20 +155,20 @@
 \newcommand{\buct@keywordsfonten}{\zihao{4}\heiti\CJKfamily+{}}
 
 %% 目录 contents
-\newcommand{\buct@toc@tocfont}{\mdseries\zihao{4}\heiti}
+\newcommand{\buct@toc@tocfont}{\zihao{4}\mdseries\heiti}
 \newcommand{\buct@toc@chapfont}{\zihao{4}\heiti}
 \newcommand{\buct@toc@secfont}{\zihao{4}\songti}
 \newcommand{\buct@toc@ssecfont}{\zihao{4}\songti}
 \newcommand{\buct@toc@dsgfigfont}{\buct@toc@ssecfont}
 
 %% 正文各级标题 chapters
-\newcommand{\buct@chapfont}{\bfsong\centering\zihao{-3}}
-\newcommand{\buct@secfont}{\bfsong\centering\zihao{-3}}
-\newcommand{\buct@ssecfont}{\bfsong\raggedright\zihao{-4}}
-\newcommand{\buct@sssecfont}{\songti\zihao{-4}}
+\newcommand{\buct@chapfont}{\zihao{-3}\bfsong\centering}
+\newcommand{\buct@secfont}{\zihao{-3}\bfsong\centering}
+\newcommand{\buct@ssecfont}{\zihao{-4}\bfsong\raggedright}
+\newcommand{\buct@sssecfont}{\zihao{-4}\songti}
 
 %% 浮动体 floats
-\newcommand{\buct@floatfont}{\zihao{5}}
+\newcommand{\buct@floatfont}{\zihao{5}\songti}
 
 % 代码 code
 \newcommand{\buct@codefont}{\ttfamily\songti\zihao{5}}
@@ -178,7 +178,6 @@
 \newcommand{\buct@codekeyfont}{%
 	\ttfamily\bfseries
 	\ifbuct@submit\relax\else\color{blue!80!black}\fi}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %%    Pages Settings    %%
@@ -246,7 +245,7 @@
 	{4.进度安排}\else%
 	\ClassError{buctthesis}{Too many \protect\taskitem\space used}%
 	{Keep \protect\taskitem\space no more than 4 times.}\fi}
-\newcommand{\taskitem}{\noindent\buct@taskitem\par}%
+\newcommand{\taskitem}{\vspace{1em}\noindent\buct@taskitem\par}
 
 % TODO: use bibentry pkg, or biblatex
 \newenvironment{bibenumerate}{%
@@ -258,23 +257,23 @@
 	\noindent%
 	\begin{minipage}{\textwidth}%
 		\punctstyle{plain}\linespread{1.94}\selectfont%
-			设计（论文）题目：\buct@ul[27em]{\buct@Title}\\[3pt]
+			设计（论文）题目：\buct@ul[27em]{\buct@ctitle}\\[3pt]
 		\IfBooleanTF{#1}{% less lines break
-			学院：\buct@ul[10em]{\buct@School}\quad 
-			专业：\buct@ul[10em]{\buct@Major}\quad
-			班级：\buct@ul[5em]{\buct@Class}\\[3pt]
-			学生：\buct@ul[5em]{\buct@Author}\quad
-			指导教师（含职称）：\buct@ul[6em]{\buct@Supervisor}\quad
-			专业负责人：\buct@ul[4em]{\buct@MajorSupervisor}%
+			学院：\buct@ul[10em]{\buct@school}\quad 
+			专业：\buct@ul[10em]{\buct@major}\quad
+			班级：\buct@ul[5em]{\buct@class}\\[3pt]
+			学生：\buct@ul[5em]{\buct@author}\quad
+			指导教师（含职称）：\buct@ul[6em]{\buct@supervisor}\quad
+			专业负责人：\buct@ul[4em]{\buct@msupervisor}%
 		}{% more lines break
-			学院：\buct@ul[15em]{\buct@School}\qquad
-			专业：\buct@ul[13em]{\buct@Major}\\[3pt]
-			班级：\buct@ul[15em]{\buct@Class}\qquad
-			学生：\buct@ul[13em]{\buct@Author}\\[3pt]
-			指导教师（含职称）：\buct@ul[8em]{\buct@Supervisor}\qquad
-			专业负责人：\buct@ul[10em]{\buct@MajorSupervisor}%
+			学院：\buct@ul[15em]{\buct@school}\qquad
+			专业：\buct@ul[13em]{\buct@major}\\[3pt]
+			班级：\buct@ul[15em]{\buct@class}\qquad
+			学生：\buct@ul[13em]{\buct@author}\\[3pt]
+			指导教师（含职称）：\buct@ul[8em]{\buct@supervisor}\qquad
+			专业负责人：\buct@ul[10em]{\buct@msupervisor}%
 		}
-\end{minipage}\vspace{2.5em}
+\end{minipage}\vspace{1.5em}
 }
 %% 摘要
 % 中、英同页 in one page
@@ -282,7 +281,7 @@
 \newenvironment{abstract*}{%
 	\cleardoublepage
 	\buct@pdfmark{摘要}{abstract}
-	\centerline{\buct@abstitfont\buct@Title}\vspace{-3pt}%
+	\centerline{\buct@abstitfont\buct@ctitle}\vspace{-3pt}%
 	\centerline{\buct@absabsfont{摘\quad 要}}\vspace{-3pt}%
 	\newcommand{\keywords}{\par\vspace{-0.5ex}\noindent\buct@keywordsfont 关键词：}
 	\addtolength{\baselineskip}{-3pt}
@@ -290,7 +289,7 @@
 % en
 \newenvironment{abstracten*}{%
 	\buct@pdfmark{Abstract}{abstracten}
-	\centerline{\buct@abstitfonten{\buct@Titleen}}\vspace{-6pt}%
+	\centerline{\buct@abstitfonten{\buct@etitle}}\vspace{-6pt}%
 	\centerline{\buct@absabsfonten {ABSTRACT}}\vspace{-3pt}%
 	\newcommand{\keywordsen}{\par\vspace{-0.5ex}\noindent\buct@keywordsfonten Keywords:~}
 	\addtolength{\baselineskip}{-6pt}
@@ -300,16 +299,15 @@
 \newenvironment{abstract}{%
 	\cleardoublepage
 	\buct@pdfmark{摘要}{abstract}
-	\centerline{\buct@abstitfont\buct@Title}\vspace{12pt}%
+	\centerline{\buct@abstitfont\buct@ctitle}\vspace{12pt}%
 	\centerline{\buct@absabsfont{摘\quad 要}}\vspace{9pt}%
 	\newcommand{\keywords}{\par\vspace{1em}\noindent\buct@keywordsfont 关键词：}
-
 }{}
 % en
 \newenvironment{abstracten}{%
 	\cleardoublepage%
 	\buct@pdfmark{Abstract}{abstracten}
-	\centerline{\buct@abstitfonten{\buct@Titleen}}\vspace{12pt}%
+	\centerline{\buct@abstitfonten{\buct@etitle}}\vspace{12pt}%
 	\centerline{\buct@absabsfonten{ABSTRACT}}\vspace{9pt}%
 	\newcommand{\keywordsen}{\par\vspace{1em}\noindent\buct@keywordsfonten Keywords:~}
 }{}
@@ -512,6 +510,9 @@ bibname		= 参考文献,
 \newfloat{dfigure}{htbp}{lodf}[chapter]
 \floatname{dfigure}{设计图纸}
 
+% 插图目录 path of pics
+\graphicspath{{figure/}}
+
 %% 图、表、方程标签格式 caption of floats, eqs & codes
 \renewcommand{\captionfont}{\buct@floatfont}
 \renewcommand{\captionlabelfont}{\buct@floatfont}
@@ -538,7 +539,7 @@ bibname		= 参考文献,
 	\renewcommand{\thetable}{\thechapter-\arabic{table}}
 	\renewcommand{\thesubfigure}{(\alph{subfigure})}
 	\renewcommand{\thefigure}{\thechapter-\arabic{figure}}
-	\renewcommand{\theequation}{式~\thechapter-\arabic{equation}}
+	\renewcommand{\theequation}{\thechapter-\arabic{equation}}
 	\renewcommand{\thedfigure}{\thechapter-\arabic{dfigure}}
 	\renewcommand{\thelstlisting}{\thechapter-\arabic{lstlisting}}
 }
@@ -599,11 +600,11 @@ bibname		= 参考文献,
 
 \RequirePackage{hyperref}
 \hypersetup{%
-	colorlinks=true,
-	bookmarksnumbered=true,
-	pdfhighlight=/N,
-	breaklinks=true,
-	citecolor=cyan,
+	colorlinks			= true,
+	bookmarksnumbered	= true,
+	pdfhighlight		= /N,
+	breaklinks			= true,
+	citecolor			= cyan,
 }
 \ifbuct@submit
 	\hypersetup{hidelinks}

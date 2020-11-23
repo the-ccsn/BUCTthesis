@@ -6,26 +6,28 @@
 ]{buctthesis}
 
 % 在这个文件里载入其他对写作有帮助的宏包，或自定义命令等
-\input{myconfig.tex}
+\usepackage{myconfig}
 
 \buctsetup{
-	%% 各选项之间不要留有空行，并以西文逗号“,”分隔
+	%%%%% 各选项之间不要留有空行，并以西文逗号“,”分隔 %%%%%
 	% 论文的中文标题
-	Title			= {BUCTthesis写作指南},
+	ctitle		= {BUCTthesis写作指南},
 	% 论文的英文标题
-	Titleen			= {HOW TO \TeX\ WITH BUCTthesis},
+	etitle		= {HOW TO \TeX\ WITH BUCTthesis},
 	% 作者姓名
-	Author			= {张三},
+	author		= {张三},
 	% 班级
-	Class			= {某某1024},
+	class		= {某某1024},
+	%学号
+	studentid	= {2018020999},
 	% 学院
-	School			= {材料科学与工程学院},
+	school		= {材料科学与工程学院},
 	% 专业名称
-	Major			= {高分子材料与工程},
+	major		= {高分子材料与工程},
 	% 导师的姓名与职称
-	Supervisor		= {李四教授},
+	supervisor	= {李四教授},
 	% 专业负责人姓名
-	MajorSupervisor	= {王五},
+	msupervisor	= {王五},
 }
 
 \begin{document}
