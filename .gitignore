@@ -9,3 +9,9 @@
 *.fdb_latexmk
 *.fls
 *.xdv
+*.idx
+*.hd
+*.glo
+*.ilg
+*.ind
+
