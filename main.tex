@@ -2,20 +2,20 @@
 % 主文件--main.tex
 \documentclass[
 	%submit,
-	openany,			% openany | openright
+	openany,			% openany | openright(default)
 ]{buctthesis}
 
 % 在这个文件里载入其他对写作有帮助的宏包，或自定义命令等
-\usepackage{myconfig}
+\usepackage{mycfg}
 
 \buctsetup{
 	%%%%% 各选项之间不要留有空行，并以西文逗号“,”分隔 %%%%%
 	% 论文的中文标题
-	ctitle		= {BUCTthesis写作指南},
+	ctitle		= {BUCTthesis写作示例文档},
 	% 论文的英文标题
-	etitle		= {HOW TO \TeX\ WITH BUCTthesis},
+	etitle		= {HOW TO \TeX\ WITH BUCTthesis: AN EXAMPLE},
 	% 作者姓名
-	author		= {张三},
+	cauthor		= {张三},
 	% 班级
 	class		= {某某1024},
 	%学号
@@ -28,14 +28,12 @@
 	supervisor	= {李四教授},
 	% 专业负责人姓名
 	msupervisor	= {王五},
+	% 中文、英文关键词，各关键词间以西文逗号“,”分隔
+	ckeywords   = {论文,\LaTeX{},模板},
+	ekeywords   = {thesis,\LaTeX{},template},
 }
 
 \begin{document}
-
-% 若排版不妥，可插入 PDF 代替。
-% Option [pages=-] will insert all pages of the document.
-%\includepdf[pages=-]{<FilePath>}
-
 % 生成伪封面。实际的论文封面由学校统一印制，正式写作可删去。
 \maketitle
 

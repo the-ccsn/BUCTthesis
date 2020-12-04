@@ -1,8 +1,10 @@
-% myconfig.sty---The file for your beloved packages, commands and customization.
+% mycfg.sty---The file for your beloved packages, commands and customization.
 
-\ProvidesPackage{myconfig}[2020/12/10 v0.9.6]
+\ProvidesPackage{mycfg}
 %% Packages
 %\usepackage{paracol}	% 一个可以排版双语对照翻译的宏包
+\RequirePackage{bxtexlogo}
+\RequirePackage{zhlipsum}
 
 %% Commands
 %自定义命令格式为：\newcommand{<命令>}[<参数个数>][<首参默认值>]{<具体的定义>}
@@ -12,29 +14,22 @@
 		\centering
 		\includegraphics[width = #1]{#2}
 		\caption{#3}\label{#4}
-	\end{figure}}
-
-%% Maths
-\newcommand\Vector{\symbfit}
-\newcommand\Matrix{\symbfit}
-
-%% A sample thesis cover
-\title{BUCTthesis 写作指南\par\version}
-\author{Miracle0565}
-\ctexset{today=big}
-
-%%=======开发区域========
-%\usepackage{showframe}
-%\usepackage{showkeys}
-%%以下仅编译《指南》所需
-\RequirePackage{bxtexlogo}
-\RequirePackage{zhlipsum}
+	\end{figure}
+}
 \newcommand{\version}{Beta.v0.9.6}
-\newcommand{\cmd}[1]{\texttt{\textbackslash#1}}
+\newcommand{\cs}[1]{\texttt{\textbackslash#1}}
 \newcommand{\file}{\textsf}
 \newcommand{\pkg}{\textsf}
 \newcommand{\env}{\texttt}
 \newcommand{\opt}{\texttt}
 \newcommand{\argu}[1]{\{$\langle$\textit{#1}$\rangle$\}}
 \newcommand{\cargu}[1]{$\langle$\textit{#1}$\rangle$}
-%%=======================
+
+%% Maths
+\newcommand\Vector{\symbfit}
+\newcommand\Matrix{\symbfit}
+
+%% A sample of thesis cover
+\title{BUCTthesis 写作示例文档\par\version}
+\author{Miracle0565}
+\ctexset{today=big}

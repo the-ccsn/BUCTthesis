@@ -1,16 +1,8 @@
 %% 前置部分--frontmatter.tex
 %% 诚信声明
-\begin{declare}
-所呈交的学位论文是本人在导师的指导下独立进行研究工作所取得的成果。
-据我所知，除文中已经注明引用的内容外，本论文不包含任何其他个人或集体
-已经发表或撰写过的研究成果，也不包含为获得北京化工大学或其它教育机构
-的学位或证书而使用过的材料。对论文所涉及的研究工作做出贡献的其他个人
-和集体，均已在文中以明确方式标明或致谢。本人完全意识到本声明的法律
-结果由本人承担。
-\end{declare}
+\makedeclare[figure/scan-declare.png]
 
 %% 任务书
-% if it works bad, please insert PDF from Word instead.
 \begin{taskbook}
 \taskinfo		% or use `\taskinfo*' for less lines.
 	
@@ -61,21 +53,7 @@
 
 
 %% 摘要
-% 使用下面的环境，会将中英文摘要排版在同一页上。
-%\begin{abstract*}
-%	\addtolength{\baselineskip}{-3pt}			% 行间距控制
-%	在此键入摘要
-%	\keywords{关键词}
-%\end{abstract*}
-%
-%\begin{abstracten*}
-%	\setlength{\baselineskip}{16pt}				% 行间距控制
-%	Abstract here.
-%	\keywordsen{KEYWORDS}
-%\end{abstracten*}
-
-% 使用下面的环境，会将中英文摘要排版在不同页上。
-\begin{abstract}
+\begin{cabstract}
 	摘要和关键词一起写在这里。
 
 	摘要介绍所研究的主要内容、方法、结果及创新点。应有中文、外文两种文本，
@@ -94,10 +72,9 @@
 	这一段话的作用是将中文摘要写到 300 个字。
 
 	（这里总共约 300 字）
-	\keywords{论文 \quad \LaTeX{} \quad 模板}
-\end{abstract}
+\end{cabstract}
 
-\begin{abstracten}
+\begin{eabstract}
 	Here is the Abstract and the Keywords.
 
 	In the abstract, you may introduce the main contents of your research,
@@ -129,5 +106,4 @@
 	\end{itemize}
 
 	(Around 1500 letters total)
-	\keywordsen{thesis \quad \LaTeX \quad template}
-\end{abstracten}
+\end{eabstract}
