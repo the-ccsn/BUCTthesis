@@ -1,5 +1,28 @@
 # Update List of BUCTthesis
 
+## Beta.v0.9.6 - 2020/12/10
+
+### Added
+
+- 启用 `DocStrip`，增加文件 `buctthesis.dtx` 和 `buctthesis.ins`，以后将说明将在 `buctthesis.pdf` 查看；同时对示例文件进行大幅更改
+- `\buctsetup` 命令中增加一个 `studentid` 键
+- “诚信声明” 现在使用 `\makedeclare` 命令：其后可跟一个可选参数，参数为扫描页的路径
+
+### Changed
+
+- 自定义命令的 `myconfig.tex` 文件更改为 `mycfg.sty`
+- 更改了 `\buctsetup` 命令中的键名称大小写
+- 调整“任务书”中部分垂直间距，并在“进度安排”的表格里画上了竖线
+- 重排“摘要”部分，且现在中英文摘要只能排在不同页上
+- 设计图纸： `\designfig` -> `\dcaption`；以前需要在 `\caption` 后跟上 `\designfig` ，现在简化成了一个命令 `\dcaption`
+- `denotation` 环境现在只接受一个参数，控制第二列宽度
+
+### Deleted
+
+- 删除了校徽和校名的插图
+- 删除公式编号中“式”字
+- 删除 `declare` 、 `abstract*` 和 `abstracten*`环境
+
 ## Beta.v0.9.5 - 2020/08/17
 
 ### Added
@@ -7,13 +30,13 @@
 - 文档类选项 `openany` | `openright` ，适用于单双页打印：前者为原先设置；而后者会在适当之处插入一完全空白页，使得章页右开
 - 现在多余的文档类选项将传递至 `ctexbook`
 
-### Fixed
+### Changed
 
 - 重写字体配置，修改字体切换的命令：粗体、黑体等有所变化
 - 微调双面摘要的垂直间距
 - 文档类选项 `TextBlack` 重命名为 `submit`
 - 代码的标签编号以 `-` 而不是 `.` 连接，形如 `代码 2-1`
-- “任务书”中，插入论文信息部分命令修改为带可选星号的 `\taskinfo` 命令。原定义 `\taskinfo` -> `\taskinfo*` ，`\Taskinfo` -> `\taskinfo`。类似于“摘要”的环境，带星号的是按照《规范》来定义的，无星号的则是为了应对一些变化。
+- “任务书”中，插入论文信息部分命令修改为带可选星号的 `\taskinfo` 命令。原定义 `\taskinfo` -> `\taskinfo*` ，`\Taskinfo` -> `\taskinfo`。类似于“摘要”的环境，带星号的是按照《规范》来定义的，无星号的则是为了应对一些变化
 - 修改了数学公式中的字体
 
 ### Deleted
@@ -24,7 +47,7 @@
 
 ## Beta.v0.9.4 - 2020/06/08
 
-### Fixed
+### Changed
 
 - 格式控制从宏包改为文档类
 - 主文件 `buctthesis.tex` 更名为 `main.tex` ，并将“诚信声明” `declare.tex` 、“任务书” `taskbook.tex` 和“摘要” `abstract.tex` 整合成一个文件 `frontmatter.tex`
@@ -44,7 +67,7 @@
 
 ## Beta.v0.9.3 - 2020/04/08
 
-### Fixed
+### Changed
 
 - 脚注：修复正文里脚注标记与前后文字的间距问题；脚注文字固定在页面底部且跨页重置计数
 - 使用 `unicode-math` 宏包来配置数学字体
@@ -64,7 +87,7 @@
 
 ## Beta.v0.9.2 - 2020/03/14
 
-### Fixed
+### Changed
 
 - 重构宏包代码，重排了部分文本。
 - 取消等宽字体的使用，一律使用 Times New Roman，并稍微修改了代码环境
@@ -89,7 +112,7 @@
 
 ## Beta.v0.9.1 - 2020/02/06
 
-### Fixed
+### Changed
 
 - 正文字号修正
 - 摘要同页排版的环境（ `abstract*` 与 `abstracten*` ），关键词的代码( `\keywords` 和 `\keywordsen` ）和格式

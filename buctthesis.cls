@@ -172,10 +172,8 @@
     \setlength{\baselineskip}{2em}%
     \centerline{\songti\zihao{3} 诚信声明}\par\vspace{1em}
     \leftline{\songti\zihao{4}\noindent 本人声明：}%
-    \def\buct@sign{本人签名：\hspace{7em}}
-    \def\buct@signdate{\hspace{7em}年\hspace{2.5em}月\hspace{2.5em}日}
     \buct@declare@content
-    \par\vspace{2em}\hfill{本人签名：\hspace{7em}}{\hspace{7em}年\hspace{2.5em}月\hspace{2.5em}日}\clearpage
+    \par\vspace{2em}\hfill{本人签名：\hspace{14em}年\hspace{2.5em}月\hspace{2.5em}日}\clearpage
 }
 \NewDocumentCommand{\makedeclare}{ o }{%
     \buct@pdfmark{诚信声明}{declare}
@@ -345,8 +343,6 @@
 }
 \let\mathbb\relax
 \DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}%
-\renewcommand\boldsymbol{\symbf}
-\newcommand\bm{\symbf}
 \newtheoremstyle{buctthm}%    name
 {3pt}%                        Space above
 {3pt}%                        Space below

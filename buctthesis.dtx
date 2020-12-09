@@ -31,24 +31,6 @@
 %</driver>
 % \fi
 %
-% \CheckSum{0}
-%
-% \CharacterTable
-%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
-%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
-%   Digits        \0\1\2\3\4\5\6\7\8\9
-%   Exclamation   \!     Double quote  \"     Hash (number) \#
-%   Dollar        \$     Percent       \%     Ampersand     \&
-%   Acute accent  \'     Left paren    \(     Right paren   \)
-%   Asterisk      \*     Plus          \+     Comma         \,
-%   Minus         \-     Point         \.     Solidus       \/
-%   Colon         \:     Semicolon     \;     Less than     \<
-%   Equals        \=     Greater than  \>     Question mark \?
-%   Commercial at \@     Left bracket  \[     Backslash     \\
-%   Right bracket \]     Circumflex    \^     Underscore    \_
-%   Grave accent  \`     Left brace    \{     Vertical bar  \|
-%   Right brace   \}     Tilde         \~}
-%
 % \DoNotIndex{\newcommand,\newenvironment,\renewcommand,\renewenvironment}
 % \DoNotIndex{\providecommand,\NewDocumentCommand}
 % \DoNotIndex{\begin,\end,\begingroup,\endgroup}
@@ -71,7 +53,6 @@
 % \DoNotIndex{\ ,\@plus,\@minus,\p@,\z@,\@m,\@M,\@ne,\m@ne}
 % \DoNotIndex{\@@par,\DeclareOperation,\RequirePackage,\LoadClass}
 % \DoNotIndex{\AtBeginDocument,\AtEndDocument}
-%
 %
 %
 % \GetFileInfo{buctthesis.dtx}
@@ -117,7 +98,7 @@
 % 无衬线字体表示宏包、文档类等存在于计算机上的文件，
 % 如 \file{buctthesis.cls} 文件、\pkg{amsmath}宏包、\cls{ctexbook} 文档类；
 % 等宽字体表示命令与环境，如 \cs{buctsetup} 命令、\env{abstract} 环境。
-% 对于命令中的参数将置于尖括号（尖括号无需输入）中，如 \cs{include}\marg{filename}；
+% 对于命令中的参数将置于尖括号（尖括号无需输入）中，如 \cs{include}\marg{file}；
 % 对于命令行指令，将置于\ {\color{violet!65}\rule[.25ex]{1em}{1ex}} 颜色框内，且需要逐行输入；
 % 而对于 \LaTeX\ 代码，将置于\ {\color{cyan}\rule[.25ex]{1em}{1ex}} 颜色框内，
 % 需要保存为特定文件后进行编译。
@@ -139,18 +120,18 @@
 %         \toprule
 %         文件（夹）名 & 简述\\
 %         \midrule
-%         \file{chapter/} & 论文各个部分的源文件路径\\
-%         \file{code/} & 源代码的路径\\
-%         \file{figure/}  & 插图的路径\\
 %         \file{buctthesis.ins} & \textsc{DocStrip} 驱动文件\\
-%         \file{buctthesis.dtx} & \textsc{DocStrip} 源文件\\\hline
+%         \file{buctthesis.dtx} & \textsc{DocStrip} 源文件\\\cmidrule(lr){1-2}
+%         \file{chapter/} & 论文各部分的源文件路径\\
+%         \file{code/} & 源代码的路径\\
+%         \file{figure/}  & 插图的路径\\\cmidrule(lr){1-2}
 %         \file{main.tex} & 主文件\\
 %         \file{main.pdf} & 示例文档\\
 %         \file{buctthesis.cls} & 模板的文档类文件\\
 %         \file{thesisbib.bib}  & \BibTeX{}参考文献数据库\\
 %         \file{mycfg.sty} & 自定义配置文件\\
 %         \file{README.md} & 项目自述文件\\
-%         {\bfseries buctthesis.pdf} & 写作指南，即本文\\
+%         \file{\bfseries buctthesis.pdf} & 写作指南，即本文\\
 %         \bottomrule
 %     \end{tabular}
 % \end{table}
@@ -284,7 +265,7 @@
 % \subsubsection{诚信声明}
 % \DescribeMacro{\makedeclare}
 % \begin{syntax}{makedeclare}
-%    \oarg{文件名}
+%    \oarg{文件}
 % \end{syntax}
 %
 % 根据《现代汉语词典》对“申明”与“声明”二词的释义，
@@ -295,7 +276,7 @@
 % \begin{latex}
 %   \makedeclare[figure/declare.png]
 % \end{latex}
-% 即可插入位于 \file{figure/declare.pn} 的图片来代替。
+% 即可插入位于 \file{figure/declare.png} 的图片来代替。
 %
 % \subsubsection{摘要和关键词}\label{subsubsec:abstract}
 % \DescribeEnv{cabstract}
@@ -332,8 +313,8 @@
 % \DescribeMacro{\listofdesignfigures}
 % 生成主目录和设计图纸目录的命令分别如下：
 % \begin{latex}
-%    \tableofcontents
-%    \listofdesignfigures
+%   \tableofcontents
+%   \listofdesignfigures
 % \end{latex}
 % 注意二者是互相独立的。
 % 后者通过 \env{dfigure} 环境指定插图为“设计图纸”并计数编号。
@@ -350,16 +331,16 @@
 % \DescribeMacro{\include}
 % \DescribeMacro{\input}
 % \begin{syntax}{include}
-%     \marg{filename}
+%     \marg{文件}
 % \end{syntax}
 % \qquad
 % \begin{syntax}{input}
-%     \marg{filename}
+%     \marg{文件}
 % \end{syntax}
 %
 % 正文部分各个章节的源文件存放于 \file{chapter/} 文件夹，
 % 只要在 \file{main.tex} 正文部分以上述命令插入各章节即可成文。
-% 插入的文件 \meta{filename} 可以不带扩展名，默认为 \file{.tex}。
+% 插入 \meta{文件} 可以不带扩展名，默认为 \file{.tex}。
 %
 % 使用 \cs{include} 命令会在读入文件前另起一页，而 \cs{input}
 % 纯粹插入文件里的内容。
@@ -380,7 +361,7 @@
 % 除了使用 \cs{dcaption} 代替 \cs{caption}外都一样。
 % \begin{latex}
 %   \begin{dfigure}[htbp]
-%       \centering\includegraphics[]{filename}
+%       \centering\includegraphics[]{file}
 %       \dcaption{设计图纸示例}
 %   \end{dfigure}
 % \end{latex}
@@ -427,7 +408,7 @@
 % \subsubsection{符号说明}\label{subsubsec:deno}
 % \DescribeEnv{denotation}
 % 符号说明部分的源文件位于 \file{chapter/denotation.tex}，
-% 使用\env{denotation}环境。
+% 使用 \env{denotation} 环境。
 % 《规范》中未详细规定符号说明部分的格式，
 % 模板设计了一个无框线、可跨页的长表格，直接在环境里填入内容即可。
 % 环境接受一个可选 \meta{Width} 参数 ，代表“说明”一列的宽度，用于在必要时调整。
@@ -460,12 +441,13 @@
 % \end{latex}
 %
 % \subsubsection{附录}\label{subsubsec:app}
-% \DescribeMacro{appendix}
+% \DescribeMacro{\appendix}
 % \cs{appendix} 命令作为附录部分的开始。
-% 与正文类似，只需往\file{chapter/app1.tex}等加入内容即可。
+% 与正文类似，只需往 \file{chapter/app1.tex} 等加入内容即可。
 %
 % \StopEventually{\PrintChanges\PrintIndex}
 %
+% \clearpage
 % \section{实现细节}\label{sec:implementation}
 % \subsection{文档类信息与选项}
 %    \begin{macrocode}
@@ -676,12 +658,13 @@
 % \begin{macro}{\bfsong}
 % 设置“伪粗体”后，使用 \cs{bfseries}将产生加粗的宋体，
 % 这与一般的 \LaTeX\ 常识是相悖的。
-% 因此模板提供了更明确的命令 \cs{bfsong} 。
+% 因此模板提供了更明确的命令 \cs{bfsong}。
 %    \begin{macrocode}
 \newcommand{\bfsong}{\bfseries}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\bfhei}
+%
 % 对于黑体同理。此外要注意模板将预设的无衬线字体（微软雅黑）改为了黑体。
 %    \begin{macrocode}
 \newcommand{\bfhei}{\sffamily\bfseries}
@@ -820,7 +803,7 @@
 % \end{macro}
 %
 % \subsubsection{诚信声明}
-% \begin{macro}{\makedeclare}
+% \begin{macro}{\buct@declare@content}
 % 定义“诚信声明”的文本内容。
 %    \begin{macrocode}
 \newcommand{\buct@declare@content}{
@@ -832,20 +815,22 @@
     结果由本人承担。
 }
 %    \end{macrocode}
+% \end{macro}
 %
+% \begin{macro}{\buct@makedeclare}
 % 设置不使用扫描页的“诚信声明”格式。
 %    \begin{macrocode}
 \newcommand{\buct@makedeclare}{
     \setlength{\baselineskip}{2em}%
     \centerline{\songti\zihao{3} 诚信声明}\par\vspace{1em}
     \leftline{\songti\zihao{4}\noindent 本人声明：}%
-    \def\buct@sign{本人签名：\hspace{7em}}
-    \def\buct@signdate{\hspace{7em}年\hspace{2.5em}月\hspace{2.5em}日}
     \buct@declare@content
-    \par\vspace{2em}\hfill{本人签名：\hspace{7em}}{\hspace{7em}年\hspace{2.5em}月\hspace{2.5em}日}\clearpage
+    \par\vspace{2em}\hfill{本人签名：\hspace{14em}年\hspace{2.5em}月\hspace{2.5em}日}\clearpage
 }
 %    \end{macrocode}
+% \end{macro}
 %
+% \begin{macro}{\makedeclare}
 % 定义一个带可选参数的命令 \cs{makedeclare}，可选参数为扫面页的相对路径；
 % 若不加参数则使用 \cs{buct@makedeclare} 来插入文本。
 %    \begin{macrocode}
@@ -870,7 +855,7 @@
 %    \end{macrocode}
 % \end{environment}
 %
-% \begin{macro}{\buct@pdfmark}
+% \begin{macro}{\buct@ul}
 % “任务书”开头部分的下划线。
 %    \begin{macrocode}
 \NewDocumentCommand{\buct@ul}{ o m }{\underline{\makebox[#1][c]{#2}}}
@@ -1162,23 +1147,17 @@
 \DeclareMathAlphabet{\mathbb}{U}{msb}{m}{n}%
 %    \end{macrocode}
 %
-% 定义和重定义数学字符加粗的命令。
-%    \begin{macrocode}
-\renewcommand\boldsymbol{\symbf}
-\newcommand\bm{\symbf}
-%    \end{macrocode}
-%
 % 使用 \pkg{amsthm} 宏包来进行定理类环境的格式控制，并预设如下定理类环境。编号跨章重置计数。
 %    \begin{macrocode}
-\newtheoremstyle{buctthm}%    name
-{3pt}%                        Space above
-{3pt}%                        Space below
-{}%                            Body font
-{}%                            Indent amount
+\newtheoremstyle{buctthm}%  name
+{3pt}%                      Space above
+{3pt}%                      Space below
+{}%                         Body font
+{}%                         Indent amount
 {\bfseries}%                Theorem head font
 {:}%                        Punctuation after theorem head
-{.5em}%                        Space after theorem head
-{}%                            Theorem head spec
+{.5em}%                     Space after theorem head
+{}%                         Theorem head spec
 \theoremstyle{buctthm}
 \newtheorem{axiom}{公理}[chapter]
 \newtheorem{theorem}{定理}[chapter]
@@ -1332,9 +1311,9 @@
 % \end{environment}
 %
 % \subsubsection{符号说明}
+% \begin{environment}{denotation}
 % 关于章节编目同前。这里使用一个可跨页的无线长表格。
 % 为了防止符号较长，这里定义的环境需要一个可选参数用于在必要时控制第二列列宽。
-% \begin{environment}{denotation}
 %    \begin{macrocode}
 \NewDocumentEnvironment{denotation}{ O{10em} +b }{%
     \chapter*{符号说明}%
@@ -1348,7 +1327,7 @@
 %
 % \subsubsection{参考文献}
 % 一方面，主文件中调用了符合要求的参考文献格式控制文件，使参考文献章节的格式规范化；
-% 另一方面，调用 \pkg{gbt7714}（和\pkg{natbib}）宏包时已经填入相关选项，
+% 另一方面，调用 \pkg{gbt7714}（和 \pkg{natbib} ）宏包时已经填入相关选项，
 % 在文章中引用文献的格式也符合了要求。所以这里仅将罗列的各条参考文献之间距离稍微调小一些。
 %    \begin{macrocode}
 \setlength{\bibsep}{3pt}
@@ -1370,7 +1349,7 @@
 
 % \subsubsection{脚注}
 % \begin{macro}{\footnote}
-% 使用带圈圈的脚注。尽管\LaTeX\ 自带了 \cs{textcircled} 命令，但是效果并不如意。
+% 使用带圈圈的脚注。尽管 \LaTeX\ 自带了 \cs{textcircled} 命令，但是效果并不如意。
 % 为了和一级列表环境的序号区分，这里使用 \pkg{tikz} 宏包来绘制一个围着阿拉伯数字脚注的圈。
 % 为了突出标号以便更加明确、清楚地显示，对编号设置了悬挂缩进。
 %    \begin{macrocode}
@@ -1506,7 +1485,7 @@
 \def\glossaryname{版本历史}
 \GlossaryPrologue{\section{\glossaryname}}
 \IndexPrologue{%
-    \section{\indexname}
+    \clearpage\section{\indexname}
     \textit{意大利体的数字表示描述对应索引项的页码；
     带下划线的数字表示定义对应索引项的代码行号；
     罗马字体的数字表示使用对应索引项的代码行号。}
