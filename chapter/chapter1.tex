@@ -22,8 +22,8 @@
 	\item 斜体：{\itshape 北京化工大学 BUCT 1958} 或 \textit{北京化工大学 BUCT 1958}
 \end{enumerate}
 
-\section{浮动体示例}
-% 一些废话用来充版面。摘自 https://github.com/chinese-poetry/chinese-poetry
+\section{浮动体}
+% 一些文字用来充版面。摘自 https://github.com/chinese-poetry/chinese-poetry
 六王毕，四海一，蜀山兀，阿房出。覆压三百余里，隔离天日。骊山北构而西折，直走咸阳。
 二川溶溶，流入宫墙。五步一楼，十步一阁；廊腰缦回，檐牙高啄；各抱地势，钩心斗角。
 盘盘焉，囷囷焉，蜂房水涡，矗不知其几千万落。长桥卧波，未云何龙？复道行空，不霁何虹？
@@ -94,10 +94,10 @@
 （机械设计等）设计图纸需要编目。模板新定义了类似 \env{figure} 的 \env{dfigure}环境。
 设计图纸的标签与普通插图不同，且计数器相互独立。
 对于图纸的编目，可以在主文件以 \cs{listofdesignfigures} 生成独立的目录，或使用
-\cs{designfig\argu{Caption}}命令与主目录合并。
+\cs{dcaption}\marg{Caption}命令与主目录合并。
 \begin{dfigure}% [H] or [htbp] is also available here.
 	\centering
-	\includegraphics[width = \textwidth]{蜗轮.pdf}
+	\includegraphics[width = \textwidth]{worm gear.pdf}
 	\caption{设计图纸示例}  % \dcaption{设计图纸示例} % 该命令将其编入主目录。
 \end{dfigure}
 
@@ -145,7 +145,7 @@
 	\begin{tabular}{lcrp{5em}@{\extracolsep{3em}}l}
 		\hline
 		左对齐 & 居中对齐 & 右对齐 & 定宽               & 增加左侧间距\\
-		l     & c        &  r    & p\argu{width}  & @\{\cs{extracolsep}\argu{width}\}\\
+		l     & c        &  r    & p\marg{width}  & @\{\cs{extracolsep}\marg{width}\}\\
 		\hline
 	\end{tabular}
 \end{table}
@@ -167,7 +167,7 @@
 	\label{tab:2tab}
 	\begin{tabular}{|c|r|r|}
 		\hline
-		    & \multicolumn{2}{c|}{成绩} \\\cline{2-3}
+			& \multicolumn{2}{c|}{成绩} \\\cline{2-3}
 		姓名 & 语文 & 数学 \\\hline
 		张三 & 91 & 92 \\\hline
 		\end{tabular}
@@ -175,7 +175,7 @@
 	\begin{tabular}{|c|r|r|}
 		\hline
 		\multirow{2}*{姓名} & \multicolumn{2}{c|}{成绩} \\ \cline{2-3}
-		    & 语文          & 数学 \\ \hline
+			& 语文          & 数学 \\ \hline
 		李四 & 93           & 94 \\ \hline
 		\end{tabular}
 \end{table}
@@ -257,6 +257,13 @@
 		\end{tabularx}
 	\end{minipage}
 \end{table}
+
+故夫知效一官，行比一乡，德合一君，而征一国者，其自视也亦若此矣。而宋荣子
+犹然笑之。且举世誉之而不加劝，举世非之而不加沮，定乎内外之分，辩乎荣辱之
+境，斯已矣。彼其于世，未数数然也。虽然，犹有未树也。夫列子御风而行，泠然
+善也。旬有五日而后反。彼于致福者，未数数然也。此虽免乎行，犹有所待者也。
+若夫乘天地之正，而御六气之辩，以游无穷者，彼且恶乎待哉？故曰：至人无己，
+神人无功，圣人无名。
 
 若要在表格中使用脚注，请参见第~\ref{subsec:footnote}小节。
 
