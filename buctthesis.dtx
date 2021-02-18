@@ -1288,7 +1288,7 @@
 %    \begin{macrocode}
 \ifbuct@bachelor
     \newenvironment{eabstract}{%
-        \clearoublepage%
+        \cleardoublepage%
         \buct@pdfmark{\buct@eabstract@title}{abstracten}
         \centerline{\buct@abs@titfonten{\buct@etitle}}\vspace{22pt}%
         \centerline{\buct@abs@absfonten\buct@eabstract@title}\vspace{22pt}%
@@ -1720,6 +1720,7 @@
 \ifbuct@bachelor\relax\else
     \AtBeginEnvironment{tabular}{\buct@floatfont}
     \AtBeginEnvironment{tabularx}{\buct@floatfont}
+\fi
 %    \end{macrocode}
 %
 % 对于 \pkg{longtable} 宏包的设置则稍有不同：
@@ -1728,6 +1729,7 @@
 %    \begin{macrocode}
     \let\oldlongtable=\longtable
     \let\endoldlongtable=\endlongtable
+\ifbuct@bachelor\relax\else
     \def\longtable{\zihao{5}\oldlongtable}
     \AtEndEnvironment{longtable}{\normalsize}
 \fi

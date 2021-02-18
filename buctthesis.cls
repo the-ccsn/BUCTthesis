@@ -410,7 +410,7 @@
 \fi
 \ifbuct@bachelor
     \newenvironment{eabstract}{%
-        \clearoublepage%
+        \cleardoublepage%
         \buct@pdfmark{\buct@eabstract@title}{abstracten}
         \centerline{\buct@abs@titfonten{\buct@etitle}}\vspace{22pt}%
         \centerline{\buct@abs@absfonten\buct@eabstract@title}\vspace{22pt}%
@@ -666,8 +666,10 @@
 \ifbuct@bachelor\relax\else
     \AtBeginEnvironment{tabular}{\buct@floatfont}
     \AtBeginEnvironment{tabularx}{\buct@floatfont}
+\fi
     \let\oldlongtable=\longtable
     \let\endoldlongtable=\endlongtable
+\ifbuct@bachelor\relax\else
     \def\longtable{\zihao{5}\oldlongtable}
     \AtEndEnvironment{longtable}{\normalsize}
 \fi
