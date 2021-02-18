@@ -1,5 +1,20 @@
 # Update List of BUCTthesis
 
+## Beta.v0.9.7 - 2021/mm/dd
+
+### Added
+
+- 增加硕博论文模板，`\documentclass[]{buctthesis}` 必须指定类型
+
+### Fixed
+
+- `denotation` 环境第二列宽的默认值的单位修正
+- 本科中文摘要的关键词中，字体都使用中易黑体
+
+### Deleted
+
+- 模板发行版中取消 `blank` 文件夹，建议写作时直接在示例文件中修改
+
 ## Beta.v0.9.6 - 2020/12/10
 
 ### Added

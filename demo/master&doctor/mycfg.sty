@@ -1,0 +1,35 @@
+% mycfg.sty---The file for your beloved packages, commands and customization.
+
+\ProvidesPackage{mycfg}
+
+%% Packages
+\RequirePackage{bxtexlogo}  % 生成错落有致的如 LaTeX 的宏包
+\RequirePackage{zhlipsum}   % 中文乱数假文
+
+%% Commands
+% 自定义命令格式为：\newcommand{<命令>}[<参数个数>][<首参默认值>]{<具体的定义>}
+% add a single fig. Usage:\addfig[Width]{Path}{Caption}{Label}
+\newcommand{\addfig}[4][.8\textwidth]{%
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width = #1]{#2}
+		\caption{#3}\label{#4}
+	\end{figure}
+}
+\newcommand{\version}{Beta.v0.9.7}
+\newcommand{\cs}[1]{\texttt{\textbackslash#1}}
+\newcommand{\file}{\textsf}
+\newcommand{\pkg}{\textsf}
+\newcommand{\env}{\texttt}
+\newcommand{\opt}{\texttt}
+\newcommand{\marg}[1]{\texttt{\{$\langle$#1$\rangle$\}}}
+\newcommand{\oarg}[1]{\texttt{ [$\langle$#1$\rangle$] }}
+
+%% Maths
+\newcommand\Vector{\symbfit}
+\newcommand\Matrix{\symbfit}
+
+%% A sample of thesis cover
+\title{BUCTthesis 写作示例文档\par\version}
+\author{Miracle0565}
+\ctexset{today=big}

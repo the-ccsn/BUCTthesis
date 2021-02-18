@@ -1,0 +1,64 @@
+% !TeX encoding = UTF-8
+% 主文件--main.tex
+\documentclass[
+	type = master,	% bachelor | master | doctor
+	%submit,
+	%openany,			% openany | openright(default)
+]{buctthesis}
+
+% 在这个文件里载入其他对写作有帮助的宏包，或自定义命令等
+\usepackage{mycfg}
+
+\buctsetup{
+	%%%%% 各选项之间不要留有空行，并以西文逗号“,”分隔 %%%%%
+	% 论文的中文标题
+	ctitle		= {BUCTthesis写作示例文档},
+	% 论文的英文标题
+	etitle		= {HOW TO \TeX\ WITH BUCTthesis: AN EXAMPLE},
+	% 作者姓名
+	cauthor		= {张三},
+	% 中文、英文关键词，各关键词间以西文逗号“,”分隔
+	ckeywords   = {论文,\LaTeX{},模板},
+	ekeywords   = {thesis,\LaTeX{},template},
+}
+
+\begin{document}
+	% 生成伪封面。实际的论文封面由学校统一印制，正式写作可删去。
+	\maketitle
+	
+	% 从此以大写罗马数字编页码
+	\frontmatter
+	
+	% 诚信声明与版权页、中英文摘要
+	\include{chapter/frontmatter}
+	
+	% 生成中文目录、英文目录
+	\tableofcontents
+	\tableofcontentsEN
+	
+	% 符号说明表
+	\include{chapter/denotation}
+	
+	% 从此以阿拉伯数字编页码
+	\mainmatter
+	
+	% 正文各章节
+	\include{chapter/chapter1}
+	\include{chapter/chapter2}
+	\include{chapter/chapter3}
+	
+	% 参考文献。
+	\bibliographystyle{gbt7714-numerical}
+	\bibliography{thesisbib.bib}
+	
+	% 附录
+	\appendix
+	\include{chapter/app1}
+	
+	% 致谢
+	\include{chapter/acknowledgement}
+	
+	% 研究成果及发表的学术论文、作者和导师简介
+	\include{chapter/resume}
+	
+\end{document}

@@ -9,11 +9,10 @@ assignees: ''
 
 ## 编译环境
 
-操作系统： Windows 10 / macOS 10.14 / Overleaf
-
-TeX 发行版： TeX Live 2020 / MacTeX 2019 / MiKTeX 2.9.6753
-
-模板版本： v0.9.x
+- 操作系统： Windows 10 / macOS 10.14 / Overleaf
+- TeX 发行版： TeX Live 2020 / MacTeX 2019 / MiKTeX 2.9.6753
+- 模板类型：本科 / 硕士 / 博士
+- 模板版本： v0.9.x
 
 ## 问题描述
 
@@ -23,7 +22,7 @@ TeX 发行版： TeX Live 2020 / MacTeX 2019 / MiKTeX 2.9.6753
 
 ### 代码：
 ```TeX
-\documentclass[]{buctthesis}
+\documentclass[ ]{buctthesis}
 \begin{document}
 Here's the bug.
 \end{document}
