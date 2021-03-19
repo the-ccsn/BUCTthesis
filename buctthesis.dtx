@@ -75,9 +75,8 @@
 % 本模板为中文论文模板，暂不支持英语专业的论文写作。以下是完整论文的书序，其中划线部分为模板未完成的部分。
 % \begin{description}
 %    \item[本科] \without{开题报告} \footnote{格式未指定。}、\without{中期进展情况检查表} \footnote{由学校提供 Word，可转换为 PDF 文件插入。}、\without{论文封面} \footnote{学校统一印制，论文题目等信息需手写，可使用扫描件插入。}、诚信声明、任务书、摘要、目录、前言、正文、结论、参考文献、符号说明、致谢和附录；
-%    \item[研究生]\without{论文封面} \footnotemark[3]、版权页（独创性声明和授权书）、\without{学位论文数据集} \footnotemark[2]、中英文摘要、中英文目录、符号和缩略词说明、正文、参考文献、附录、致谢、作者攻读学位期间发表的学术论文及科研成果目录、作者和导师简介和\without{答辩委员会决议} \footnote{使用扫描件插入。}。
+%    \item[研究生] 论文封面、版权页（独创性声明和授权书）、\without{学位论文数据集} \footnotemark[2]、中英文摘要、中英文目录、符号和缩略词说明、正文、参考文献、附录、致谢、作者攻读学位期间发表的学术论文及科研成果目录、作者和导师简介和\without{答辩委员会决议} \footnote{使用扫描件插入。}。
 % \end{description}
-%
 %
 % \subsection{免责声明}
 % 请您注意，至本文档编译时，北京化工大学教务处仅提供《本科规范》和《研究生规范》而未对本模板做任何测试或授权。
@@ -127,6 +126,7 @@
 %         \file{buctthesis.dtx} & \textsc{DocStrip} 源文件\\\cmidrule(lr){1-2}
 %         \file{chapter/} & 论文各部分的源文件路径\\
 %         \file{code/} & 源代码的路径\\
+%         \file{cover/} & 论文封面的路径\\
 %         \file{figure/}  & 插图的路径\\\cmidrule(lr){1-2}
 %         \file{main.tex} & 主文件\\
 %         \file{main.pdf} & 示例文档\\
@@ -579,6 +579,44 @@
 %   \end{resume}
 % \end{latex}
 %
+% \subsection{封面}\label{subsec:cover}
+% 本小节将简单介绍研究生论文封面的代码与编译。
+%
+% 与本科模板不同的是，BUCTthesis 的硕博模板在 \file{cover} 文件夹中仿制了学校的封面。
+% 在该文件夹中的三个文件都与封面有关，编译时请确保它们位于同一路径之下。
+% \begin{enumerate}
+%    \item \file{cover.tex}：源文档。与 \cs{buctsetup} 类似，这里使用\cs{coversetup} 定义论文信息。
+% \begin{latex}
+%   \coversetup{
+%       % 学号，位于封面的右上角
+%       studentid = {2021010234},
+%       % 标题。封面的标题有两行，每一行控制在 13 个汉字长度以内
+%       titleA = {甲乙丙丁戊己庚辛壬癸一二三},
+%       titleB = {四五六七八九十甲乙丙丁戊己},
+%       % 作者
+%       author = {张三},
+%       % 专业
+%       major  = {计算机科学与技术},
+%       % 导师
+%       supervisor = {某某某教授},
+%       % 日期，不填为当日。请注意：务必使用形如“YYYY-MM-DD”的格式
+%       date = {2021-12-23},
+%   }
+% \end{latex}
+%
+% 至于编译，只需一遍 xelatex 即可，扩展名可省略。
+% \begin{shell}
+%   xelatex cover.tex
+% \end{shell}
+%    \item \file{BUCT-badge.pdf}：学校的校徽，用于作为图片插入。
+%    \item \file{buctcover.cls}：格式控制文件。类似 \file{buctthesis.cls}，亦可由 \file{buctthesis.ins} 和 \file{buctthesis.dtx} 生成：
+%     \begin{shell}
+%   xelatex buctthesis.ins
+%     \end{shell}
+% 请注意执行以上命令时会同时生成 \file{buctcover.cls} 和 \file{buctthesis.cls}，只有前者是用于控制封面的。
+%
+%
+% \end{enumerate}
 %
 %
 % \StopEventually{\PrintChanges\PrintIndex}
