@@ -21,8 +21,6 @@
 \askforoverwritefalse
 \keepsilent
 
-\usedir{tex/latex/buctthesis}
-
 \preamble
 
 This is a generated file.
@@ -45,8 +43,14 @@ of LaTeX version 1999/12/01 or later.
 \endpreamble
 
 \generate{
-    \file{buctthesis.cls}{\from{\jobname.dtx}{class}}
-	\file{manual.sty}{\from{\jobname.dtx}{manual}}
+    \usedir{tex/latex/buctthesis}
+    \file{buctthesis.cls}{\from{\jobname.dtx}{class} }
+	\file{manual.sty}    {\from{\jobname.dtx}{manual}}
+}
+
+\generate{
+    \usedir{tex/latex/buctthesis/cover}
+    \file{buctcover.cls}{\from{\jobname.dtx}{cover}}
 }
 
 \obeyspaces
@@ -57,6 +61,7 @@ of LaTeX version 1999/12/01 or later.
 \Msg{*                                                           *}
 \Msg{*     buctthesis.cls                                        *}
 \Msg{*         munual.sty                                        *}
+\Msg{*      buctcover.cls                                        *}
 \Msg{*                                                           *}
 \Msg{* To produce the documentation run the file buctthesis.dtx  *}
 \Msg{* through LaTeX.                                            *}
