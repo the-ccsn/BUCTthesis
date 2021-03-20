@@ -97,7 +97,7 @@
     \end{table}
     \vspace{26bp}
     \begin{minipage}[c][][c]{2.35cm}
-        \includegraphics[width = 2.35cm]{title/BUCT-badge.pdf}
+        \includegraphics[width = 2.35cm]{BUCT-badge.pdf}
     \end{minipage}
     \qquad
     \begin{minipage}[c][2.35cm][c]{9cm}

@@ -608,15 +608,26 @@
 % \begin{shell}
 %   xelatex cover.tex
 % \end{shell}
-%    \item \file{BUCT-badge.pdf}：学校的校徽，用于作为图片插入。
 %    \item \file{buctcover.cls}：格式控制文件。类似 \file{buctthesis.cls}，亦可由 \file{buctthesis.ins} 和 \file{buctthesis.dtx} 生成：
 %     \begin{shell}
 %   xelatex buctthesis.ins
 %     \end{shell}
 % 请注意执行以上命令时会同时生成 \file{buctcover.cls} 和 \file{buctthesis.cls}，只有前者是用于控制封面的。
-%
-%
 % \end{enumerate}
+% 
+% 除此之外，封面使用的方正系列字体未预装于一些操作系统上，
+% 可访问\href{https://www.foundertype.com}{方正字库官网}下载和安装，具体步骤从略。
+%
+% 所使用的字体清单：
+% \begin{enumerate}
+%    \item SimSun，宋体（特指中易宋体）
+%    \item SimHei，黑体（特指中易黑体）
+%    \item KaiTi，楷体（特指中易楷体）
+%    \item STXingkai，华文行楷
+%    \item FZDaBiaoSong-B06S，方正大标宋简体
+%    \item FZXiaoBiaoSong-B05S，方正小标宋简体
+% \end{enumerate}
+%
 %
 %
 % \StopEventually{\PrintChanges\PrintIndex}
