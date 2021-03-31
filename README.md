@@ -1,7 +1,29 @@
-# BUCTthesis: a LaTeX writting template for BUCT thesis.
+# BUCTthesis
 
 [![BUCTthesis](https://img.shields.io/badge/BUCTthesis-LaTeX-blue)](https://github.com/Miracle0565/BUCTthesis)
 [![GitHub license](https://img.shields.io/github/license/Miracle0565/BUCTthesis)](https://github.com/Miracle0565/BUCTthesis/blob/master/LICENSE)
+
+## BUCTthesis in a nutshell
+BUCTthesis is a LaTeX writting template package for Beijing University of Chemical Technology,
+supporting bachelor, master and doctor theses.
+
+You can [download](https://github.com/Miracle0565/BUCTthesis/releases) this package from GitHub Releases,
+and the latest released version is strongly recommended. As this package is mainly provided for
+Chinese users, the following of this file and the manual documents are written in Chinese only.
+
+This file may be distributed and/or modified under
+the conditions of the LaTeX Project Public License,
+either version 1.3c of this license or (at your option)
+any later version. The latest version of this license
+is in:
+
+http://www.latex-project.org/lppl.txt
+
+and version 1.3c or later is part of all distributions
+of LaTeX version 1999/12/01 or later.
+
+
+## BUCTthesis 是什么？
 
 本项目为北京化工大学学位论文的 LaTeX 模板，包括本科毕业设计（论文）与硕士、博士研究生学位论文。
 
@@ -57,4 +79,4 @@
 
 ## 开源许可
 
-本项目基于  [LaTeX Project Public License](http://www.latex-project.org/lppl.txt)（版本 1.3c 或更高）开源于 [GitHub](https://github.com/Miracle0565/BUCTthesis) 。同时为了方便国内用户，在 [Gitee](https://gitee.com/Miracle0565/BUCTthesis) 建有代码的镜像。
+本项目的代码部分基于  [LaTeX Project Public License](http://www.latex-project.org/lppl.txt)（版本 1.3c 或更高）开源于 [GitHub](https://github.com/Miracle0565/BUCTthesis) 。同时为了方便国内用户，在 [Gitee](https://gitee.com/Miracle0565/BUCTthesis) 建有代码的镜像。
