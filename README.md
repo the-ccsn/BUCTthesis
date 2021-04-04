@@ -25,7 +25,7 @@ of LaTeX version 1999/12/01 or later.
 
 ## BUCTthesis 是什么？
 
-本项目为北京化工大学学位论文的 LaTeX 模板，包括本科毕业设计（论文）与硕士、博士研究生学位论文。
+BUCTthesis （**B**eijing **U**niversity of **C**hemical **T**echnology LaTeX **Thesis** template）是北京化工大学学位论文的 LaTeX 模板，包括本科毕业设计（论文）与硕士、博士研究生学位论文。
 
 ## 快速使用
 
