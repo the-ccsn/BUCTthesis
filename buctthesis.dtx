@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2019-2020 by Miracle0565
+% Copyright (C) 2019-2021 by Miracle0565
 %
 %     https://github.com/Miracle0565/BUCTthesis
 % -------------------------------------------------------
@@ -20,7 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \iffalse
 %<*driver>
-\ProvidesFile{buctthesis.dtx}[2020/03/23 v1.1 BUCT Thesis Template]
+\ProvidesFile{buctthesis.dtx}[2021/03/28 v1.1 BUCT Thesis Template]
 \documentclass{ltxdoc}
 \usepackage{manual}
 \begin{document}
@@ -584,6 +584,8 @@
 %
 % 与本科模板不同的是，BUCTthesis 的硕博模板在 \file{cover} 文件夹中仿制了学校的封面。
 % 在该文件夹中的三个文件都与封面有关，编译时请确保它们位于同一路径之下。
+%
+% \emph{注意：这里的“仿制”仅是实现封面的效果，不能替代学校统一印制的封面。}
 % \begin{enumerate}
 %    \item \file{cover.tex}：源文档。与 \cs{buctsetup} 类似，这里使用\cs{coversetup} 定义论文信息。
 % \begin{latex}
@@ -638,7 +640,7 @@
 %    \begin{macrocode}
 %<class|cover>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<*class>
-\ProvidesClass{buctthesis}[2020/03/20 v1.1 BUCT Thesis Template]
+\ProvidesClass{buctthesis}[2021/03/28 v1.1 BUCT Thesis Template]
 %    \end{macrocode}
 %
 % 装载 \pkg{ifxetex} 宏包，并通过 \cs{RequireXeTeX} 命令检查编译命令。
@@ -2045,7 +2047,7 @@
 % 由于学校会统一印制封面，这里仅提供\emph{硕博论文封面}的一个参考实现。
 %    \begin{macrocode}
 %<*cover>
-\ProvidesClass{buctcover}[2020/03/20 Cover Maker for BUCTthesis]
+\ProvidesClass{buctcover}[2021/03/28 Cover Maker for BUCTthesis]
 \RequirePackage{ifxetex}
 \RequireXeTeX
 \RequirePackage{kvoptions}
@@ -2264,7 +2266,7 @@
 % \iffalse
 %    \begin{macrocode}
 %<*manual>
-\ProvidesPackage{manual}[2020/01/23 document style for BUCTthesis]
+\ProvidesPackage{manual}[2021/01/23 document style for BUCTthesis]
 \RequirePackage{hypdoc}
 \PassOptionsToPackage{AutoFakeSlant}{xeCJK}
 \RequirePackage[UTF8, heading, fontset = none, linespread = 1.2,]{ctex}
