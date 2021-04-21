@@ -1,6 +1,15 @@
-# Update List of BUCTthesis
+# Changelog of BUCTthesis
+在这里记录 BUCTthesis 中较为重要的改动。
 
-## v1.0 - 2021/01/23
+## v1.1 - 2021/03/29
+
+**本版本提交至CTAN**
+
+### Added
+
+- 增加论文封面，仅支持硕博
+
+## v1.0 - 2021/02/18
 
 ### Added
 
