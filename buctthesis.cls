@@ -26,7 +26,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{buctthesis}[2021/03/28 v1.1 BUCT Thesis Template]
+\ProvidesClass{buctthesis}[2021/04/24 v1.2 BUCT Thesis Template]
 \RequirePackage{ifxetex}
 \RequireXeTeX
 \RequirePackage{kvoptions}

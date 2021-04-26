@@ -26,7 +26,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{buctcover}[2021/03/28 Cover Maker for BUCTthesis]
+\ProvidesClass{buctcover}[2021/04/24 Cover Maker for BUCTthesis]
 \RequirePackage{ifxetex}
 \RequireXeTeX
 \RequirePackage{kvoptions}
@@ -67,14 +67,18 @@
     top = 2.1cm, bottom = 2.2cm, left = 2cm, right = 2cm,
     headheight = 0cm, footskip = 0cm
 ]{geometry}
-\RequirePackage{array,graphicx,hyperref}
+\RequirePackage{array,graphicx,calc,hyperref}
 \pagestyle{empty}
 \xeCJKsetup{EmboldenFactor=2.3}
+\setCJKmainfont{SimSun}[AutoFakeBold]
 \setCJKsansfont{SimHei}[AutoFakeBold]
 \newCJKfontfamily[xingkai]\xingkai{STXingkai}
 \newCJKfontfamily[zhkai]  \zhkai  {KaiTi} [AutoFakeBold]
 \newCJKfontfamily[xbsong] \xbsong {FZXiaoBiaoSong-B05S}
 \newCJKfontfamily[dbsong] \dbsong {FZDaBiaoSong-B06S}
+\newcommand\buct@title@ul[1]{%
+    \CJKunderline{\makebox[\widthof{\buct@titleA\enspace}][l]{#1}}
+}
 \newcommand\buct@format@date[1]{%
     \edef\buct@@date{\buct@date}%
     \def\buct@@process@date##1-##2-##3\@nil{%
@@ -121,15 +125,14 @@
         \begin{tabular}{
             >{\begin{CJKfilltwosides}[b]{4\ccwd}\sffamily\bfseries}r%
             <{\end{CJKfilltwosides}}%
-            @{}l%
-            @{}>{\zihao{3}\bfseries}l%
+            @{}>{\enspace\zihao{3}\bfseries}l%
             <{\vspace{.2em}}%
         }
-            题目     &：           & \CJKunderline{\makebox[13em][l]{\buct@titleA}}\\
-                    &\phantom{：} & \CJKunderline{\makebox[13em][l]{\buct@titleB}}\\
-            专业     &：           & \CJKunderline{\makebox[13em][l]{\buct@major}}\\
-            研究生   &：           & \CJKunderline{\makebox[13em][l]{\buct@author}}\\
-            指导教师 &：           & \CJKunderline{\makebox[13em][l]{\buct@supervisor}}\\
+            题目     & \buct@title@ul{\buct@titleA}\\
+                    &\buct@title@ul{\buct@titleB}\\
+            专业     & \buct@title@ul{\zihao{4}\buct@major}\\
+            研究生   & \buct@title@ul{\zihao{4}\buct@author}\\
+            指导教师 & \buct@title@ul{\zihao{4}\buct@supervisor}\\
         \end{tabular}
     \end{center}
     \vfill{%
