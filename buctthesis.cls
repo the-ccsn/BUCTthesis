@@ -140,7 +140,7 @@
 \fi
 \ifbuct@bachelor
     \newcommand{\buct@abs@titfont}{\zihao{3}\bfsong}
-    \newcommand{\buct@abs@infofont}{\zihao{5}\songti}
+    \newcommand{\buct@abs@infofont}{\zihao{5}\mdseries}
     \newcommand{\buct@abs@absfont}{\zihao{4}\songti}
     \newcommand{\buct@keywordsfont}{\zihao{4}\heiti\CJKfamily+{}}
     \newcommand{\buct@abs@titfonten}{\zihao{3}\bfseries}
@@ -390,43 +390,51 @@
     \newenvironment{cabstract}{%
         \cleardoublepage
         \buct@pdfmark{\buct@cabstract@title}{cabstract}
-        \centerline{\buct@abs@titfont\buct@ctitle}\vspace{22pt}%
-        \centerline{%
+        \begin{center}
+            \buct@abs@titfont\buct@ctitle
+            \vskip22pt
             \buct@abs@infofont\buct@cauthor\quad%
             \buct@class\quad\buct@studentid\quad%
             \buct@supervisor@title\buct@supervisor%
-        }\vspace{22pt}%
-        \centerline{\buct@abs@absfont\buct@cabstract@title}\vspace{22pt}%
-    }{\par\vspace{1em}\noindent\buct@keywordsfont\buct@ckeywords@title\buct@ckeywords}
+            \vskip22pt
+            \buct@abs@absfont\buct@cabstract@title
+        \end{center}\par\vspace{18pt}
+    }{\vskip1em\noindent\buct@keywordsfont\buct@ckeywords@title\buct@ckeywords}
 \else
     \newenvironment{cabstract}{%
         \cleardoublepage
         \buct@pdfmark{\buct@cabstract@title}{cabstract}\markboth{\buct@cabstract@title}{}
-        \centerline{\buct@abs@titfont\buct@ctitle}\vspace{24pt}%
-        \centerline{\buct@abs@absfont\buct@cabstract@title}\vspace{24pt}%
+        \begin{center}
+            \buct@abs@titfont\buct@ctitle
+            \vskip24pt
+            \buct@abs@absfont\buct@cabstract@title
+        \end{center}\par\vspace{12pt}
         \buct@abs@textfont
-    }{\par\vspace{24pt}%
+    }{\vskip24pt%
     \noindent\buct@keywords@titfont\buct@ckeywords@title\buct@keywords@font\buct@ckeywords}
 \fi
 \ifbuct@bachelor
     \newenvironment{eabstract}{%
         \cleardoublepage%
         \buct@pdfmark{\buct@eabstract@title}{abstracten}
-        \centerline{\buct@abs@titfonten{\buct@etitle}}\vspace{22pt}%
-        \centerline{\buct@abs@absfonten\buct@eabstract@title}\vspace{22pt}%
-    }{\par\vspace{1em}\noindent\buct@keywordsfonten \buct@ekeywords@title\buct@ekeywords}
+        \begin{center}
+            \buct@abs@titfonten\buct@etitle\vskip22pt
+            \buct@abs@absfonten\buct@eabstract@title
+        \end{center}
+        \par\vspace{22pt}
+    }{\vskip1em\noindent\buct@keywordsfonten \buct@ekeywords@title\buct@ekeywords}
 \else
     \newenvironment{eabstract}{%
         \cleardoublepage%
         \buct@pdfmark{\buct@eabstract@title}{eabstract}\markboth{\buct@eabstract@title}{}
-        {
-            \setlength{\leftskip}{3em plus 1em minus .5em}
-            \setlength{\rightskip}{3em plus 1em minus .5em}
-            \centerline{\buct@abs@titfonten\buct@etitle}\vspace{72pt}
-            \centerline{\buct@abs@absfonten\buct@eabstract@title}\vspace{48pt}
-        }
+            \begin{center}
+                \setlength{\leftskip}{3em plus 1em minus .5em}
+                \setlength{\rightskip}{3em plus 1em minus .5em}
+                \buct@abs@titfonten\buct@etitle\vskip76pt
+                \buct@abs@absfonten\buct@eabstract@title
+            \end{center}\par\vspace{40pt}
         \buct@abs@textfont
-    }{\par\vspace{48pt}%
+    }{\vskip48pt%
     \noindent\buct@keywords@titfonten\buct@ekeywords@title\buct@keywords@fonten\buct@ekeywords}
 \fi
 \setcounter{secnumdepth}{3}
