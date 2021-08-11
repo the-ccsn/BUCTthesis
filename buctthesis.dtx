@@ -20,7 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \iffalse
 %<*driver>
-\ProvidesFile{buctthesis.dtx}[2021/04/24 v1.2 BUCT Thesis Template]
+\ProvidesFile{buctthesis.dtx}[2021/08/10 v1.2 BUCT Thesis Template]
 \documentclass{ltxdoc}
 \usepackage{manual}
 \begin{document}
@@ -197,9 +197,10 @@
 % 主文件 \file{main.tex} 以
 % \begin{latex}
 %   \documentclass[
-%       type = doctor,    % bachelor | master | doctor
+%       type = doctor,          % bachelor | master | doctor
+%       fontset = windows,      % fandol | windows | ...
 %       submit,
-%       openany,          % openany | openright(default)
+%       openany,                % openany | openright(default)
 %   ]{buctthesis}
 % \end{latex}
 % 命令载入文档类，从而控制全文格式。
@@ -216,6 +217,26 @@
 %   % 本科论文
 %   \documentclass[type = bachelor,]{buctthesis}
 % \end{latex}
+%
+% \DescribeOpt{fontset = }
+% 该选项会传递至 \pkg{ctex} 宏集，从而指定全文的字体。模板的设置如表~\ref{tab:fontset}~所示。
+% 
+% 其中选项 \opt{fandol} 或使用 \opt{\meta{others}} 选项 \footnote{参见\pkg{ctex}宏集第 4.3 小节。}是为了一些不方便安装字体的系统或平台（如 Overleaf）所采取的\emph{临时解决方案}。
+% 这些字体与中易系列字体有少许差别，且时有缺字现象。
+% 因此，强烈建议在最后提交论文前，在合适的环境下使用 \opt{fontset = windows} 进行编译。
+%
+% \begin{table}[ht]
+%   \centering
+%   \caption{模板的字体配置}\label{tab:fontset}
+%     \begin{tabular}{llll}
+%         \toprule
+%         \opt{fontset =}   & \opt{windows} & \opt{fandol} & \opt{\meta{others}}\\
+%         \midrule
+%         中文      & 中易字库 （宋、黑开启伪粗体）  & Fandol 字库 & / \\
+%         西文      & Times New Roman             & Times New Roman & Times New Roman \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
 %
 % \DescribeOpt{submit}
 % 是否为提交版本。如果启用则会将文章超链接和代码块的文字颜色全部设置为黑色，适合论文最终提交与付梓。
@@ -871,17 +892,37 @@
 %    \end{macrocode}
 %
 % \subsection{字体配置}
-% 以下仅对 Windows 系统下做了适配。
-%
-% 开启“伪粗体”和“伪斜体”，并设置的相关系数。
+% \begin{macro}{\buct@fontsetval}
+% 首先来设置中文的字体。在 \pkg{ctex} 宏集中的 \cs{g\_\_ctex\_fontset\_tl} 存储着选项 \opt{fontset} 的值。
+% 模板尽可能避免使用 \LaTeX 3 语法，所以先用一个 \cs{buct@fontsetval} 来保存它。
 %    \begin{macrocode}
-\xeCJKsetup{EmboldenFactor=2.2,SlantFactor=0.2}
-\setCJKmainfont{SimSun}[AutoFakeBold,AutoFakeSlant]
-\setCJKsansfont{SimHei}[AutoFakeBold]
+    \newcommand\buct@fontsetval{\csname g__ctex_fontset_tl\endcsname}
+%    \end{macrocode}
+% \end{macro}
+%
+% 根据\cs{buct@fontsetval} 的值，分别设置不同的字体。
+%
+%    \begin{macrocode}
+\ifthenelse{\equal{\buct@fontsetval}{windows}}{
+%    \end{macrocode}
+%
+% 在 Windows 系统下，需要对中易宋体、中易黑体开启“伪粗”和“伪斜”，并设置相关系数。
+%    \begin{macrocode}
+    \xeCJKsetup{EmboldenFactor=2.2,SlantFactor=0.2}
+    \setCJKmainfont{SimSun}[AutoFakeBold,AutoFakeSlant]
+    \setCJKsansfont{SimHei}[AutoFakeBold]
+}
+%    \end{macrocode}
+% 而在非Windows 系统下，则由 \pkg{ctex} 宏集自动检测环境并保留其默认设置，
+% 同时警告所使用的字体与《规范》（即默认设置）存在不同。
+%    \begin{macrocode}
+{
+    \ClassWarning{buctthesis}{The fonts differ to the default.}
+}
 %    \end{macrocode}
 %
 % \begin{macro}{\bfsong}
-% 设置“伪粗体”后，使用 \cs{bfseries}将产生加粗的宋体，
+% 因设置中易宋体开启“伪粗体”，使用 \cs{bfseries}将产生加粗的效果，
 % 这与一般的 \LaTeX\ 常识是相悖的。
 % 因此模板提供了更明确的命令 \cs{bfsong}。
 %    \begin{macrocode}
@@ -890,7 +931,7 @@
 % \end{macro}
 % \begin{macro}{\bfhei}
 %
-% 对于黑体同理。此外要注意模板将预设的无衬线字体（微软雅黑）改为了黑体。
+% 对于黑体同理。此外要注意模板将Windows下预设的无衬线字体（微软雅黑）改为了黑体。
 %    \begin{macrocode}
 \newcommand{\bfhei}{\sffamily\bfseries}
 %    \end{macrocode}

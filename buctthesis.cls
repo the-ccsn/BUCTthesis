@@ -109,9 +109,15 @@
     \RequirePackage[pagewise]{lineno}
 \fi
 \RequirePackage{hyperref}
-\xeCJKsetup{EmboldenFactor=2.2,SlantFactor=0.2}
-\setCJKmainfont{SimSun}[AutoFakeBold,AutoFakeSlant]
-\setCJKsansfont{SimHei}[AutoFakeBold]
+    \newcommand\buct@fontsetval{\csname g__ctex_fontset_tl\endcsname}
+\ifthenelse{\equal{\buct@fontsetval}{windows}}{
+    \xeCJKsetup{EmboldenFactor=2.2,SlantFactor=0.2}
+    \setCJKmainfont{SimSun}[AutoFakeBold,AutoFakeSlant]
+    \setCJKsansfont{SimHei}[AutoFakeBold]
+}
+{
+    \ClassWarning{buctthesis}{The fonts differ to the default.}
+}
 \newcommand{\bfsong}{\bfseries}
 \newcommand{\bfhei}{\sffamily\bfseries}
 \setmainfont{Times New Roman}
