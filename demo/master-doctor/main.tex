@@ -1,9 +1,10 @@
 % !TeX encoding = UTF-8
 % 主文件--main.tex
 \documentclass[
-	type = master,	% bachelor | master | doctor
+	type = master,		% bachelor | master | doctor
 	%submit,
 	%openany,			% openany | openright(default)
+	fontset = fandol,	% fandol | windows (normal)
 ]{buctthesis}
 
 % 在这个文件里载入其他对写作有帮助的宏包，或自定义命令等
@@ -23,8 +24,8 @@
 }
 
 \begin{document}
-	% 生成伪封面。实际的论文封面由学校统一印制，正式写作可删去。
-	\maketitle
+	% 插入封面，来自于 cover 文件夹下。封面的制作请看说明文档；参数 [pages=-] 表示插入所有页面
+	%\includepdf[pages=-]{cover/buctcover.pdf}
 	
 	% 从此以大写罗马数字编页码
 	\frontmatter

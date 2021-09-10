@@ -20,7 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \iffalse
 %<*driver>
-\ProvidesFile{buctthesis.dtx}[2021/08/10 v1.2 BUCT Thesis Template]
+\ProvidesFile{buctthesis.dtx}[2021/09/10 v1.2 BUCT Thesis Template]
 \documentclass{ltxdoc}
 \usepackage{manual}
 \begin{document}
@@ -222,7 +222,7 @@
 % 该选项会传递至 \pkg{ctex} 宏集，从而指定全文的字体。模板的设置如表~\ref{tab:fontset}~所示。
 % 
 % 其中选项 \opt{fandol} 或使用 \opt{\meta{others}} 选项 \footnote{参见\pkg{ctex}宏集第 4.3 小节。}是为了一些不方便安装字体的系统或平台（如 Overleaf）所采取的\emph{临时解决方案}。
-% 这些字体与中易系列字体有少许差别，且时有缺字现象。
+% 这些字体与中易系列字体有少许差别，且偶尔有缺字现象。
 % 因此，强烈建议在最后提交论文前，在合适的环境下使用 \opt{fontset = windows} 进行编译。
 %
 % \begin{table}[ht]
@@ -662,7 +662,7 @@
 %    \begin{macrocode}
 %<class|cover>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<*class>
-\ProvidesClass{buctthesis}[2021/04/24 v1.2 BUCT Thesis Template]
+\ProvidesClass{buctthesis}[2021/09/10 v1.2 BUCT Thesis Template]
 %    \end{macrocode}
 %
 % 装载 \pkg{ifxetex} 宏包，并通过 \cs{RequireXeTeX} 命令检查编译命令。
@@ -1575,7 +1575,7 @@
     \newcommand{\buct@listof}[2]{%
         \xpatchcmd{\@dottedtocline}{\hbox{.}}{\hbox{$\cdot$}}{}{}
         \renewcommand{\@dotsep}{1.7}%
-            \@ifundefined{ext@#1}{\float@error{#1}}{%
+        \@ifundefined{ext@#1}{\float@error{#1}}{%
             \@namedef{l@#1}{\@dottedtocline{1}{0em}{2em}}
             \float@listhead{\buct@toc@tocfont{}#2}%
             \begingroup\setlength{\parskip}{\z@}%

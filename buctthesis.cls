@@ -26,7 +26,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{buctthesis}[2021/04/24 v1.2 BUCT Thesis Template]
+\ProvidesClass{buctthesis}[2021/09/10 v1.2 BUCT Thesis Template]
 \RequirePackage{ifxetex}
 \RequireXeTeX
 \RequirePackage{kvoptions}
@@ -526,7 +526,7 @@
     \newcommand{\buct@listof}[2]{%
         \xpatchcmd{\@dottedtocline}{\hbox{.}}{\hbox{$\cdot$}}{}{}
         \renewcommand{\@dotsep}{1.7}%
-            \@ifundefined{ext@#1}{\float@error{#1}}{%
+        \@ifundefined{ext@#1}{\float@error{#1}}{%
             \@namedef{l@#1}{\@dottedtocline{1}{0em}{2em}}
             \float@listhead{\buct@toc@tocfont{}#2}%
             \begingroup\setlength{\parskip}{\z@}%
