@@ -20,7 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \iffalse
 %<*driver>
-\ProvidesFile{buctthesis.dtx}[2021/09/10 v1.2 BUCT Thesis Template]
+\ProvidesFile{buctthesis.dtx}[2022/03/04 v1.3 BUCT Thesis Template]
 \documentclass{ltxdoc}
 \usepackage{manual}
 \begin{document}
@@ -59,10 +59,11 @@
 %
 % \title{\textsf{BUCTthesis}：北京化工大学学位论文模板}
 % \author{Miracle0565\\ \texttt{https://github.com/Miracle0565}}
-% \date{\filedate}
+% \date{\fileversion （\filedate）}
 %
+% \newgeometry{hcentering}
 % \maketitle
-% \tableofcontents\clearpage
+% \tableofcontents\restoregeometry\clearpage
 %
 % \section{欢迎！}
 % BUCTthesis是北京化工大学本科与硕士、博士研究生毕业论文的 \LaTeX\ 写作模板，版本号~\fileversion。
@@ -107,9 +108,13 @@
 %
 % \section{开始使用}\label{sec:start}
 % \subsection{准备工作}
-% 开始之前，您需要安装一个合适的 \TeX\ 发行版，以及需要一些必要的 \TeX\ 技能。
+% 开始之前，您需要选择一个合适的 \TeX\ 发行版，以及需要一些必要的 \TeX\ 技能。
 % \begin{enumerate}
-%     \item  \TeX\ 发行版：建议完整安装 \TeX\ Live 2020 或更新版本。模板\emph{不支持} \CTeX\ 套装。安装 \TeX 发行版的详细步骤可参考\href{https://github.com/OsbertWang/install-latex-guide-zh-cn}{《一份简短的关于 \LaTeX 安装的介绍》}。此外，该文档简要地介绍了几款常见的文本编辑器，可根据喜好自行选择。
+%     \item  \TeX\ 发行版：
+%     \begin{description}
+%         \item[本地编译] 建议完整安装 \TeX\ Live 2020 或更新版本。模板\emph{不支持} \CTeX\ 套装。安装 \TeX 发行版的详细步骤可参考\href{https://github.com/OsbertWang/install-latex-guide-zh-cn}{《一份简短的关于 \LaTeX 安装的介绍》}。此外，该文档简要地介绍了几款常见的文本编辑器，可根据喜好自行选择。
+%         \item[在线编译] 推荐 \href{https://www.overleaf.com/}{Overleaf}，它提供了 Ubuntu 系统下的 \TeX\ Live，目前为 2021 版。免费版本足以应对模板的正常编译，至于完整的文档历史和协作编辑等功能则需付费订阅。
+%     \end{description}
 %     \item \TeX\ 技能：本文档不是一份 \LaTeX\ 零基础教程，使用本模板需要对 \LaTeX\ 和参考文献管理工具 \BibTeX 有一定的熟练度。若您是新手，我们建议您先阅读一些入门文档，如\href{http://mirror.ctan.org/info/lshort/chinese/lshort-zh-cn.pdf}{《一份不太简短的 \LaTeXe 介绍》}。
 % \end{enumerate}
 %
@@ -186,7 +191,7 @@
 %     sOmetHInG GoEs wRoNg.
 %   \end{document}
 %       \end{latex}
-%    \item 如果有必要的话可以将 \file{.log} 文件通过 \url{https://paste.ubuntu.com} 一并提交。
+%    \item 如果有必要的话可以将 \file{.log} 文件通过 \href{https://pastebin.com/}{Pastebin} 一并提交。
 % \end{enumerate}
 %
 % \section{使用说明}\label{sec:usage}
@@ -244,8 +249,8 @@
 %
 % \DescribeOpt{openright}
 % \DescribeOpt{openany}
-% 对于书籍而言，一般章都只出现在右边的页面（奇数页），之前不足的页面用空白补足。
-% 这也是打开模板 \opt{openright} 选项的结果，这会在适当处插入一完全空白页。
+% 对于书籍而言，一般章标题都只出现在右边的页面（奇数页），之前不足的页面用空白补足。
+% 这也是打开模板 \opt{openright} 选项的结果：将会在适当处插入一完全空白页。
 % 而 \opt{openany} 则允许在任意页开启新的一章。
 %
 % 其它选项：多余的选项将传递给 \pkg{ctexbook} 文档类，如 \opt{draft} 将关闭插图和部分宏包的渲染，从而加快编译速度。
@@ -316,7 +321,7 @@
 %    \oarg{文件路径}
 % \end{syntax}
 %
-% 直接使用 \cs{makedeclare} 会根据所选 \opt{type} 生成对应内容。
+% 直接使用而不带任何参数的 \cs{makedeclare} 会根据所选 \opt{type} 生成对应内容。
 %
 % 此外，考虑到有时需要插入扫描页，所以该命令可跟一个可选参数，如：
 % \begin{latex}
@@ -642,11 +647,11 @@
 % 除此之外，封面使用的方正系列字体未预装于一些操作系统上，
 % 可访问\href{https://www.foundertype.com}{方正字库官网}下载和安装，具体步骤从略。
 %
-% 所使用的字体清单：
+% 封面所使用的中文字体清单：
 % \begin{enumerate}
-%    \item SimSun，宋体（特指中易宋体）
-%    \item SimHei，黑体（特指中易黑体）
-%    \item KaiTi，楷体（特指中易楷体）
+%    \item SimSun，中易宋体
+%    \item SimHei，中易黑体
+%    \item KaiTi，中易楷体
 %    \item STXingkai，华文行楷
 %    \item FZDaBiaoSong-B06S，方正大标宋简体
 %    \item FZXiaoBiaoSong-B05S，方正小标宋简体
@@ -827,7 +832,7 @@
 %
 % 关于化学式排版的宏包有很多，但这里载入 \pkg{mhchem}。
 % 它容易上手，偏向于无机和分析化学（方程）式的排版。
-% 至于有机化学结构式等，使用图片插入可能是一个更好的选择；若时间充裕可学习如 \pkg{chemfig} 等宏包。
+% 至于有机化学的结构式等，使用图片插入可能是一个更好的选择；若时间充裕可学习如 \pkg{chemfig} 等宏包。
 %    \begin{macrocode}
 \RequirePackage[version = 4]{mhchem}
 %    \end{macrocode}
@@ -896,7 +901,7 @@
 % 首先来设置中文的字体。在 \pkg{ctex} 宏集中的 \cs{g\_\_ctex\_fontset\_tl} 存储着选项 \opt{fontset} 的值。
 % 模板尽可能避免使用 \LaTeX 3 语法，所以先用一个 \cs{buct@fontsetval} 来保存它。
 %    \begin{macrocode}
-    \newcommand\buct@fontsetval{\csname g__ctex_fontset_tl\endcsname}
+\newcommand\buct@fontsetval{\csname g__ctex_fontset_tl\endcsname}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -958,6 +963,11 @@
 }{}
 %    \end{macrocode}
 %
+%
+% 指定 Unicode 中带圈数字 \symbol{"2460}--\symbol{"2469} 使用中文字体。
+%    \begin{macrocode}
+\xeCJKDeclareCharClass{CJK}{"2460->"2469}
+%    \end{macrocode}
 % 页眉与页脚的字体。
 %    \begin{macrocode}
 \newcommand{\buct@headfont}{\zihao{-5}\songti}
@@ -1790,6 +1800,7 @@
 %    \end{macrocode}
 %
 % \subsubsection{浮动体}
+% \begin{environment}{dfigure}
 % 本科：
 % 使用 \pkg{float} 宏包新定义浮动体环境 \env{dfigure}，用于排版设计图纸。
 % 设计图纸与普通插图的区别在于：
@@ -1799,12 +1810,17 @@
 %     \item 仅设计图纸编入目录，且此目录独立于主目录。
 % \end{itemize}
 %
-% 硕博：
-% 使用 \pkg{bicaption} 宏包设置双语标题，其中第二语言为英语。
 %    \begin{macrocode}
 \ifbuct@bachelor
     \newfloat{dfigure}{htbp}{lodf}[chapter]
     \floatname{dfigure}{\buct@dfigurename}
+%    \end{macrocode}
+% \end{environment}
+%
+% 硕博：
+% 使用 \pkg{bicaption} 宏包设置双语标题，其中第二语言为英语。
+%
+%    \begin{macrocode}
 \else
     \DeclareCaptionOption{english}[]{
         \renewcommand\figurename{\buct@bifigure@name}
@@ -1828,8 +1844,8 @@
 % 在“符号说明表”中我们嵌套了 \env{longtable} 环境，但其中的字号仍应为小四号。
 % 因此这里需要保留原先的定义。
 %    \begin{macrocode}
-    \let\oldlongtable=\longtable
-    \let\endoldlongtable=\endlongtable
+    \let\oldlongtable\longtable
+    \let\endoldlongtable\endlongtable
 \ifbuct@bachelor\relax\else
     \def\longtable{\zihao{5}\oldlongtable}
     \AtEndEnvironment{longtable}{\normalsize}
@@ -2323,7 +2339,7 @@
 % \iffalse
 %    \begin{macrocode}
 %<*manual>
-\ProvidesPackage{manual}[2021/01/23 document style for BUCTthesis]
+\ProvidesPackage{manual}[2021/09/25 document style for BUCTthesis]
 \RequirePackage{hypdoc}
 \PassOptionsToPackage{AutoFakeSlant}{xeCJK}
 \RequirePackage[UTF8, heading, fontset = none, linespread = 1.2,]{ctex}
@@ -2345,6 +2361,7 @@
     a4paper,
     hmargin={40mm,20mm},vmargin={25mm,15mm},footskip=7mm,
 ]{geometry}
+
 \ctexset{
     fontset,
     abstractname   = 简介,
@@ -2354,10 +2371,14 @@
         name   = {第,节},
     },
 }
+\xeCJKDeclareCharClass{CJK}{"2460->"2469}
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{3}
-\setmainfont{Libertinus Serif}
-\setmathfont{LibertinusMath-Regular.otf}
+\setmainfont{TeX Gyre Pagella}
+\setmonofont[
+    HyphenChar = None ,
+    UprightFont=* Light, BoldFont=* Bold,
+    SlantedFont=* Light Oblique]{CMU Typewriter Text}
 \captionsetup{strut=off, labelsep=quad, labelfont+=bf}
 \lstdefinestyle{base}{
     aboveskip        = 0 pt,
@@ -2454,7 +2475,7 @@
     \ctexset{section/numbering=false}%
 }
 \hypersetup{
-    pdftitle  = {BUCTthesis: 北京化工大学学位论文模板},
+    pdftitle  = {BUCTthesis：北京化工大学学位论文模板},
     pdfauthor = {Miracle0565},
 }
 \CodelineIndex
