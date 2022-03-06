@@ -8,7 +8,7 @@
 %% 
 %% This is a generated file.
 %% 
-%% Copyright (C) 2019-2021 by Miracle0565
+%% Copyright (C) 2019-2022 by Miracle0565
 %% 
 %%     https://github.com/Miracle0565/BUCTthesis
 %% 
@@ -109,7 +109,7 @@
     \RequirePackage[pagewise]{lineno}
 \fi
 \RequirePackage{hyperref}
-    \newcommand\buct@fontsetval{\csname g__ctex_fontset_tl\endcsname}
+\newcommand\buct@fontsetval{\csname g__ctex_fontset_tl\endcsname}
 \ifthenelse{\equal{\buct@fontsetval}{windows}}{
     \xeCJKsetup{EmboldenFactor=2.2,SlantFactor=0.2}
     \setCJKmainfont{SimSun}[AutoFakeBold,AutoFakeSlant]
@@ -133,6 +133,7 @@
         }
     ]{LibertinusMath-Regular.otf}
 }{}
+\xeCJKDeclareCharClass{CJK}{"2460->"2469}
 \newcommand{\buct@headfont}{\zihao{-5}\songti}
 \newcommand{\buct@footfont}{\zihao{-5}\songti}
 \ifbuct@bachelor
@@ -681,8 +682,8 @@
     \AtBeginEnvironment{tabular}{\buct@floatfont}
     \AtBeginEnvironment{tabularx}{\buct@floatfont}
 \fi
-    \let\oldlongtable=\longtable
-    \let\endoldlongtable=\endlongtable
+    \let\oldlongtable\longtable
+    \let\endoldlongtable\endlongtable
 \ifbuct@bachelor\relax\else
     \def\longtable{\zihao{5}\oldlongtable}
     \AtEndEnvironment{longtable}{\normalsize}

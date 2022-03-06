@@ -2,11 +2,9 @@
 \chapter{绪论}
 \section{字体}
 \subsection{字体配置}
+模板配置了两种字库，以 \opt{fontset = windows} 为例：
 \begin{enumerate}
-	\item 中文：主字体（衬线字体）为宋体，无衬线字体族为黑体，%
-	\footnote{这里指中易宋体（SimSun）和中易黑体（SimHei），二者均为 Windows 系统的预装字体。
-	对于不方便安装该字体的系统，可定位至 \file{buctthesis.cls}
-	文件中的 \cs{setCJKmainfont}\{SimSun\} 处，将 SimSun 替换为合适的衬线字体；无衬线字体同理。}
+	\item 中文：主字体（衬线字体）为中易宋体，无衬线字体族为中易黑体，%
 	且二者均可加粗为对应的伪粗体；《规范》中未规定的楷体和仿宋均为 \pkg{ctex} 宏集的预设，为避免格式审查问题，应当减少使用；
 	\item 西文：除英文摘要的关键词使用中易黑体、除公式中的西文（数字、字母等）使用特殊字体，其它一律使用 Times New Roman；
 	\item 公式：模板会根据实际字体安装情况，选择 $LibertinusMath$ 字体或使用 \LaTeX\ 的默认字体。
@@ -128,7 +126,7 @@
 			\file{thesisbib.bib}  & \BibTeX{}参考文献数据库\\
 			\file{mycfg.sty}      & 自定义配置文件\\
 			\file{README.md}      & 项目自述文件\\
-			\file{buctthesis.pdf} & 写作指南，即本文\\
+			\file{buctthesis.pdf} & 写作指南\\
 			\bottomrule
 		\end{tabular}
 \end{table}
@@ -191,11 +189,11 @@
 \begin{longtable}[c]{*{5}{l}r}
 	\caption{带有塑化剂的PEO-基聚合物电解质举例}\label{tab:longtab}\\
 	\toprule
-	\textbf{Entry} & \textbf{聚合物基体} & \textbf{锂盐} & \textbf{塑化剂} & \textbf{$T$ (\si{\degreeCelsius})} & \textbf{离子电导率 (\si{S.cm^{-1}})}\\ \midrule
+	\textbf{条目} & \textbf{聚合物基体} & \textbf{锂盐} & \textbf{塑化剂} & \textbf{$T$ (\si{\degreeCelsius})} & \textbf{离子电导率 (\si{S.cm^{-1}})}\\ \midrule
 	\endfirsthead
 	\multicolumn{6}{c}{\small 续表 \thetable\quad 带有塑化剂的PEO-基聚合物电解质举例} \\
 	\toprule
-	\textbf{Entry} & \textbf{聚合物基体} & \textbf{锂盐} & \textbf{塑化剂} & \textbf{$T$ (\si{\degreeCelsius})} & \textbf{离子电导率 (\si{S.cm^{-1}})}\\ \midrule
+	\textbf{条目} & \textbf{聚合物基体} & \textbf{锂盐} & \textbf{塑化剂} & \textbf{$T$ (\si{\degreeCelsius})} & \textbf{离子电导率 (\si{S.cm^{-1}})}\\ \midrule
 	\endhead
 	\bottomrule
 	\endfoot\endlastfoot

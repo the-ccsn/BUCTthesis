@@ -4,7 +4,8 @@
 
 %% Packages
 \RequirePackage{bxtexlogo}  % 生成错落有致的如 LaTeX 的宏包
-\RequirePackage{zhlipsum}   % 中文乱数假文
+\RequirePackage{zhlipsum}   % 中文乱数假文，用于填充文本
+\RequirePackage{lipsum}	% 英文乱数假文，用于填充文本
 
 %% Commands
 % 自定义命令格式为：\newcommand{<命令>}[<参数个数>][<首参默认值>]{<具体的定义>}
@@ -16,7 +17,7 @@
 		\caption{#3}\label{#4}
 	\end{figure}
 }
-\newcommand{\version}{v1.2}
+\newcommand{\version}{v1.3}
 \newcommand{\cs}[1]{\texttt{\textbackslash#1}}
 \newcommand{\file}{\textsf}
 \newcommand{\pkg}{\textsf}
