@@ -8,7 +8,7 @@
 %% 
 %% This is a generated file.
 %% 
-%% Copyright (C) 2019-2021 by Miracle0565
+%% Copyright (C) 2019-2022 by Miracle0565
 %% 
 %%     https://github.com/Miracle0565/BUCTthesis
 %% 
@@ -26,7 +26,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{buctcover}[2021/04/24 Cover Maker for BUCTthesis]
+\ProvidesClass{buctcover}[2022/05/14 Cover Maker for BUCTthesis]
 \RequirePackage{ifxetex}
 \RequireXeTeX
 \RequirePackage{kvoptions}
@@ -43,22 +43,19 @@
 \ProcessKeyvalOptions*
 \PassOptionsToPackage{quiet}{xeCJK}
 \LoadClass[zihao=-4]{ctexbook}
-\ifbuct@bachelor%
-    \ClassError{buctcover}{%
-        type `bachelor' is unavailable. \MessageBreak%
-        type = [ master | doctor ]%
-    }{}\else
+\ifbuct@bachelor\relax\else
     \ifbuct@master\relax\else
         \ifbuct@doctor\relax\else
             \ClassError{buctthesis}{%
                 Specified thesis type is obligatory: \MessageBreak%
-                type = [ master | doctor ]%
+                type = [ bachelor | master | doctor ]%
             }{}
 \fi\fi\fi
 \newcommand{\coversetup}[1]{\kvsetkeys{buct}{#1}}
+\DeclareStringOption[班级未定义]{class}
 \DeclareStringOption[学号未定义]{studentid}
 \DeclareStringOption[题目首行未定义]{titleA}
-\DeclareStringOption[题目次行未定义]{titleB}
+\DeclareStringOption{titleB}
 \DeclareStringOption[专业未定义]{major}
 \DeclareStringOption[作者未定义]{author}
 \DeclareStringOption[导师未定义]{supervisor}
@@ -67,7 +64,9 @@
     top = 2.1cm, bottom = 2.2cm, left = 2cm, right = 2cm,
     headheight = 0cm, footskip = 0cm
 ]{geometry}
-\RequirePackage{array,graphicx,calc,hyperref}
+\RequirePackage{xeCJKfntef}
+\RequirePackage{array,graphicx,calc,tikz,xifthen,hyperref}
+\RequirePackage[absolute,overlay]{textpos}
 \pagestyle{empty}
 \xeCJKsetup{EmboldenFactor=2.3}
 \setCJKmainfont{SimSun}[AutoFakeBold]
@@ -76,8 +75,12 @@
 \newCJKfontfamily[zhkai]  \zhkai  {KaiTi} [AutoFakeBold]
 \newCJKfontfamily[xbsong] \xbsong {FZXiaoBiaoSong-B05S}
 \newCJKfontfamily[dbsong] \dbsong {FZDaBiaoSong-B06S}
+\setmainfont{Times New Roman}
 \newcommand\buct@title@ul[1]{%
     \CJKunderline{\makebox[\widthof{\buct@titleA\enspace}][l]{#1}}
+}
+\newcommand\buct@major@ul[1]{%
+    \CJKunderline{\makebox[\widthof{\buct@major\quad}][l]{#1}}
 }
 \newcommand\buct@format@date[1]{%
     \edef\buct@@date{\buct@date}%
@@ -87,69 +90,140 @@
     \expandafter\buct@@process@date\buct@@date\@nil
 }
 \newcommand\@zhdate[3]{%
-    \Large\bfseries\zhkai\ziju{.1}%
-    日\hspace{1.5\ccwd}期：\zhdigits{#1}年\zhnumber{#2}月\zhnumber{#3}日%
+    \bfseries\zhkai
+    \ifbuct@bachelor
+        \zihao{4}
+        #1年\makebox[1.5em]{#2}月\makebox[1.5em]{#3}日
+    \else
+        \Large\ziju{.1}%
+        日\hspace{1.5\ccwd}期：\zhdigits{#1}年\zhnumber{#2}月\zhnumber{#3}日%
+    \fi
 }
 \newcommand{\buct@makecover}{%
     \begin{table}[h]
-        \renewcommand{\arraystretch}{1.3}
-        \raggedleft\large
+        \raggedleft
+        \ifbuct@bachelor
+            \songti\zihao{5}
+        \else
+            \renewcommand{\arraystretch}{1.3}\large
+        \fi
         \begin{tabular}{l@{}l}
-            \xbsong 单位代码 & ：\CJKfamily+{zhsong}\mbox{10010}\\
-            \xbsong 学\hspace{2\ccwd}号 & ：\CJKfamily+{zhsong}\mbox{\buct@studentid}\\
+            \ifbuct@bachelor%
+                班\hspace{2\ccwd}级&：\CJKfamily+{zhsong}\buct@class\hspace*{2\ccwd}\\
+                学\hspace{2\ccwd}号&：\CJKfamily+{zhsong}\buct@studentid\hspace*{2\ccwd}\\
+            \else%
+                \xbsong 单位代码 & ：\CJKfamily+{zhsong}\mbox{10010}\\
+                \xbsong 学\hspace{2\ccwd}号 & ：\CJKfamily+{zhsong}\mbox{\buct@studentid}\\
+            \fi
         \end{tabular}
     \end{table}
-    \vspace{26bp}
+    \ifbuct@bachelor\vspace{3bp}\else\vspace{26bp}\fi
     \begin{minipage}[c][][c]{2.35cm}
         \includegraphics[width = 2.35cm]{BUCT-badge.pdf}
     \end{minipage}
     \qquad
     \begin{minipage}[c][2.35cm][c]{9cm}
-        \ziju{-0.02}\xingkai\zihao{0}{北京化工大学}
+        \xingkai
+        \ifbuct@bachelor
+            \ziju{0.1}\hspace*{0.8\ccwd}\zihao{-0}
+        \else
+            \ziju{-0.02}\zihao{0}
+        \fi
+        {北京化工大学}
     \end{minipage}
-    \vspace{18bp}
+    \ifbuct@bachelor\vspace{12bp}\else\vspace{18bp}\fi
     \begin{center}
-        % \ziju{-0.05}
-        {\dbsong\fontsize{38bp}{60bp}\selectfont
-        \ifbuct@master{硕}\else{博}\fi{}士研究生学位论文}
-    \end{center}
-        \vspace{76bp}
-    \begin{center}
-        \fontsize{20}{36}\selectfont
-        \xeCJKsetup{
-            underline = {
-                skip      = false,
-                thickness = 1.2pt,
+        \ifbuct@bachelor
+            \ziju{0.15}\xbsong\zihao{-0}\CJKfamily+{}{%
+            \punctstyle{banjiao}毕业设计（论文）% (论文)
             }
-        }
-        \begin{tabular}{
-            >{\begin{CJKfilltwosides}[b]{4\ccwd}\sffamily\bfseries}r%
-            <{\end{CJKfilltwosides}}%
-            @{}>{\enspace\zihao{3}\bfseries}l%
-            <{\vspace{.2em}}%
-        }
-            题目     & \buct@title@ul{\buct@titleA}\\
-                    &\buct@title@ul{\buct@titleB}\\
-            专业     & \buct@title@ul{\zihao{4}\buct@major}\\
-            研究生   & \buct@title@ul{\zihao{4}\buct@author}\\
-            指导教师 & \buct@title@ul{\zihao{4}\buct@supervisor}\\
-        \end{tabular}
+        \else%
+            %\ziju{-0.05}
+            \dbsong\fontsize{38bp}{60bp}\selectfont
+            \ifbuct@master{硕}\else{博}\fi{}士研究生学位论文
+        \fi
     \end{center}
-    \vfill{%
-        \begin{center}%
-            \buct@format@date{\@zhdate}%
-        \end{center}%
-    }
+    \ifbuct@bachelor
+            \setlength{\TPHorizModule}{1cm}
+            \setlength{\TPVertModule}{1cm}
+            \begin{textblock}{0}(0,10)
+                \noindent%
+                \tikz[line width=1.2pt] \draw (0,0) -- (21,0) (0,0.2) -- (21,0.2);
+            \end{textblock}
+            \vspace{72bp}
+            \begin{center}
+                \xeCJKsetup{
+                    underline = {
+                        skip      = false,
+                        thickness = 1.4pt,
+                    }
+                }
+                \renewcommand{\arraystretch}{2}
+                \begin{tabular}{%
+                        >{\zihao{-2}\xbsong}l
+                        >{\zihao{3}\bfseries}l
+                }
+                    题\hspace{\ccwd}目  & \buct@title@ul{\buct@titleA}\\
+                    \ifthenelse{\equal{\buct@titleB}{}}{\relax}{
+                                        & \buct@title@ul{\buct@titleB}\\
+                    }
+                \end{tabular}
+                \vskip144bp\zihao{3}
+                \begin{tabular}{
+                        >{\begin{CJKfilltwosides}[b]{4\ccwd}\xbsong}r%
+                            <{\end{CJKfilltwosides}}%
+                        @{}>{\enspace\zihao{4}\bfseries}l%
+                        <{\vspace{.2em}}%
+                    }
+                    专业     & \buct@major@ul{\buct@major}\\
+                    学生   & \buct@major@ul{\buct@author}\\
+                    指导教师 & \buct@major@ul{\buct@supervisor}\\
+                \end{tabular}
+            \end{center}
+            \vfill{%
+                \begin{center}%
+                    \buct@format@date{\@zhdate}%
+                \end{center}%
+            }
+    \else
+        \vspace{76bp}
+        \begin{center}
+            \fontsize{20}{36}\selectfont
+            \xeCJKsetup{
+                underline = {
+                    skip      = false,
+                    thickness = 1.2pt,
+                }
+            }
+            \begin{tabular}{
+                >{\begin{CJKfilltwosides}[b]{4\ccwd}\sffamily\bfseries}r%
+                <{\end{CJKfilltwosides}}%
+                @{}>{\enspace\zihao{3}\bfseries}l%
+                <{\vspace{.2em}}%
+            }
+                题目     & \buct@title@ul{\buct@titleA}\\
+                \ifthenelse{\equal{\buct@titleB}{}}{\relax}{
+                                        & \buct@title@ul{\buct@titleB}\\
+                }
+                专业     & \buct@title@ul{\zihao{4}\buct@major}\\
+                研究生   & \buct@title@ul{\zihao{4}\buct@author}\\
+                指导教师 & \buct@title@ul{\zihao{4}\buct@supervisor}\\
+            \end{tabular}
+        \end{center}
+        \vfill{%
+            \begin{center}%
+                \buct@format@date{\@zhdate}%
+            \end{center}%
+        }
+    \fi
 }
-\ifbuct@bachelor\relax\else
-    \NewDocumentCommand{\makecover}{ o }{%
+\NewDocumentCommand{\makecover}{ o }{%
     \hypertarget{cover}{}
     \pdfbookmark{封面}{cover}
         \IfNoValueTF{#1}{\buct@makecover}{%
             \includepdf[pages=-]{#1}
         }
-    }
-\fi
+}
 \endinput
 %%
 %% End of file `buctcover.cls'.

@@ -20,7 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \iffalse
 %<*driver>
-\ProvidesFile{buctthesis.dtx}[2022/03/04 v1.3 BUCT Thesis Template]
+\ProvidesFile{buctthesis.dtx}[2022/05/14 v1.4 BUCT Thesis Template]
 \documentclass{ltxdoc}
 \usepackage{manual}
 \begin{document}
@@ -374,16 +374,15 @@
 %
 % 三者是互相独立的。
 % 英文目录通过 \cs{echapter} 等命令指定某一标题的英文标题，参见~\ref{subsubsec:bitoc}。
-% 设计图纸目录通过 \env{dfigure} 环境指定插图为“设计图纸”并计数编号。
-% 参见~\ref{subsubsec:dfigure}。
+% 设计图纸目录通过 \env{dfigure} 环境指定插图为“设计图纸”并计数编号，参见~\ref{subsubsec:dfigure}。
 %
 % \subsubsection{符号说明表}\label{subsubsec:deno}
 % \DescribeEnv{denotation}
-% 符号说明部分的源文件位于 \file{chapter/denotation.tex}，
+% 符号说明表的源文件位于 \file{chapter/denotation.tex}，
 % 使用 \env{denotation} 环境。
-% 《本科规范》和《研究生规范》中都未详细规定符号说明部分的格式，
+% 《本科规范》和《研究生规范》中都未详细规定符号说明表的格式，
 % 模板设计了一个无框线、可跨页的长表格，直接在环境里填入内容即可。
-% 环境接受一个可选 \meta{Width} 参数 ，代表“说明”一列的宽度，用于在必要时调整。
+% 环境接受一个可选参数 \meta{width} ，代表“说明”一列的宽度，用于在必要时调整。
 % \begin{latex}
 %   \begin{denotation}[12cm] % 设置第二列的列宽为 12 cm，默认 10 cm
 %       符号1   &   说明1   \\
@@ -524,12 +523,18 @@
 %
 % \subsubsection{参考文献}\label{subsubsec:bib}
 % \DescribeMacro{\cite}
+% \DescribeMacro{\inlinecite}
 % \DescribeMacro{\nocite}
 % \begin{syntax}{cite}
 %    \marg{CiteKey}
 % \end{syntax}
+% \qquad
+% \begin{syntax}{inlinecite}
+%    \marg{CiteKey}
+% \end{syntax}
 %
-% 模板以上标、方括号按“顺序编码制”引用参考文献。
+% 模板使用 \cs{cite} 实现上标、方括号按“顺序编码制”引用参考文献；
+% \cs{inlinecite} 可实现行间引用，适合某些特殊情况使用；
 % 而 \cs{nocite}\marg{CiteKey} 则指明不引用但需要列出的参考文献。
 % 在同一处引用多个文献时，应将各篇文献的引用标签一同写在参数里，
 % 并以西文逗号“,”分隔每个 \meta{CiteKey}。
@@ -607,19 +612,27 @@
 % \end{latex}
 %
 % \subsection{封面}\label{subsec:cover}
-% 本小节将简单介绍研究生论文封面的代码与编译。
+% \DescribeMacro{\makecover}
+% BUCTthesis 对学校印刷的纸质封面进行了仿制，本小节将简单介绍相关代码与编译方法。
 %
-% 与本科模板不同的是，BUCTthesis 的硕博模板在 \file{cover} 文件夹中仿制了学校的封面。
+% 由于字体的原因，BUCTthesis 将封面模板另置于 \file{cover} 文件夹，可根据需要使用。
 % 在该文件夹中的三个文件都与封面有关，编译时请确保它们位于同一路径之下。
 %
 % \emph{注意：这里的“仿制”仅是实现封面的效果，学校印制的封面需要手写内容，故不能替代学校统一印制的封面。}
 % \begin{enumerate}
-%    \item \file{cover.tex}：源文档。与 \cs{buctsetup} 类似，这里使用\cs{coversetup} 定义论文信息。
+%    \item \file{buctcover.tex}：源文档。在 \cs{documentclass} 后定义封面所属学位，在 \cs{coversetup} 中定义论文相关信息。除导言区外无需修改。
 % \begin{latex}
+%    \documentclass[
+%        type = bachelor    % type = [ bechelor | master | doctor ]
+%    ]{buctcover}
 %   \coversetup{
-%       % 学号，位于封面的右上角
+%       %班级，位于右上角，仅本科
+%       class = {计科1024},
+%       % 学号，位于右上角
 %       studentid = {2021010234},
-%       % 标题。封面的标题有两行，每一行控制在 18 个汉字长度以内
+%       % 标题。总字数不要超过 36 个汉字长度。
+%       % 本科：可以一行或分两行写，如果无第二行将 titleB 留空或注释掉；
+%       % 硕博：封面的标题有两行，每一行控制在 18 个汉字长度以内。
 %       titleA = {甲乙丙丁戊己庚辛壬癸一二三},
 %       titleB = {四五六七八九十甲乙丙丁戊己},
 %       % 作者
@@ -635,7 +648,7 @@
 %
 % 至于编译，只需一遍 xelatex 即可，扩展名可省略。
 % \begin{shell}
-%   xelatex cover.tex
+%   xelatex buctcover.tex
 % \end{shell}
 %    \item \file{buctcover.cls}：格式控制文件。类似 \file{buctthesis.cls}，亦可由 \file{buctthesis.ins} 和 \file{buctthesis.dtx} 生成：
 %     \begin{shell}
@@ -653,10 +666,9 @@
 %    \item SimHei，中易黑体
 %    \item KaiTi，中易楷体
 %    \item STXingkai，华文行楷
-%    \item FZDaBiaoSong-B06S，方正大标宋简体
 %    \item FZXiaoBiaoSong-B05S，方正小标宋简体
+%    \item FZDaBiaoSong-B06S，方正大标宋简体（仅硕博封面需要）
 % \end{enumerate}
-%
 %
 %
 % \StopEventually{\PrintChanges\PrintIndex}
@@ -667,7 +679,7 @@
 %    \begin{macrocode}
 %<class|cover>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<*class>
-\ProvidesClass{buctthesis}[2021/03/06 v1.3 BUCT Thesis Template]
+\ProvidesClass{buctthesis}[2022/05/14 v1.4 BUCT Thesis Template]
 %    \end{macrocode}
 %
 % 装载 \pkg{ifxetex} 宏包，并通过 \cs{RequireXeTeX} 命令检查编译命令。
@@ -1045,7 +1057,8 @@
 % 设置浮动体（包括插图和表格）内容、编号和标题的字体。
 %    \begin{macrocode}
 \newcommand{\buct@floatfont}{\zihao{5}}
-\newcommand{\buct@float@captionfont}{\zihao{5}\songti}
+\newcommand{\buct@float@captionfont}{\zihao{5}\mdseries}
+\newcommand{\buct@float@labelfont}{\zihao{5}\mdseries}
 %    \end{macrocode}
 %
 % 设置代码块的字体。根据是否开启 \opt{submit} 选项，设置关键字、注释的颜色。
@@ -1795,7 +1808,7 @@
 \sisetup{%
     list-final-separator = { 和 },
     list-pair-separator = { 和 },
-    range-phrase = {$\sim$},
+    range-phrase = {\,$\sim$\,},
 }
 %    \end{macrocode}
 %
@@ -1861,7 +1874,7 @@
 %
 %    \begin{macrocode}
 \renewcommand{\captionfont}{\buct@float@captionfont}
-\renewcommand{\captionlabelfont}{\buct@float@captionfont}
+\renewcommand{\captionlabelfont}{\buct@float@labelfont}
 \DeclareCaptionLabelSeparator{capspace}{\quad}
 \captionsetup{labelsep=capspace}
 \captionsetup[table]{%
@@ -1898,6 +1911,15 @@
     \renewcommand{\thelstlisting}{\thechapter-\arabic{lstlisting}}
 }
 %    \end{macrocode}
+%
+% \subsubsection{文献引用}
+% \begin{macro}{\inlinecite}
+% 这里定义的 \cs{inlinecite} 适用于行间引用，依赖于 \pkg{natbib} 宏包里的命令。
+%    \begin{macrocode}
+\DeclareRobustCommand\inlinecite{\@inlinecite}
+\def\@inlinecite#1{\begingroup\let\@cite\NAT@citenum\citep{#1}\endgroup}
+%    \end{macrocode}
+% \end{macro}
 %
 % \subsubsection{数学公式}
 % 硕博公式需要加入点线连接公式与编号。这里通过重定义 \file{source2e}
@@ -2110,10 +2132,15 @@
 %
 %
 % \subsection{封面}
-% 由于学校会统一印制封面，这里仅提供\emph{硕博论文封面}的一个参考实现。
+% 由于学校会统一印制封面，这里仅提供本科和硕博的一个参考实现。
+% 并且由于学校所给的参考封面每年都有细微的变动，由本模板所生成的封面上文字间距不能保证与参考一致。
+% 还请留心。
 %    \begin{macrocode}
 %<*cover>
-\ProvidesClass{buctcover}[2021/04/24 Cover Maker for BUCTthesis]
+\ProvidesClass{buctcover}[2022/05/14 Cover Maker for BUCTthesis]
+%    \end{macrocode}
+% 和论文本体一样，目前只支持 \XeLaTeX\ 引擎编译封面，其余设置基本一致。
+%    \begin{macrocode}
 \RequirePackage{ifxetex}
 \RequireXeTeX
 \RequirePackage{kvoptions}
@@ -2132,36 +2159,35 @@
 \LoadClass[zihao=-4]{ctexbook}
 %    \end{macrocode}
 %
-% 目前封面的 \opt{type} 选项仅允许硕博。
+% 封面的 \opt{type} 对于三种学位类型都能支持，但是必须选择其中的一项。
 %    \begin{macrocode}
-\ifbuct@bachelor%
-    \ClassError{buctcover}{%
-        type `bachelor' is unavailable. \MessageBreak%
-        type = [ master | doctor ]%
-    }{}\else
+\ifbuct@bachelor\relax\else
     \ifbuct@master\relax\else
         \ifbuct@doctor\relax\else
             \ClassError{buctthesis}{%
                 Specified thesis type is obligatory: \MessageBreak%
-                type = [ master | doctor ]%
+                type = [ bachelor | master | doctor ]%
             }{}
 \fi\fi\fi
 %    \end{macrocode}
 %
 % 定义用于定义论文相关信息的内部命令。
-% 与 \cls{buctthesis} 不同的是：这里仅能通过 \cs{coversetup} 定义论文信息。其中 \opt{titleA} 和 \opt{titleB} 分别用于封面标题的第一行与第二行。
+% 与 \cls{buctthesis} 不同的是：这里仅能通过 \cs{coversetup} 定义论文信息。
+% 其中 \opt{titleA} 和 \opt{titleB} 分别用于封面标题的第一行与第二行。
+% 由于可能存在只用一行就能写完标题的情况，所以这里不设置后者的默认文本。
 %    \begin{macrocode}
 \newcommand{\coversetup}[1]{\kvsetkeys{buct}{#1}}
+\DeclareStringOption[班级未定义]{class}
 \DeclareStringOption[学号未定义]{studentid}
 \DeclareStringOption[题目首行未定义]{titleA}
-\DeclareStringOption[题目次行未定义]{titleB}
+\DeclareStringOption{titleB}
 \DeclareStringOption[专业未定义]{major}
 \DeclareStringOption[作者未定义]{author}
 \DeclareStringOption[导师未定义]{supervisor}
 \DeclareStringOption[\the\year-\two@digits{\month}-\two@digits{\day}]{date}
 %    \end{macrocode}
 %
-% 页边距设置。经过测量，各边距值比正文部分都要小。
+% 页边距设置。经过测量，各边距值比正文部分都要小；本科暂与硕博设置一致。
 %    \begin{macrocode}
 \RequirePackage[a4paper,nomarginpar,
     top = 2.1cm, bottom = 2.2cm, left = 2cm, right = 2cm,
@@ -2169,9 +2195,17 @@
 ]{geometry}
 %    \end{macrocode}
 %
-% 载入表格、插图、计算尺寸的宏包。
+% 载入 \pkg{xeCJKfntef} 宏包。在 \pkg{ctex} 宏集 2.5 版本之后需要手动载入。
 %    \begin{macrocode}
-\RequirePackage{array,graphicx,calc,hyperref}
+\RequirePackage{xeCJKfntef}
+%    \end{macrocode}
+%
+% 以下宏包分别用于排版表格、插图，计算标题文本长度，划本科封面线条，
+% 判断语句和添加封面的 PDF 书签。
+% \pkg{textpos} 配合 \pkg{tikz}，这样就能在页面的任何地方作画了。
+%    \begin{macrocode}
+\RequirePackage{array,graphicx,calc,tikz,xifthen,hyperref}
+\RequirePackage[absolute,overlay]{textpos}
 %    \end{macrocode}
 %
 % 清空页眉页脚。
@@ -2196,19 +2230,39 @@
 \newCJKfontfamily[xbsong] \xbsong {FZXiaoBiaoSong-B05S}
 \newCJKfontfamily[dbsong] \dbsong {FZDaBiaoSong-B06S}
 %    \end{macrocode}
+% 设置西文字体。事实上该字体这只会作用于本科封面的数字日期，除此之外的数字（如学号）使用中文字体。
+%    \begin{macrocode}
+\setmainfont{Times New Roman}
+%    \end{macrocode}
 %
 % 标尺，用于调试。
 %    \begin{macrocode}
 % \usepackage[unit=cm,type=upperleft,hshift=0cm,vshift=0cm]{fgruler}
 %    \end{macrocode}
 %
+% \begin{macro}{\buct@title@ul}
 % 定义下划线命令，这里利用了 \pkg{calc} 宏包的 \cs{widthof} 命令，
 % 取 \cs{buct@titleA} （即首行标题）的长度，用以固定下划线的长度。
+% 文本末尾加一个 \cs{enspace} 会让横线右端稍长于最后一个文字，显得更美观一些。
 %    \begin{macrocode}
 \newcommand\buct@title@ul[1]{%
     \CJKunderline{\makebox[\widthof{\buct@titleA\enspace}][l]{#1}}
 }
 %    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\buct@major@ul}
+% 但是对于本科封面而言，“专业”“学生”“指导教师”与“题目”之间有一大段空白，
+% 可以看做相互独立的表格。因此，这里我们让横线的宽度取所填入专业文本的宽度。
+% 使用 \cs{quad} 会让横线右端长于最后一个文字更多一点，更贴合封面的参考样例。
+%    \begin{macrocode}
+\newcommand\buct@major@ul[1]{%
+    \CJKunderline{\makebox[\widthof{\buct@major\quad}][l]{#1}}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\buct@format@date}
 % 日期格式处理，将输入的 \cs{buct@date} 拆分。
 %    \begin{macrocode}
 \newcommand\buct@format@date[1]{%
@@ -2219,101 +2273,203 @@
     \expandafter\buct@@process@date\buct@@date\@nil
 }
 %    \end{macrocode}
+% \end{macro}
 %
-% \cs{@zhdate} 命令接受三个数字，将“年”转换为中文数字串，“月”和“日”转换为中文数字；其中“年”中的 0 映射为“〇”而非“零”。
+% \cs{@zhdate} 命令接受三个数字。
+% 本科的日期要求比较简单，直接输出对应的数字即可。
+% 但是样例所给的数字前后有一些空白，我们用 \cs{makebox} 来定格它。
 %    \begin{macrocode}
 \newcommand\@zhdate[3]{%
-    \Large\bfseries\zhkai\ziju{.1}%
-    日\hspace{1.5\ccwd}期：\zhdigits{#1}年\zhnumber{#2}月\zhnumber{#3}日%
+    \bfseries\zhkai
+    \ifbuct@bachelor
+        \zihao{4}
+        #1年\makebox[1.5em]{#2}月\makebox[1.5em]{#3}日
+%    \end{macrocode}
+%
+% 如果是硕博，则将“年”转换为中文数字串，“月”和“日”转换为中文数字；其中“年”中的 0 映射为“〇”而非“零”。
+%    \begin{macrocode}
+    \else
+        \Large\ziju{.1}%
+        日\hspace{1.5\ccwd}期：\zhdigits{#1}年\zhnumber{#2}月\zhnumber{#3}日%
+    \fi
 }
 %    \end{macrocode}
 %
 % \begin{macro}{\buct@makecover}
-% 定义 \cs{buct@makecover} 命令来生成封面。
+% 接下来是重头戏：定义 \cs{buct@makecover} 命令来生成封面。
 %    \begin{macrocode}
 \newcommand{\buct@makecover}{%
 %    \end{macrocode}
 %
-% 封面右上角的“单位代码”和“学号”。
+% 封面右上角的“单位代码”和“学号”，先分别设置格式。
 %    \begin{macrocode}
     \begin{table}[h]
-        \renewcommand{\arraystretch}{1.3}
-        \raggedleft\large
+        \raggedleft
+        \ifbuct@bachelor
+            \songti\zihao{5}
+        \else
+            \renewcommand{\arraystretch}{1.3}\large
+        \fi
+%    \end{macrocode}
+%
+% 用一个无线表格来排版文字。需要注意二者都要以中文字体来书写数字。
+% 注意本科封面的表格右端并不是严格顶头，所以这里空开两个字符的宽度。
+%    \begin{macrocode}
         \begin{tabular}{l@{}l}
-            \xbsong 单位代码 & ：\CJKfamily+{zhsong}\mbox{10010}\\
-            \xbsong 学\hspace{2\ccwd}号 & ：\CJKfamily+{zhsong}\mbox{\buct@studentid}\\
+            \ifbuct@bachelor%
+                班\hspace{2\ccwd}级&：\CJKfamily+{zhsong}\buct@class\hspace*{2\ccwd}\\
+                学\hspace{2\ccwd}号&：\CJKfamily+{zhsong}\buct@studentid\hspace*{2\ccwd}\\
+            \else%
+                \xbsong 单位代码 & ：\CJKfamily+{zhsong}\mbox{10010}\\
+                \xbsong 学\hspace{2\ccwd}号 & ：\CJKfamily+{zhsong}\mbox{\buct@studentid}\\
+            \fi
         \end{tabular}
     \end{table}
-    \vspace{26bp}
+    \ifbuct@bachelor\vspace{3bp}\else\vspace{26bp}\fi
 %    \end{macrocode}
 %
 % 校徽与校名。前者是插图，后者是文字。
+% 需要注意，本科和硕博封面的“北京化工大学”几个字的字距是有差别的。
+% 由于并未设置居中，所以本科还需要手动空一点距离让文本近似居于页面中央。
 %    \begin{macrocode}
     \begin{minipage}[c][][c]{2.35cm}
         \includegraphics[width = 2.35cm]{BUCT-badge.pdf}
     \end{minipage}
     \qquad
     \begin{minipage}[c][2.35cm][c]{9cm}
-        \ziju{-0.02}\xingkai\zihao{0}{北京化工大学}
+        \xingkai
+        \ifbuct@bachelor
+            \ziju{0.1}\hspace*{0.8\ccwd}\zihao{-0}
+        \else
+            \ziju{-0.02}\zihao{0}
+        \fi
+        {北京化工大学}
     \end{minipage}
-    \vspace{18bp}
+    \ifbuct@bachelor\vspace{12bp}\else\vspace{18bp}\fi
 %    \end{macrocode}
 %
-% 标题。
+% 标题。本科的标题中的“(论文)”使用了半角括号，模板使用全角。
+% 由于从半角改到了全角，我们使用 \pkg{xeCJK} 里的命令来吃掉一点括号的空白。
+% 
+% 注： \cs{punctstyle\{banjiao\}} 和 \cs{xeCJKsetup\{PunctStyle = banjiao\}} 和 \cs{ctexset\{punct = banjiao\}}是一样的。
 %    \begin{macrocode}
     \begin{center}
-        % \ziju{-0.05}
-        {\dbsong\fontsize{38bp}{60bp}\selectfont
-        \ifbuct@master{硕}\else{博}\fi{}士研究生学位论文}
-    \end{center}
-        \vspace{76bp}
-%    \end{macrocode}
-%
-% 论文信息。
-%    \begin{macrocode}
-    \begin{center}
-        \fontsize{20}{36}\selectfont
-%    \end{macrocode}
-%
-% 禁用下划线的断点，调整粗细。
-%    \begin{macrocode}
-        \xeCJKsetup{
-            underline = {
-                skip      = false, 
-                thickness = 1.2pt,
+        \ifbuct@bachelor
+            \ziju{0.15}\xbsong\zihao{-0}\CJKfamily+{}{%
+            \punctstyle{banjiao}毕业设计（论文）% (论文)
             }
-        }
+        \else%
+            %\ziju{-0.05}
+            \dbsong\fontsize{38bp}{60bp}\selectfont
+            \ifbuct@master{硕}\else{博}\fi{}士研究生学位论文
+        \fi
+    \end{center}
 %    \end{macrocode}
 %
-% 使用一个表格来排版论文的信息。
+%
+% 对于论文标题之下的部分，我们将本科和硕博分开设置。
+%
+% 本科封面有两条横贯页面的横线，位于纸张顶部向下 \SI{10}{\centi\metre} 左右，
+% 我们用 \pkg{textpos} 的 \env{textblock} 环境定位，用 \pkg{tikz} 将它们画出来。
+% 两条线的间距取 \SI{0.2}{\centi\metre}。
 %    \begin{macrocode}
-        \begin{tabular}{
-            >{\begin{CJKfilltwosides}[b]{4\ccwd}\sffamily\bfseries}r%
-            <{\end{CJKfilltwosides}}%
-            @{}>{\enspace\zihao{3}\bfseries}l%
-            <{\vspace{.2em}}%
-        }
+    \ifbuct@bachelor
+            \setlength{\TPHorizModule}{1cm}
+            \setlength{\TPVertModule}{1cm}
+            \begin{textblock}{0}(0,10)
+                \noindent%
+                \tikz[line width=1.2pt] \draw (0,0) -- (21,0) (0,0.2) -- (21,0.2);
+            \end{textblock}
+            \vspace{72bp}
 %    \end{macrocode}
 %
+% 接下来书写题目。先使用 \pkg{xeCJK} 的功能来禁用下划线的断点，并调整其粗细。
+%    \begin{macrocode}
+            \begin{center}
+                \xeCJKsetup{
+                    underline = {
+                        skip      = false,
+                        thickness = 1.4pt,
+                    }
+                }
+%    \end{macrocode}
+%
+% 然后是“题目”及其内容。
 % 题目需要手动断行，且长度控制在 \SI{36}{em} 以内。
 % 因表格本身的横线与文字间距较大，这里采用下划线的方式来划线。
+% 注意这里我们要判断题目是否有第二行（即 \cs{buct@titleB} 是否有值）
+% 来输出一行还是两行题目。
 %    \begin{macrocode}
-            题目     & \buct@title@ul{\buct@titleA}\\
-                    &\buct@title@ul{\buct@titleB}\\
-            专业     & \buct@title@ul{\zihao{4}\buct@major}\\
-            研究生   & \buct@title@ul{\zihao{4}\buct@author}\\
-            指导教师 & \buct@title@ul{\zihao{4}\buct@supervisor}\\
-        \end{tabular}
-    \end{center}
+                \renewcommand{\arraystretch}{2}
+                \begin{tabular}{%
+                        >{\zihao{-2}\xbsong}l
+                        >{\zihao{3}\bfseries}l
+                }
+                    题\hspace{\ccwd}目  & \buct@title@ul{\buct@titleA}\\
+                    \ifthenelse{\equal{\buct@titleB}{}}{\relax}{
+                                        & \buct@title@ul{\buct@titleB}\\
+                    }
+                \end{tabular}
+                \vskip144bp\zihao{3}
+%    \end{macrocode}
+%
+% 使用一个表格来排版论文的信息，如前定义 \cs{buct@major@ul} 所述，这里横线的宽度取“专业”内容的宽度。
+%    \begin{macrocode}
+                \begin{tabular}{
+                        >{\begin{CJKfilltwosides}[b]{4\ccwd}\xbsong}r%
+                            <{\end{CJKfilltwosides}}%
+                        @{}>{\enspace\zihao{4}\bfseries}l%
+                        <{\vspace{.2em}}%
+                    }
+                    专业     & \buct@major@ul{\buct@major}\\
+                    学生   & \buct@major@ul{\buct@author}\\
+                    指导教师 & \buct@major@ul{\buct@supervisor}\\
+                \end{tabular}
+            \end{center}
 %    \end{macrocode}
 %
 % 在页面底部书写日期。
 %    \begin{macrocode}
-    \vfill{%
-        \begin{center}%
-            \buct@format@date{\@zhdate}%
-        \end{center}%
-    }
+            \vfill{%
+                \begin{center}%
+                    \buct@format@date{\@zhdate}%
+                \end{center}%
+            }
+%    \end{macrocode}
+%
+%   硕博论文的处理方式与本科相似。
+%    \begin{macrocode}
+    \else
+        \vspace{76bp}
+        \begin{center}
+            \fontsize{20}{36}\selectfont
+            \xeCJKsetup{
+                underline = {
+                    skip      = false,
+                    thickness = 1.2pt,
+                }
+            }
+            \begin{tabular}{
+                >{\begin{CJKfilltwosides}[b]{4\ccwd}\sffamily\bfseries}r%
+                <{\end{CJKfilltwosides}}%
+                @{}>{\enspace\zihao{3}\bfseries}l%
+                <{\vspace{.2em}}%
+            }
+                题目     & \buct@title@ul{\buct@titleA}\\
+                \ifthenelse{\equal{\buct@titleB}{}}{\relax}{
+                                        & \buct@title@ul{\buct@titleB}\\
+                }
+                专业     & \buct@title@ul{\zihao{4}\buct@major}\\
+                研究生   & \buct@title@ul{\zihao{4}\buct@author}\\
+                指导教师 & \buct@title@ul{\zihao{4}\buct@supervisor}\\
+            \end{tabular}
+        \end{center}
+        \vfill{%
+            \begin{center}%
+                \buct@format@date{\@zhdate}%
+            \end{center}%
+        }
+    \fi
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2322,15 +2478,13 @@
 % 文档命令 \cs{makecover} 类似 \cs{makedeclare}，
 % 接受一个可选参数用于插入扫描页，否则调用 \cs{buct@makecover} 生成封面。
 %    \begin{macrocode}
-\ifbuct@bachelor\relax\else
-    \NewDocumentCommand{\makecover}{ o }{%
+\NewDocumentCommand{\makecover}{ o }{%
     \hypertarget{cover}{}
     \pdfbookmark{封面}{cover}
         \IfNoValueTF{#1}{\buct@makecover}{%
             \includepdf[pages=-]{#1}
         }
-    }
-\fi
+}
 %</cover>
 %    \end{macrocode}
 % \end{macro}

@@ -26,7 +26,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{buctthesis}[2021/03/06 v1.3 BUCT Thesis Template]
+\ProvidesClass{buctthesis}[2022/05/14 v1.4 BUCT Thesis Template]
 \RequirePackage{ifxetex}
 \RequireXeTeX
 \RequirePackage{kvoptions}
@@ -187,7 +187,8 @@
     \newcommand{\buct@sssecfont}{\buct@ssecfont}
 \fi
 \newcommand{\buct@floatfont}{\zihao{5}}
-\newcommand{\buct@float@captionfont}{\zihao{5}\songti}
+\newcommand{\buct@float@captionfont}{\zihao{5}\mdseries}
+\newcommand{\buct@float@labelfont}{\zihao{5}\mdseries}
 \newcommand{\buct@codefont}{\ttfamily\songti\zihao{5}}
 \newcommand{\buct@codecomfont}{%
     \ttfamily\slshape
@@ -666,7 +667,7 @@
 \sisetup{%
     list-final-separator = { 和 },
     list-pair-separator = { 和 },
-    range-phrase = {$\sim$},
+    range-phrase = {\,$\sim$\,},
 }
 \ifbuct@bachelor
     \newfloat{dfigure}{htbp}{lodf}[chapter]
@@ -690,7 +691,7 @@
 \fi
 \graphicspath{{figure/}}
 \renewcommand{\captionfont}{\buct@float@captionfont}
-\renewcommand{\captionlabelfont}{\buct@float@captionfont}
+\renewcommand{\captionlabelfont}{\buct@float@labelfont}
 \DeclareCaptionLabelSeparator{capspace}{\quad}
 \captionsetup{labelsep=capspace}
 \captionsetup[table]{%
@@ -722,6 +723,8 @@
     \fi
     \renewcommand{\thelstlisting}{\thechapter-\arabic{lstlisting}}
 }
+\DeclareRobustCommand\inlinecite{\@inlinecite}
+\def\@inlinecite#1{\begingroup\let\@cite\NAT@citenum\citep{#1}\endgroup}
 \ifbuct@bachelor\relax\else
     \xpatchcmd{\dotfill}{.44em}{.3em}{}{}
     \renewenvironment{equation}{
