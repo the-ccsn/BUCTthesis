@@ -80,7 +80,7 @@
     \CJKunderline{\makebox[\widthof{\buct@titleA\enspace}][l]{#1}}
 }
 \newcommand\buct@major@ul[1]{%
-    \CJKunderline{\makebox[\widthof{\buct@major\quad}][l]{#1}}
+    \CJKunderline{\makebox[\widthof{\buct@major\quad}][c]{#1}}
 }
 \newcommand\buct@format@date[1]{%
     \edef\buct@@date{\buct@date}%

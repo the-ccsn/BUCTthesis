@@ -980,13 +980,16 @@
 %    \begin{macrocode}
 \xeCJKDeclareCharClass{CJK}{"2460->"2469}
 %    \end{macrocode}
-% 页眉与页脚的字体。
+%
+% 完成配置后，定义文中各元素的字体样式。
+%
+% 页眉与页脚。
 %    \begin{macrocode}
 \newcommand{\buct@headfont}{\zihao{-5}\songti}
 \newcommand{\buct@footfont}{\zihao{-5}\songti}
 %    \end{macrocode}
 %
-% 诚信声明（本科），或论文原创性声明和授权声明（硕博）的字体。
+% 诚信声明（本科）或论文原创性声明和授权声明（硕博）。
 %    \begin{macrocode}
 \ifbuct@bachelor
     \newcommand{\buct@dcl@titlefont}{\zihao{3}\songti}
@@ -999,7 +1002,7 @@
 \fi
 %    \end{macrocode}
 %
-% 中英文摘要中的字体。
+% 中英文摘要。
 % 这里的 \cs{CJKfamily+} 命令来自于 \pkg{xeCJK} 宏包，用于切换字体族：
 % 当参数为空时，则使用当前的 CJK 字体族，且对所有字符类生效。
 %    \begin{macrocode}
@@ -1024,7 +1027,7 @@
 \fi
 %    \end{macrocode}
 %
-% 设置中英文目录、设计图纸目录标题和目录中的各级标题字体。
+% 中英文目录、设计图纸目录标题和目录中的各级标题。
 %    \begin{macrocode}
 \ifbuct@bachelor
     \newcommand{\buct@toc@tocfont}{\zihao{4}\mdseries\heiti}
@@ -1054,14 +1057,14 @@
 \fi
 %    \end{macrocode}
 %
-% 设置浮动体（包括插图和表格）内容、编号和标题的字体。
+% 浮动体（包括插图和表格）内容、编号和标题。
 %    \begin{macrocode}
 \newcommand{\buct@floatfont}{\zihao{5}}
 \newcommand{\buct@float@captionfont}{\zihao{5}\mdseries}
 \newcommand{\buct@float@labelfont}{\zihao{5}\mdseries}
 %    \end{macrocode}
 %
-% 设置代码块的字体。根据是否开启 \opt{submit} 选项，设置关键字、注释的颜色。
+% 代码块。根据是否开启 \opt{submit} 选项，设置关键字、注释的颜色。
 % 如果未开启，关键字将会使用深蓝色，注释会使用深灰色。
 %    \begin{macrocode}
 \newcommand{\buct@codefont}{\ttfamily\songti\zihao{5}}
@@ -2257,7 +2260,7 @@
 % 使用 \cs{quad} 会让横线右端长于最后一个文字更多一点，更贴合封面的参考样例。
 %    \begin{macrocode}
 \newcommand\buct@major@ul[1]{%
-    \CJKunderline{\makebox[\widthof{\buct@major\quad}][l]{#1}}
+    \CJKunderline{\makebox[\widthof{\buct@major\quad}][c]{#1}}
 }
 %    \end{macrocode}
 % \end{macro}
