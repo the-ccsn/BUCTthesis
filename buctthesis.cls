@@ -259,14 +259,14 @@
         可以允许采用影印、缩印或其它复制手段保存、汇编学位论文。
 
         $\Box$ 论文暂不公开（或保密）注释：本学位论文属于暂不公开
-        （或保密）范围，在\rule{1.5em}{.6pt}年解密后适用本授权书。
+        （或保密）范围，在 \rule{1.5em}{.4pt} 年解密后适用本授权书。
 
         $\Box$ 非暂不公开（或保密）论文注释：本学位论文不属于暂不公开
         （或保密）范围，适用本授权书。
     }
     \newcommand\buct@dcl@pdf{版权页}
-    \newcommand\buct@sign@author{作者签名：\rule{7em}{.6pt}\qquad{日期：}\rule{7em}{.6pt}}
-    \newcommand\buct@sign@supervisor{导师签名：\rule{7em}{.6pt}\qquad{日期：}\rule{7em}{.6pt}}
+    \newcommand\buct@sign@author{作者签名：\rule{7em}{.4pt}\qquad{日期：}\rule{7em}{.4pt}}
+    \newcommand\buct@sign@supervisor{导师签名：\rule{7em}{.4pt}\qquad{日期：}\rule{7em}{.4pt}}
     \newcommand\buct@cabstract@title{摘\hspace{\ccwd}要}
     \newcommand\buct@eabstract@title{ABSTRACT}
     \newcommand\buct@ckeywords@title{关键词：}
@@ -274,6 +274,7 @@
     \newcommand\buct@ckeywords@sep{，}
     \newcommand\buct@ekeywords@sep{,~}
     \newcommand\buct@content@title{目\hspace{\ccwd}录}
+	\newcommand\buct@econtent@chapter{Chapter~}
     \newcommand\econtentsname{Contents}
     \newcommand\buct@deno@title{符号和缩略词说明}
     \newcommand\buct@ack@title{致谢}
@@ -322,24 +323,14 @@
     \else{
         \thispagestyle{empty}
         \linespread{1.5534}
-        \setlength{\parskip}{9pt}
-        \begin{center}
-            \buct@dcl@titlefont\buct@dcl@title
-        \end{center}
-
-        \buct@dcl@textfont\buct@dcl@text
-
-        \vspace{6pt}\buct@sign@author\vspace{6pt}
-
-        \begin{center}
-            \buct@auth@titlefont\buct@auth@title
-        \end{center}
-
-        \buct@auth@textfont\buct@auth@text
-
-        \vspace{6pt}\buct@sign@author
-
-        \vspace{6pt}\buct@sign@supervisor
+        \setlength{\parskip}{15pt}
+        \centerline{\buct@dcl@titlefont\buct@dcl@title}
+		\par\indent\buct@dcl@textfont\buct@dcl@text
+		\par\indent\buct@sign@author\\[30pt]
+        \centerline{\buct@auth@titlefont\buct@auth@title}
+		\par\indent\buct@auth@textfont\buct@auth@text
+		\par\indent\buct@sign@author
+		\par\indent\buct@sign@supervisor
     }\fi
     \clearpage\normalsize
 }
@@ -471,7 +462,7 @@
     \newcommand\buct@addengcontents[3]{%
         \addcontentsline{toce}{#1}{\protect\numberline{#3\@nameuse{the#1}}#2}
     }
-    \newcommand\echapter[1]{\buct@addengcontents{chapter}{#1}{\buct@toce@chapfont}}
+    \newcommand\echapter[1]{\buct@addengcontents{chapter}{#1}{\buct@toce@chapfont{}\buct@econtent@chapter}}
     \newcommand\esection[1]{\buct@addengcontents{section}{#1}{}}
     \newcommand\esubsection[1]{\buct@addengcontents{subsection}{#1}{}}
     \newcommand\esubsubsection[1]{\buct@addengcontents{subsubsection}{#1}{}}
@@ -773,6 +764,7 @@
         \addcontentsline{toc}{chapter}{\buct@trans@title}
     }{}
 \else
+	\g@addto@macro\appendix{\def\buct@econtent@chapter{Appendix~}}
     \newenvironment{achievements}{%
         \cleardoublepage
         \chapter*{\buct@achi@title}
