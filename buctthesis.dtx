@@ -618,7 +618,8 @@
 % 由于字体的原因，BUCTthesis 将封面模板另置于 \file{cover} 文件夹，可根据需要使用。
 % 在该文件夹中的三个文件都与封面有关，编译时请确保它们位于同一路径之下。
 %
-% \emph{注意：这里的“仿制”仅是实现封面的效果，学校印制的封面需要手写内容，故不能替代学校统一印制的封面。}
+% \emph{注意：这里的“仿制”仅是实现封面的效果，学校印制的封面需要手写内容，故不能在纸本上替代学校统一印制的封面；
+% 若无特殊说明，可以在提交电子版时使用此封面。但，仍请以教务处最新通告为准。}
 % \begin{enumerate}
 %    \item \file{buctcover.tex}：源文档。在 \cs{documentclass} 后定义封面所属学位，在 \cs{coversetup} 中定义论文相关信息。除导言区外无需修改。
 % \begin{latex}
@@ -650,6 +651,9 @@
 % \begin{shell}
 %   xelatex buctcover.tex
 % \end{shell}
+% 如果编译两遍，还会生成封面的 PDF 书签。
+% 此时可以用其他 PDF 工具将封面整合到论文中，同时还能保留封面书签以便于跳转。
+%
 %    \item \file{buctcover.cls}：格式控制文件。类似 \file{buctthesis.cls}，亦可由 \file{buctthesis.ins} 和 \file{buctthesis.dtx} 生成：
 %     \begin{shell}
 %   xelatex buctthesis.ins
