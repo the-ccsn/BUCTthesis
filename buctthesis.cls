@@ -26,7 +26,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{buctthesis}[2022/05/14 v1.4 BUCT Thesis Template]
+\ProvidesClass{buctthesis}[2022/07/29 v1.4.1 BUCT Thesis Template]
 \RequirePackage{ifxetex}
 \RequireXeTeX
 \RequirePackage{kvoptions}
@@ -116,7 +116,10 @@
     \setCJKsansfont{SimHei}[AutoFakeBold]
 }
 {
-    \ClassWarning{buctthesis}{The fonts differ to the default.}
+    \ClassWarning{buctthesis}{%
+        The fonts differ to the default.\MessageBreak%
+        Use fontset = windows to correct.%
+    }
 }
 \newcommand{\bfsong}{\bfseries}
 \newcommand{\bfhei}{\sffamily\bfseries}
@@ -259,7 +262,7 @@
         可以允许采用影印、缩印或其它复制手段保存、汇编学位论文。
 
         $\Box$ 论文暂不公开（或保密）注释：本学位论文属于暂不公开
-        （或保密）范围，在 \rule{1.5em}{.4pt} 年解密后适用本授权书。
+        （或保密）范围，在\rule{1.5em}{.4pt}年解密后适用本授权书。
 
         $\Box$ 非暂不公开（或保密）论文注释：本学位论文不属于暂不公开
         （或保密）范围，适用本授权书。
@@ -274,7 +277,7 @@
     \newcommand\buct@ckeywords@sep{，}
     \newcommand\buct@ekeywords@sep{,~}
     \newcommand\buct@content@title{目\hspace{\ccwd}录}
-	\newcommand\buct@econtent@chapter{Chapter~}
+    \newcommand\buct@econtent@chapter{Chapter~}
     \newcommand\econtentsname{Contents}
     \newcommand\buct@deno@title{符号和缩略词说明}
     \newcommand\buct@ack@title{致谢}
@@ -325,12 +328,12 @@
         \linespread{1.5534}
         \setlength{\parskip}{15pt}
         \centerline{\buct@dcl@titlefont\buct@dcl@title}
-		\par\indent\buct@dcl@textfont\buct@dcl@text
-		\par\indent\buct@sign@author\\[30pt]
+        \par\indent\buct@dcl@textfont\buct@dcl@text
+        \par\indent\buct@sign@author\\[30pt]
         \centerline{\buct@auth@titlefont\buct@auth@title}
-		\par\indent\buct@auth@textfont\buct@auth@text
-		\par\indent\buct@sign@author
-		\par\indent\buct@sign@supervisor
+        \par\indent\buct@auth@textfont\buct@auth@text
+        \par\indent\buct@sign@author
+        \par\indent\buct@sign@supervisor
     }\fi
     \clearpage\normalsize
 }
@@ -380,7 +383,7 @@
         \ClassError{buctthesis}{Too many \protect\taskitem\space used}%
         {Keep \protect\taskitem\space no more than 4 times.}\fi
     }
-    \newcommand{\taskitem}{\vspace{1em}\noindent\buct@taskitem\par}
+    \newcommand{\taskitem}{\vspace{6pt}\noindent\buct@taskitem\par}
 \fi
 \newenvironment{bibenumerate}{%
     \begin{enumerate}[label={[\arabic*]},leftmargin=3em]
@@ -674,9 +677,9 @@
     \AtBeginEnvironment{tabular}{\buct@floatfont}
     \AtBeginEnvironment{tabularx}{\buct@floatfont}
 \fi
+\ifbuct@bachelor\relax\else
     \let\oldlongtable\longtable
     \let\endoldlongtable\endlongtable
-\ifbuct@bachelor\relax\else
     \def\longtable{\zihao{5}\oldlongtable}
     \AtEndEnvironment{longtable}{\normalsize}
 \fi
@@ -704,7 +707,7 @@
     \renewcommand{\thesubtable}{(\alph{subtable})}
     \renewcommand{\thetable}{\thechapter-\arabic{table}}
     \renewcommand{\thesubfigure}{(\alph{subfigure})}
-    \renewcommand{\thefigure}{\arabic{chapter}-\arabic{figure}}
+    \renewcommand{\thefigure}{\thechapter-\arabic{figure}}
     \ifbuct@bachelor
         \renewcommand{\thedfigure}{\thechapter-\arabic{dfigure}}
         \renewcommand{\theequation}{\thechapter-\arabic{equation}}
@@ -764,7 +767,7 @@
         \addcontentsline{toc}{chapter}{\buct@trans@title}
     }{}
 \else
-	\g@addto@macro\appendix{\def\buct@econtent@chapter{Appendix~}}
+    \g@addto@macro\appendix{\def\buct@econtent@chapter{Appendix~}}
     \newenvironment{achievements}{%
         \cleardoublepage
         \chapter*{\buct@achi@title}
@@ -809,7 +812,6 @@
 \fi
 \renewcommand{\emph}[1]{\textbf{#1}}
 \renewcommand{\em}{\bfsong}
-
 \newcommand{\buct@ftntcircled}[1]{%
     \lower 0.15em\hbox{%
         \tikz\draw (0pt, 0pt) circle (0.4 em) node {#1};%

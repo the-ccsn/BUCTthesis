@@ -20,7 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \iffalse
 %<*driver>
-\ProvidesFile{buctthesis.dtx}[2022/06/21 v1.4 BUCT Thesis Template]
+\ProvidesFile{buctthesis.dtx}[2022/07/29 v1.4.1 BUCT Thesis Template]
 \documentclass{ltxdoc}
 \usepackage{manual}
 \begin{document}
@@ -683,7 +683,7 @@
 %    \begin{macrocode}
 %<class|cover>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<*class>
-\ProvidesClass{buctthesis}[2022/06/21 v1.4 BUCT Thesis Template]
+\ProvidesClass{buctthesis}[2022/07/29 v1.4.1 BUCT Thesis Template]
 %    \end{macrocode}
 %
 % 装载 \pkg{ifxetex} 宏包，并通过 \cs{RequireXeTeX} 命令检查编译命令。
@@ -1855,9 +1855,9 @@
 % 在“符号说明表”中我们嵌套了 \env{longtable} 环境，但其中的字号仍应为小四号。
 % 因此这里需要保留原先的定义。
 %    \begin{macrocode}
+\ifbuct@bachelor\relax\else
     \let\oldlongtable\longtable
     \let\endoldlongtable\endlongtable
-\ifbuct@bachelor\relax\else
     \def\longtable{\zihao{5}\oldlongtable}
     \AtEndEnvironment{longtable}{\normalsize}
 \fi
@@ -1898,7 +1898,7 @@
     \renewcommand{\thesubtable}{(\alph{subtable})}
     \renewcommand{\thetable}{\thechapter-\arabic{table}}
     \renewcommand{\thesubfigure}{(\alph{subfigure})}
-    \renewcommand{\thefigure}{\arabic{chapter}-\arabic{figure}}
+    \renewcommand{\thefigure}{\thechapter-\arabic{figure}}
     \ifbuct@bachelor
         \renewcommand{\thedfigure}{\thechapter-\arabic{dfigure}}
         \renewcommand{\theequation}{\thechapter-\arabic{equation}}
