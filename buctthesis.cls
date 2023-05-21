@@ -9,6 +9,7 @@
 %% This is a generated file.
 %% 
 %% Copyright (C) 2019-2022 by Miracle0565
+%% Copyright (C) 2022-2023 by The-CCSN
 %% 
 %%     https://github.com/Miracle0565/BUCTthesis
 %% 
@@ -26,7 +27,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{buctthesis}[2022/07/29 v1.4.1 BUCT Thesis Template]
+\ProvidesClass{buctthesis}[2022/05/20 v2.0 BUCT Thesis Template]
 \RequirePackage{ifxetex}
 \RequireXeTeX
 \RequirePackage{kvoptions}
@@ -56,20 +57,26 @@
                 type = [ bachelor | master | doctor ]%
             }{}
 \fi\fi\fi
-\newcommand{\buct@def@key}[1]{
+\NewDocumentCommand{\buct@def@key}{ m o }{
     \@namedef{#1}##1{\@namedef{buct@#1}{##1}}
-    \define@key{buct}{#1}{\@nameuse{#1}{##1}}
+    \define@key{buct}{#1}[#2]{\@nameuse{#1}{##1}}
 }
 \newcommand{\buctsetup}[1]{\kvsetkeys{buct}{#1}}
-\buct@def@key{ctitle}
-\buct@def@key{etitle}
-\buct@def@key{cauthor}
-\buct@def@key{class}
+\buct@def@key{ChineseTitle}
+\buct@def@key{EnglishTitle}
+\buct@def@key{ChineseTitleLineA}
+\buct@def@key{ChineseTitleLineB}
+\buct@def@key{ChineseTitle}
+\buct@def@key{author}
 \buct@def@key{studentid}
-\buct@def@key{school}
-\buct@def@key{major}
 \buct@def@key{supervisor}
-\buct@def@key{msupervisor}
+\buct@def@key{major}
+\buct@def@key{date}[\the\year-\two@digits{\month}-\two@digits{\day}]
+\ifbuct@bachelor
+    \buct@def@key{school}
+    \buct@def@key{class}
+    \buct@def@key{msupervisor}
+\fi
 \newcommand{\buct@def@sep@key}[2]{%
     \@namedef{#1}##1{%
         \@namedef{buct@#1}{}%
@@ -83,8 +90,8 @@
     }
     \define@key{buct}{#1}{\@nameuse{#1}{##1}}%
 }
-\buct@def@sep@key{ckeywords}{\buct@ckeywords@sep}
-\buct@def@sep@key{ekeywords}{\buct@ekeywords@sep}
+\buct@def@sep@key{ChineseKeywords}{\buct@ChineseKeywords@sep}
+\buct@def@sep@key{EnglishKeywords}{\buct@EnglishKeywords@sep}
 \RequirePackage{geometry,fancyhdr}
 \RequirePackage{titletoc}
 \RequirePackage{amsmath,amsthm,amssymb,unicode-math}
@@ -98,12 +105,16 @@
 \RequirePackage[format=hang]{caption}
 \RequirePackage{bicaption}
 \RequirePackage{tikz}
+\RequirePackage{calc}
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{xeCJKfntef}
 \RequirePackage{listings}
 \RequirePackage[sort&compress]{gbt7714}
 \RequirePackage{xcolor}
 \RequirePackage{pdfpages}
 \RequirePackage[bottom,perpage]{footmisc}
 \RequirePackage{xpatch}
+\RequirePackage{xifthen}
 \ifbuct@debugger
     \RequirePackage[color=blue,type=upperleft,showframe,hshift=2.7cm,vshift=3.5cm]{fgruler}
     \RequirePackage[pagewise]{lineno}
@@ -215,7 +226,7 @@
     \newcommand\buct@dcl@sign{本人签名：\hspace{14em}年\hspace{2.5em}月\hspace{2.5em}日}
     \newcommand\buct@task@title{本科生毕业设计（论文）任务书}
     \newcommand\buct@task@pdf{任务书}
-    \newcommand\buct@task@ctitle{设计（论文）题目：}
+    \newcommand\buct@task@ChineseTitle{设计（论文）题目：}
     \newcommand\buct@task@school{学院：}
     \newcommand\buct@task@major{专业：}
     \newcommand\buct@task@class{班级：}
@@ -228,10 +239,10 @@
     \newcommand\buct@task@itemd{4.进度安排}
     \newcommand\buct@cabstract@title{摘要}
     \newcommand\buct@eabstract@title{ABSTRACT}
-    \newcommand\buct@ckeywords@title{关键词：}
-    \newcommand\buct@ekeywords@title{Keywords:~}
-    \newcommand\buct@ckeywords@sep{\quad}
-    \newcommand\buct@ekeywords@sep{; }
+    \newcommand\buct@ChineseKeywords@title{关键词：}
+    \newcommand\buct@EnglishKeywords@title{Keywords:~}
+    \newcommand\buct@ChineseKeywords@sep{\quad}
+    \newcommand\buct@EnglishKeywords@sep{; }
     \newcommand\buct@supervisor@title{指导教师：}
     \newcommand\buct@content@title{目\hspace{\ccwd}录}
     \newcommand\buct@dfigurename{设计图纸}
@@ -272,13 +283,13 @@
     \newcommand\buct@sign@supervisor{导师签名：\rule{7em}{.4pt}\qquad{日期：}\rule{7em}{.4pt}}
     \newcommand\buct@cabstract@title{摘\hspace{\ccwd}要}
     \newcommand\buct@eabstract@title{ABSTRACT}
-    \newcommand\buct@ckeywords@title{关键词：}
-    \newcommand\buct@ekeywords@title{KEY WORDS:~}
-    \newcommand\buct@ckeywords@sep{，}
-    \newcommand\buct@ekeywords@sep{,~}
+    \newcommand\buct@ChineseKeywords@title{关键词：}
+    \newcommand\buct@EnglishKeywords@title{KEY WORDS:~}
+    \newcommand\buct@ChineseKeywords@sep{，}
+    \newcommand\buct@EnglishKeywords@sep{,~}
     \newcommand\buct@content@title{目\hspace{\ccwd}录}
     \newcommand\buct@econtent@chapter{Chapter~}
-    \newcommand\econtentsname{Contents}
+    \newcommand\buct@econtentsname{Contents}
     \newcommand\buct@deno@title{符号和缩略词说明}
     \newcommand\buct@ack@title{致谢}
     \newcommand\buct@eack@title{Acknowledgement}
@@ -313,6 +324,174 @@
     {\newpage}
     {\thispagestyle{empty}\newpage}
     {}{}
+%% \subsection{封面}
+\newcommand\buct@title@ul[1]{%
+    \CJKunderline{\makebox[\widthof{\buct@ChineseTitleLineA\enspace}][l]{#1}}
+}
+\newcommand\buct@major@ul[1]{%
+    \CJKunderline{\makebox[\widthof{\buct@major\quad}][c]{#1}}
+}
+\newcommand\buct@format@date[1]{%
+    \edef\buct@@date{\buct@date}%
+    \def\buct@@process@date##1-##2-##3\@nil{%
+        #1{##1}{##2}{##3}%
+    }%
+    \expandafter\buct@@process@date\buct@@date\@nil
+}
+\newcommand\@zhdate[3]{%
+    \bfseries\zhkai
+    \ifbuct@bachelor
+        \zihao{4}
+        #1年\makebox[1.5em]{#2}月\makebox[1.5em]{#3}日
+    \else
+        \Large\ziju{.1}%
+        日\hspace{1.5\ccwd}期：\zhdigits{#1}年\zhnumber{#2}月\zhnumber{#3}日%
+    \fi
+}
+\newcommand{\buct@makecover}{%
+    \newgeometry{
+        top = 2.1cm, bottom = 2.2cm,
+        left = 2cm, right = 2cm,
+        headheight = 0cm, footskip = 0cm
+    }
+    \thispagestyle{empty}
+    \xeCJKsetup{EmboldenFactor=2.3}
+    \begin{table}[h]
+        \raggedleft
+        \ifbuct@bachelor
+            \songti\zihao{5}
+        \else
+            \renewcommand{\arraystretch}{1.3}\large
+        \fi
+        \begin{tabular}{l@{}l}
+            \ifbuct@bachelor%
+                班\hspace{2\ccwd}级&：\CJKfamily+{zhsong}\buct@class\hspace*{2\ccwd}\\
+                学\hspace{2\ccwd}号&：\CJKfamily+{zhsong}\buct@studentid\hspace*{2\ccwd}\\
+            \else%
+                \xbsong 单位代码 & ：\CJKfamily+{zhsong}\mbox{10010}\\
+                \xbsong 学\hspace{2\ccwd}号 & ：\CJKfamily+{zhsong}\mbox{\buct@studentid}\\
+            \fi
+        \end{tabular}
+    \end{table}
+    \ifbuct@bachelor\vspace{3bp}\else\vspace{26bp}\fi
+    \begin{minipage}[c][][c]{2.35cm}
+        \includegraphics[width = 2.35cm]{figure/BUCT-badge.pdf}
+    \end{minipage}
+    \qquad
+    \begin{minipage}[c][2.35cm][c]{9cm}
+        \xingkai
+        \ifbuct@bachelor
+            \ziju{0.1}\hspace*{0.8\ccwd}\zihao{-0}
+        \else
+            \ziju{-0.02}\zihao{0}
+        \fi
+        {北京化工大学}
+    \end{minipage}
+    \ifbuct@bachelor\vspace{12bp}\else\vspace{18bp}\fi
+    \begin{center}
+        \ifbuct@bachelor
+            \ziju{0.15}\xbsong\zihao{-0}\CJKfamily+{}{%
+            \punctstyle{banjiao}毕业设计（论文）% (论文)
+            }
+        \else%
+            %\ziju{-0.05}
+            \dbsong\fontsize{38bp}{60bp}\selectfont
+            \ifbuct@master{硕}\else{博}\fi{}士研究生学位论文
+        \fi
+    \end{center}
+    \ifbuct@bachelor
+            \setlength{\TPHorizModule}{1cm}
+            \setlength{\TPVertModule}{1cm}
+            \begin{textblock}{0}(0,10)
+                \noindent%
+                \tikz[line width=1.2pt] \draw (0,0) -- (21,0) (0,0.2) -- (21,0.2);
+            \end{textblock}
+            \vspace{72bp}
+            \begin{center}
+                \xeCJKsetup{
+                    underline = {
+                        skip      = false,
+                        thickness = 1.4pt,
+                    }
+                }
+                \renewcommand{\arraystretch}{2}
+                \begin{tabular}{%
+                        >{\zihao{-2}\xbsong}l
+                        >{\zihao{3}\bfseries}l
+                }
+                    题\hspace{\ccwd}目  & \buct@title@ul{\buct@ChineseTitleLineA}\\
+                    \ifthenelse{\equal{\buct@ChineseTitleLineB}{}}{\relax}{
+                                        & \buct@title@ul{\buct@ChineseTitleLineB}\\
+                    }
+                \end{tabular}
+                \vskip144bp\zihao{3}
+                \begin{tabular}{
+                        >{\begin{CJKfilltwosides}[b]{4\ccwd}\xbsong}r%
+                            <{\end{CJKfilltwosides}}%
+                        @{}>{\enspace\zihao{4}\bfseries}l%
+                        <{\vspace{.2em}}%
+                    }
+                    专业     & \buct@major@ul{\buct@major}\\
+                    学生   & \buct@major@ul{\buct@author}\\
+                    指导教师 & \buct@major@ul{\buct@supervisor}\\
+                \end{tabular}
+            \end{center}
+            \vfill{%
+                \begin{center}%
+                    \buct@format@date{\@zhdate}%
+                \end{center}%
+            }
+    \else
+        \vspace{76bp}
+        \begin{center}
+            \xeCJKsetup{
+                underline = {
+                    skip      = false,
+                    thickness = 1.2pt,
+                }
+            }
+            \renewcommand{\arraystretch}{2.7}
+            \begin{tabular}{
+                >{\fontsize{20}{36}\selectfont\begin{CJKfilltwosides}[b]{4\ccwd}\sffamily\bfseries}r%
+                <{\end{CJKfilltwosides}}%
+                @{}>{\enspace\zihao{3}\bfseries}l%
+                <{\vspace{.2em}}%
+            }
+                题目     & \buct@title@ul{\buct@ChineseTitleLineA}\\
+                \ifthenelse{\equal{\buct@ChineseTitleLineB}{}}{\relax}{
+                                        & \buct@title@ul{\buct@ChineseTitleLineB}\\
+                }
+                专业     & \buct@title@ul{\zihao{4}\buct@major}\\
+                研究生   & \buct@title@ul{\zihao{4}\buct@author}\\
+                指导教师 & \buct@title@ul{\zihao{4}\buct@supervisor}\\
+            \end{tabular}
+        \end{center}
+        \vfill{%
+            \begin{center}%
+                \buct@format@date{\@zhdate}%
+            \end{center}%
+        }
+    \fi
+}
+\NewDocumentCommand{\makecover}{ o }{%
+    \hypertarget{cover}{}
+    \pdfbookmark{封面}{cover}
+    \IfNoValueTF{#1}{
+        \IfFontExistsTF{FZXiaoBiaoSong-B05S}{%
+            \newCJKfontfamily[xbsong] \xbsong {FZXiaoBiaoSong-B05S}
+            \newCJKfontfamily[dbsong] \dbsong {FZDaBiaoSong-B06S}
+            \newCJKfontfamily[xingkai]\xingkai{STXingkai}
+            \newCJKfontfamily[zhkai]  \zhkai  {KaiTi} [AutoFakeBold]
+            \buct@makecover
+        }{
+            \cleardoublepage
+        }
+
+    }{%
+        \includepdf[pages=-]{#1}
+    }
+\restoregeometry
+}
 \newcommand{\buct@pdfmark}[2]{%
     \hypertarget{#2}{}
     \pdfbookmark{#1}{#2}
@@ -344,29 +523,30 @@
     }
 }
 \ifbuct@bachelor
-    \newenvironment{taskbook}{%
+    \NewDocumentEnvironment{taskbook}{ s }{%
         \cleardoublepage%
         \buct@pdfmark{\buct@task@pdf}{taskbook}%
         \section*{\buct@task@title}%
+        \IfBooleanTF{#1}{\pagestyle{empty}}{}%
     }{\clearpage}
     \NewDocumentCommand{\buct@ul}{ o m }{\underline{\makebox[#1][c]{#2}}}
     \NewDocumentCommand\taskinfo{ s }{%
         \noindent%
         \begin{minipage}{\textwidth}%
             \punctstyle{plain}\linespread{1.94}%
-                \buct@task@ctitle\buct@ul[27em]{\buct@ctitle}\\[3pt]
+                \buct@task@ChineseTitle\buct@ul[27em]{\buct@ChineseTitle}\\[3pt]
             \IfBooleanTF{#1}{% less lines break
                 \buct@task@school\buct@ul[10em]{\buct@school}\quad
                 \buct@task@major\buct@ul[10em]{\buct@major}\quad
                 \buct@task@class\buct@ul[5em]{\buct@class}\\[3pt]
-                \buct@task@student\buct@ul[5em]{\buct@cauthor}\quad
+                \buct@task@student\buct@ul[5em]{\buct@author}\quad
                 \buct@task@supervisor\buct@ul[6em]{\buct@supervisor}\quad
                 \buct@task@msupervisor\buct@ul[4em]{\buct@msupervisor}%
             }{% more lines break
                 \buct@task@school\buct@ul[15em]{\buct@school}\qquad
                 \buct@task@major\buct@ul[13em]{\buct@major}\\[3pt]
                 \buct@task@class\buct@ul[15em]{\buct@class}\qquad
-                \buct@task@student\buct@ul[13em]{\buct@cauthor}\\[3pt]
+                \buct@task@student\buct@ul[13em]{\buct@author}\\[3pt]
                 \buct@task@supervisor\buct@ul[8em]{\buct@supervisor}\qquad
                 \buct@task@msupervisor\buct@ul[10em]{\buct@msupervisor}%
             }
@@ -393,51 +573,51 @@
         \cleardoublepage
         \buct@pdfmark{\buct@cabstract@title}{cabstract}
         \begin{center}
-            \buct@abs@titfont\buct@ctitle
+            \buct@abs@titfont\buct@ChineseTitle
             \vskip22pt
-            \buct@abs@infofont\buct@cauthor\quad%
+            \buct@abs@infofont\buct@author\quad%
             \buct@class\quad\buct@studentid\quad%
             \buct@supervisor@title\buct@supervisor%
             \vskip22pt
             \buct@abs@absfont\buct@cabstract@title
         \end{center}\par\vspace{18pt}
-    }{\vskip1em\noindent\buct@keywordsfont\buct@ckeywords@title\buct@ckeywords}
+    }{\vskip1em\noindent\buct@keywordsfont\buct@ChineseKeywords@title\buct@ChineseKeywords}
 \else
     \newenvironment{cabstract}{%
         \cleardoublepage
-        \buct@pdfmark{\buct@cabstract@title}{cabstract}\markboth{\buct@cabstract@title}{}
+        \buct@pdfmark{\buct@cabstract@title}{cabstract}\markboth{\buct@cabstract@title}{\buct@cabstract@title}
         \begin{center}
-            \buct@abs@titfont\buct@ctitle
+            \buct@abs@titfont\buct@ChineseTitle
             \vskip24pt
             \buct@abs@absfont\buct@cabstract@title
         \end{center}\par\vspace{12pt}
         \buct@abs@textfont
     }{\vskip24pt%
-    \noindent\buct@keywords@titfont\buct@ckeywords@title\buct@keywords@font\buct@ckeywords}
+    \noindent\buct@keywords@titfont\buct@ChineseKeywords@title\buct@keywords@font\buct@ChineseKeywords}
 \fi
 \ifbuct@bachelor
     \newenvironment{eabstract}{%
         \cleardoublepage%
         \buct@pdfmark{\buct@eabstract@title}{abstracten}
         \begin{center}
-            \buct@abs@titfonten\buct@etitle\vskip22pt
+            \buct@abs@titfonten\buct@EnglishTitle\vskip22pt
             \buct@abs@absfonten\buct@eabstract@title
         \end{center}
         \par\vspace{22pt}
-    }{\vskip1em\noindent\buct@keywordsfonten \buct@ekeywords@title\buct@ekeywords}
+    }{\vskip1em\noindent\buct@keywordsfonten \buct@EnglishKeywords@title\buct@EnglishKeywords}
 \else
     \newenvironment{eabstract}{%
         \cleardoublepage%
-        \buct@pdfmark{\buct@eabstract@title}{eabstract}\markboth{\buct@eabstract@title}{}
+        \buct@pdfmark{\buct@eabstract@title}{eabstract}\markboth{\buct@eabstract@title}{\buct@eabstract@title}
             \begin{center}
                 \setlength{\leftskip}{3em plus 1em minus .5em}
                 \setlength{\rightskip}{3em plus 1em minus .5em}
-                \buct@abs@titfonten\buct@etitle\vskip76pt
+                \buct@abs@titfonten\buct@EnglishTitle\vskip76pt
                 \buct@abs@absfonten\buct@eabstract@title
             \end{center}\par\vspace{40pt}
         \buct@abs@textfont
     }{\vskip48pt%
-    \noindent\buct@keywords@titfonten\buct@ekeywords@title\buct@keywords@fonten\buct@ekeywords}
+    \noindent\buct@keywords@titfonten\buct@EnglishKeywords@title\buct@keywords@fonten\buct@EnglishKeywords}
 \fi
 \setcounter{secnumdepth}{3}
 \ifbuct@bachelor
@@ -449,16 +629,16 @@
     \cleardoublepage
     \pdfbookmark{\contentsname}{toc}%
     \chapter*{\buct@toc@tocfont\buct@content@title}%
-    \ifbuct@bachelor\relax\else\markboth{\buct@content@title}\fi
+    \ifbuct@bachelor\relax\else\markboth{\buct@content@title}{\buct@content@title}\fi
     \@starttoc{toc}
 }
 \ifbuct@bachelor\relax\else
     \newcommand\tableofcontentsEN{%
         \cleardoublepage
-        \pdfbookmark{\econtentsname}{toce}%
+        \pdfbookmark{\buct@econtentsname}{toce}%
         \chapter*{%
-            \em\econtentsname%
-            \ifbuct@bachelor\relax\else\markboth{\econtentsname}\fi%
+            \em\buct@econtentsname%
+            \ifbuct@bachelor\relax\else\markboth{\buct@econtentsname}{\buct@econtentsname}\fi%
         }%
         \@starttoc{toce}
     }
@@ -479,11 +659,11 @@
         {\buct@toc@chapfont\vspace{3pt}}
         {\thecontentslabel\quad}{}
         {\titlerule*[.4em]{$\cdot$}\bfseries\contentspage}
-    \titlecontents{section}[2em]
+    \titlecontents{section}[2.5em]
         {\buct@toc@secfont\vspace{-3pt}}
         {\thecontentslabel\quad}{}
         {\titlerule*[.5em]{$\cdot$}\contentspage}
-    \titlecontents{subsection}[5em]
+    \titlecontents{subsection}[4em]
         {\buct@toc@ssecfont\vspace{-3pt}}
         {\thecontentslabel\quad}{}
         {\titlerule*[1em]{$\cdot$}\contentspage}
@@ -510,7 +690,7 @@
     \addcontentsline{toc}{chapter}{\bibname}
     \ifbuct@bachelor\relax\else
         \addcontentsline{toce}{chapter}{\buct@toce@chapfont\buct@ebib@title}
-        \markboth{\bibname}
+        \markboth{\bibname}{\bibname}
     \fi
 }
 \ifbuct@bachelor
@@ -677,12 +857,10 @@
     \AtBeginEnvironment{tabular}{\buct@floatfont}
     \AtBeginEnvironment{tabularx}{\buct@floatfont}
 \fi
-\ifbuct@bachelor\relax\else
-    \let\oldlongtable\longtable
-    \let\endoldlongtable\endlongtable
-    \def\longtable{\zihao{5}\oldlongtable}
-    \AtEndEnvironment{longtable}{\normalsize}
-\fi
+\let\oldlongtable\longtable
+\let\endoldlongtable\endlongtable
+\def\longtable{\zihao{5}\oldlongtable}
+\AtEndEnvironment{longtable}{\normalsize}
 \graphicspath{{figure/}}
 \renewcommand{\captionfont}{\buct@float@captionfont}
 \renewcommand{\captionlabelfont}{\buct@float@labelfont}
@@ -771,14 +949,14 @@
     \newenvironment{achievements}{%
         \cleardoublepage
         \chapter*{\buct@achi@title}
-        \markboth{\buct@achi@title}{}
+        \markboth{\buct@achi@title}{\buct@achi@title}
         \addcontentsline{toc}{chapter}{\buct@achi@title}
         \addcontentsline{toce}{chapter}{\buct@toce@chapfont\buct@eachi@title}
     }{}
     \newenvironment{resume}{%
         \cleardoublepage
         \chapter*{\buct@resu@title}
-        \markboth{\buct@resu@title}{}
+        \markboth{\buct@resu@title}{\buct@resu@title}
         \addcontentsline{toc}{chapter}{\buct@resu@title}
         \addcontentsline{toce}{chapter}{\buct@toce@chapfont\buct@eresu@title}
     }{}
@@ -786,7 +964,7 @@
 \newenvironment{acknowledgement}{%
     \chapter*{\buct@ack@title}
     \ifbuct@bachelor\relax\else
-        \markboth{\buct@ack@title}{}
+        \markboth{\buct@ack@title}{\buct@ack@title}
         \addcontentsline{toce}{chapter}{\buct@toce@chapfont\buct@eack@title}
     \fi
     \addcontentsline{toc}{chapter}{\buct@ack@title}
@@ -798,7 +976,7 @@
         \addcontentsline{toc}{chapter}{\buct@deno@title}
     \else
         \buct@pdfmark{\buct@deno@title}{denotation}
-        \markboth{\buct@deno@title}{}
+        \markboth{\buct@deno@title}{\buct@deno@title}
     \fi
     \vspace{-1em}%
     \begin{oldlongtable}[c]{l@{\extracolsep{3em}}p{#1}}

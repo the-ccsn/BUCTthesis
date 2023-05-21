@@ -11,21 +11,34 @@
 \usepackage{mycfg}
 
 \buctsetup{
-	%%%%% 各选项之间不要留有空行，并以西文逗号“,”分隔 %%%%%
 	% 论文的中文标题
-	ctitle		= {BUCTthesis写作示例文档},
-	% 论文的英文标题
-	etitle		= {HOW TO \TeX\ WITH BUCTthesis: AN EXAMPLE},
-	% 作者姓名
-	cauthor		= {张三},
+	ChineseTitle		= {基于 \LaTeX\ 的北京化工大学本硕博毕业论文写作模板},
+	% 封面上的标题。总字数不要超过 36 个汉字长度。
+	% 硕博：封面的标题有两行，每一行控制在 18 个汉字长度以内。
+	% 封面标题首行
+	ChineseTitleLineA	= {基于 \LaTeX\ 的北京化工大学本硕博},
+	% 封面标题次行
+	ChineseTitleLineB	= {毕业论文写作模板},
+	% 论文的英文标题，一般需要大写
+	EnglishTitle		= {BUCTthesis: A \LaTeX\ WRITING TEMPLATE FOR BUCT},
+	% 作者的中文姓名
+	author				= {张三},
+	% 学号
+	studentid			= {2018020999},
+	% 专业名称
+	major				= {高分子材料与工程},
+	% 导师的姓名与职称
+	supervisor			= {李四教授},
 	% 中文、英文关键词，各关键词间以西文逗号“,”分隔
-	ckeywords   = {论文,\LaTeX{},模板},
-	ekeywords   = {thesis,\LaTeX{},template},
+	ChineseKeywords		= {论文,\LaTeX{},模板},
+	EnglishKeywords		= {thesis,\LaTeX{},template},
+	% 日期，请注意：务必使用形如“YYYY-MM-DD”的格式
+	date				= {2023-05-20},
 }
 
 \begin{document}
-	% 插入封面，来自于 cover 文件夹下。封面的制作请看说明文档；参数 [pages=-] 表示插入所有页面
-	%\includepdf[pages=-]{cover/buctcover.pdf}
+	% 生成封面，请确保字体文件的存在
+	\makecover
 	
 	% 从此以大写罗马数字编页码
 	\frontmatter
