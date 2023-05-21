@@ -40,13 +40,14 @@ BUCTthesis （**B**eijing **U**niversity of **C**hemical **T**echnology LaTeX **
    - `chapter` 文件夹用于存放各部分内容，并在 `main.tex` 调用；
    - `figure` 和 `code` 文件夹下分别保存插图和源代码，以方便写作时调用；
 6. 对 `main.tex` 文件执行 `latexmk` 或 `xelatex -> bibtex -> xelatex -> xelatex` 的全编译。
-7. 在 `cover` 文件夹中可生成论文的封面，使用方法请阅读说明文档 `buctthesis.pdf`。
 
 ## 注意事项
 
 - 北京化工大学教务处与研究生院仅提供了写作规范（见下）而**未对本模板做任何测试或授权**。模板作者自当尽力，但限于软件等各种因素，由本模板生成的文档可能仍与要求有所出入。所以使用本模板类造成（包括但不限于）论文审核不通过等问题作者不负责，请使用时慎酌。
 - 模板在 TeX Live 2020 及更新版本、[Overleaf](https://www.overleaf.com/) 上可顺利编译，可能不兼容于低版本。**不支持** CTeX 套装。
-- 学校会统一印制论文封面，而其中包括标题和作者等的内容需要用笔填写。但为保证论文的完整性，本模板对其进行了仿制，故与实际相比可能有少许差别。
+- 论文封面相关：
+   - 学校会统一印制论文封面，而其中包括标题和作者等的内容需要用笔填写。但为保证论文的完整性，本模板对其进行了仿制，故与实际相比可能有少许差别；
+   - 封面使用的方正系列字体需要自行安装，字体清单参见说明文档 `buctthesis.pdf`。
 
 ## 写作规范
 
@@ -80,4 +81,4 @@ BUCTthesis （**B**eijing **U**niversity of **C**hemical **T**echnology LaTeX **
 
 ## 迁移
 
-原有的 https://github.com/the-ccsn/buct-taskbook 与 https://github.com/the-ccsn/buct-proposal 目前分别位于对应的根目录下文件夹内
+原有的 [本科开题报告模板](https://github.com/the-ccsn/buct-proposal) 目前暂存于本仓库根目录下文件夹内。
