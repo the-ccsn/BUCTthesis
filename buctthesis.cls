@@ -25,9 +25,8 @@
 %% of LaTeX version 1999/12/01 or later.
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{buctthesis}[2022/05/20 v2.0 BUCT Thesis Template]
+\ProvidesClass{buctthesis}[2023/05/20 v2.0 BUCT Thesis Template]
 \RequirePackage{ifxetex}
 \RequireXeTeX
 \RequirePackage{kvoptions}
@@ -432,7 +431,7 @@
                         <{\vspace{.2em}}%
                     }
                     专业     & \buct@major@ul{\buct@major}\\
-                    学生   & \buct@major@ul{\buct@author}\\
+                    学生     & \buct@major@ul{\buct@author}\\
                     指导教师 & \buct@major@ul{\buct@supervisor}\\
                 \end{tabular}
             \end{center}

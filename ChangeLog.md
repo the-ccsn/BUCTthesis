@@ -1,6 +1,22 @@
 # Changelog of BUCTthesis
 在这里记录 BUCTthesis 中较为重要的改动。
 
+## v2.0 - 2023/05/21
+**从该版本起，仓库交由 [长城学生网络](https://github.com/the-ccsn) 维护。**
+
+### Added
+- 合并 `buctcover.cls` 至 `buctthesis.cls` 中。也就是说现在可以直接在 `main.tex` 中使用 `\makecover` 生成封面
+- 现在 `taskbook` 环境后可以接受一个 `*` 号，使得输出的“任务书”不含页眉页脚
+
+### Fixed
+- 修改了几个选项的键名，现在更加易读了
+- 现在默认加载 `xeCJKfntef` 宏包来生成封面的下划线
+- 修复了本科“符号说明表”的 `denotation` 环境失效的问题
+- 微调了本科目录的样式
+
+### Deleted
+- 删除了 `buctcover.cls` 文件
+
 ## v1.4 - 2022/06/21
 
 ### Added

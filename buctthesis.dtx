@@ -76,8 +76,8 @@
 % \subsection{模板内容}
 % 本模板为中文论文模板，暂不支持英语专业的论文写作。以下是完整论文的书序，其中划线部分为模板未完成的部分。
 % \begin{description}
-%    \item[本科] \without{开题报告} \footnote{格式未指定。}、\without{中期进展情况检查表} \footnote{由学校提供 Word，可转换为 PDF 文件插入。}、论文封面、诚信声明、任务书、摘要、目录、前言、正文、结论、参考文献、符号说明、致谢和附录；
-%    \item[研究生] 论文封面、版权页（独创性声明和授权书）、\without{学位论文数据集} \footnotemark[2]、中英文摘要、中英文目录、符号和缩略词说明、正文、参考文献、附录、致谢、作者攻读学位期间发表的学术论文及科研成果目录、作者和导师简介和\without{答辩委员会决议} \footnote{使用扫描件插入。}。
+%    \item[本科] 开题报告 \footnote{目前处于实验性质，参见根目录下的 \file{buct-proposal} 文件夹。}、\CJKsout{中期进展情况检查表} \footnote{由学校提供 Word，可转换为 PDF 文件插入。}、论文封面、诚信声明、任务书、摘要、目录、前言、正文、结论、参考文献、符号说明、致谢和附录；
+%    \item[研究生] 论文封面、版权页（独创性声明和授权书）、\CJKsout{学位论文数据集} \footnotemark[2]、中英文摘要、中英文目录、符号和缩略词说明、正文、参考文献、附录、致谢、作者攻读学位期间发表的学术论文及科研成果目录、作者和导师简介和\CJKsout{答辩委员会决议} \footnote{使用扫描件插入。}。
 % \end{description}
 %
 % \subsection{免责声明}
@@ -213,7 +213,7 @@
 %
 % 以下逐一简述各个选项：
 %
-% \DescribeOpt{type = }
+% \DescribeOpt{type}
 % \emph{必须指定一种类型}：本科 \opt{bachelor}，硕士 \opt{master}，以及博士 \opt{doctor}。
 % 如：
 % \begin{latex}
@@ -224,7 +224,7 @@
 %   \documentclass[type = bachelor]{buctthesis}
 % \end{latex}
 %
-% \DescribeOpt{fontset = }
+% \DescribeOpt{fontset}
 % 该选项会传递至 \pkg{ctex} 宏集，从而指定全文的字体。模板的设置如表~\ref{tab:fontset}~所示。
 %
 % 其中选项 \opt{fandol} 或使用 \opt{\meta{others}} 选项 \footnote{参见\pkg{ctex}宏集第 4.3 小节。}是为了一些不方便安装字体的系统或平台（如 Overleaf）所采取的\emph{临时解决方案}。
@@ -244,7 +244,7 @@
 %     \end{tabular}
 % \end{table}
 %
-% \emph{由于封面使用的字体比较特殊，所以上述字体设置与封面无关。参见~\ref{subsec:cover}~中对封面所使用字体的相关内容。}
+% \emph{此外，论文封面使用的字体比较特殊，因此需要做另外设置。参见~\ref{subsec:cover}~中对封面相关字体的说明。}
 %
 % \DescribeOpt{submit}
 % 是否为提交版本。如果启用则会将文章超链接和代码块的文字颜色全部设置为黑色，适合论文最终提交与付梓。
@@ -271,6 +271,8 @@
 % \DescribeOpt{major}
 % \DescribeOpt{supervisor}
 % \DescribeOpt{msupervisor}
+% \DescribeOpt{ChineseKeywords}
+% \DescribeOpt{EnglishKeywords}
 % \begin{syntax}{buctsetup}
 %    \marg{键值列表}
 % \end{syntax}
@@ -432,8 +434,8 @@
 % \end{latex}
 %
 % 三者是互相独立的。
-% 英文目录通过 \cs{echapter} 等命令指定某一标题的英文标题，参见~\ref{subsubsec:bitoc}。
-% 设计图纸目录通过 \env{dfigure} 环境指定插图为“设计图纸”并计数编号，参见~\ref{subsubsec:dfigure}。
+% 为生成英文目录，需要在正文中以 \cs{echapter} 等命令指定各级标题的对应英文，参见~\ref{subsubsec:bitoc}；
+% 为生成设计图纸目录，需要在正文中以 \env{dfigure} 环境指定插图为“设计图纸”并计数编号，参见~\ref{subsubsec:dfigure}。
 %
 % \subsubsection{符号说明表}\label{subsubsec:deno}
 % \DescribeEnv{denotation}
@@ -495,7 +497,7 @@
 % 我们只需在正文章节标题命令后加上对应标签即可。
 % 如：
 % \begin{latex}
-%   \chapter{绪论}\echapter{Intorduciton}
+%   \chapter{绪论}\echapter{Introduciton}
 %       \section{基本概念}\esection{Basic Conceptions}
 %       \section{本章小结}\esection{Chapter Summary}
 %   \chapter{实验}\echapter{The Experiments}
@@ -511,7 +513,7 @@
 %     \oarg{中文目录标题}\marg{中文正文标题}\marg{英文目录标题}
 % \end{syntax}
 %
-% 可见与 \cs{chapter} 相比，它多了一个参数用于接受 \meta{英文目录的标题}。
+% 可见与 \cs{chapter} 相比，它多了一个必选参数用于接受 \meta{英文目录的标题}。
 % 于是，上面这个例子可以这样简化：
 % \begin{latex}
 %   \bichapter{绪论}{Intorduciton}
@@ -536,11 +538,13 @@
 %
 % 该命令仅适用于硕博论文中。
 %
-% 具体的用法很简单：使用 \cs{bicaption} 代替 \cs{caption} 命令即可，如：
+% 具体的用法很简单：在 \env{figure} 环境中使用 \cs{bicaption} 代替 \cs{caption}，如：
 % \begin{latex}
 %   \begin{figure}
-%       \centering \includegraphics[]{file}
+%       \centering
+%       \includegraphics[<options>]{My-Fig}
 %       \bicaption{中文标题}{English Title}
+%       \label{fig:my-fig}
 %   \end{figure}
 % \end{latex}
 %
@@ -553,20 +557,25 @@
 % 一是加入主目录，另一种是单独生成目录。
 %
 % \DescribeEnv{dfigure}
-% 设计图纸的计数器是独立于一般插图的，故需要使用 \env{dfigure} 环境来代替 \env{figure}。
-
+% 设计图纸的计数器是独立于一般插图的。
+% 因此，无论编目方式如何，
+% 都需要使用 \env{dfigure} 而非 \env{figure} 环境，来为一张插图指定为“设计图纸”。
+%
 % \DescribeMacro{\dcaption}
-% 先来看编入主目录的方式，在正文内插入插图的代码处，
-% 除了使用 \cs{dcaption} 代替 \cs{caption}外都一样。
+% 如果需要编入主目录，需要使用 \cs{dcaption} 代替 \cs{caption}，如：
 % \begin{latex}
-%   \begin{dfigure}[htbp]
-%       \centering\includegraphics[]{file}
+%   \begin{dfigure}
+%       \centering
+%       \includegraphics[<options>]{My-Fig}
 %       \dcaption{设计图纸示例}
 %   \end{dfigure}
 % \end{latex}
+% 也就是说，\cs{dcaption} 命令用于添加编号与标题的同时将它编入主目录。
 %
 % \DescribeMacro{\listofdesignfigures}
-% 而独立目录也很简单，一个 \cs{listofdesignfigures} 即可。参见~\ref{subsubsec:content}。
+% 而独立目录也很简单：只需要 \env{dfigure} 指定为“设计图纸”，
+% 并在主目录（\cs{tableofcontents}）后跟一个 \cs{listofdesignfigures} 即可。参见~\ref{subsubsec:content}。
+%
 % \subsubsection{结论}
 % \DescribeEnv{conclusion}
 % 该环境仅适用于本科论文中。
@@ -592,18 +601,23 @@
 %    \marg{CiteKey}
 % \end{syntax}
 %
-% 模板使用 \cs{cite} 实现上标、方括号按“顺序编码制”引用参考文献；
-% \cs{inlinecite} 可实现行间引用，适合某些特殊情况使用；
-% 而 \cs{nocite}\marg{CiteKey} 则指明不引用但需要列出的参考文献。
+% 模板使用 \BibTeX 来实现参考文献的引用。
+% 一般情况下，使用 \cs{cite} 实现上标、方括号按“顺序编码制”引用参考文献；
+% 而 \cs{inlinecite} 可实现行间引用，适合某些特殊情况使用；
+% 此外，\cs{nocite}\marg{CiteKey} 则指明不在正文中引用但仍需要列出的参考文献，一般不使用。
 % 在同一处引用多个文献时，应将各篇文献的引用标签一同写在参数里，
-% 并以西文逗号“,”分隔每个 \meta{CiteKey}。
+% 并以西文逗号“,”分隔每个 \meta{CiteKey}，如：
+% \begin{latex}
+%   ……多喝热水。\cite{bib1, bib2}
+% \end{latex}
 %
-% 主文件中以
+% 至于参考文献列表，主文件中以下列命令来生成符合格式要求的参考文献章节：
 % \begin{latex}
 %   \bibliographystyle{gbt7714-numerical}
 %   \bibliography{thesisbib.bib}
 % \end{latex}
-% 来增加符合格式要求的参考文献章节。为罗列各条参考文献，
+%
+% 为罗列各条参考文献，
 % 需要在 \file{thesisbib.bib} 文件中增删需引用的文献数据。
 % 在文章中相应位置引用文献后，需执行一次全编译以确保正确显示。
 %
@@ -617,12 +631,14 @@
 %
 % 文献翻译的源文件位于 \file{chapter/translation.tex}，
 % 使用 \env{translation} 环境，原文和翻译都要有。
+%
+% \emph{注意：部分学院要求该部分作为单独的一份文件，此时可直接删除该文件并删除主文件的插入代码。}
 % \begin{latex}
-%   \begin{translations}
+%   \begin{translation}
 %      English.
 %
 %      汉语。
-%   \end{translations}
+%   \end{translation}
 % \end{latex}
 %
 % \subsubsection{附录}\label{subsubsec:app}
@@ -680,7 +696,7 @@
 %    \begin{macrocode}
 %<*class>
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{buctthesis}[2022/05/20 v2.0 BUCT Thesis Template]
+\ProvidesClass{buctthesis}[2023/05/20 v2.0 BUCT Thesis Template]
 %    \end{macrocode}
 %
 % 装载 \pkg{ifxetex} 宏包，并通过 \cs{RequireXeTeX} 命令检查编译命令。
@@ -764,7 +780,7 @@
 %   \define@key{buct}{ChineseTitle}{\ChineseTitle{#1}}
 % \end{latex}
 %
-% 这个命令我们让它能接受两个参数，其中第一个为选项的键名称，后一个则是默认值。
+% 这个命令我们让它能接受两个参数，其中第一个必选参数为选项的键名称，后一个可选参数则是选项的默认值。
 %    \begin{macrocode}
 \NewDocumentCommand{\buct@def@key}{ m o }{
     \@namedef{#1}##1{\@namedef{buct@#1}{##1}}
@@ -797,7 +813,7 @@
 %
 % \begin{macro}{\buct@def@sep@key}
 % 对于 \opt{ChineseKeywords} 等键接受的是以西文逗号“,”分隔的值，上面的定义就不合适了。
-% 所以要对值做分隔。相比 \cs{buct@def@key} 这里多一个参数，即为在论文中的分隔符。
+% 所以要对值做分隔。相比 \cs{buct@def@key} 这里的后一个参数为必选项，即为在论文中的分隔符。
 % 此处的宏展开可参考\href{https://www.zhihu.com/question/26916597}{这篇讨论}。
 %    \begin{macrocode}
 \newcommand{\buct@def@sep@key}[2]{%
@@ -977,7 +993,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% 对于西文正文，全部统一设置为Times New Roman，以尽可能避免格式审查问题。
+% 其次，对于西文，全部统一设置为 Times New Roman，以尽可能避免格式审查问题。
 %    \begin{macrocode}
 \setmainfont{Times New Roman}
 \setsansfont{Times New Roman}
@@ -1454,7 +1470,7 @@
                         <{\vspace{.2em}}%
                     }
                     专业     & \buct@major@ul{\buct@major}\\
-                    学生   & \buct@major@ul{\buct@author}\\
+                    学生     & \buct@major@ul{\buct@author}\\
                     指导教师 & \buct@major@ul{\buct@supervisor}\\
                 \end{tabular}
             \end{center}
@@ -2555,7 +2571,6 @@
 \setlist[enumerate]{%
     itemindent = 2em,
 }
-\newcommand\without\CJKsout
 \newcommand\Arg[1]{ \texttt{\char`\{} \meta{#1} \texttt{\char`\}} }
 \providecommand\marg[1]{ \Arg{#1} }
 \providecommand\oarg[1]{ \texttt[ \meta{#1} \texttt] }
