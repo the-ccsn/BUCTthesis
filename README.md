@@ -1,13 +1,13 @@
 # BUCTthesis
 
-[![BUCTthesis](https://img.shields.io/badge/BUCTthesis-LaTeX-blue)](https://github.com/Miracle0565/BUCTthesis)
-[![GitHub license](https://img.shields.io/github/license/Miracle0565/BUCTthesis)](https://github.com/Miracle0565/BUCTthesis/blob/master/LICENSE)
+[![BUCTthesis](https://img.shields.io/badge/BUCTthesis-LaTeX-blue)](https://github.com/the-ccsn/BUCTthesis)
+[![GitHub license](https://img.shields.io/github/license/the-ccsn/BUCTthesis)](https://github.com/the-ccsn/BUCTthesis/blob/master/LICENSE)
 
 ## BUCTthesis in a nutshell
 BUCTthesis is a LaTeX writting template package for Beijing University of Chemical Technology,
 supporting bachelor, master and doctor theses.
 
-You can [download](https://github.com/Miracle0565/BUCTthesis/releases) this package from GitHub Releases,
+You can [download](https://github.com/the-ccsn/BUCTthesis/releases) this package from GitHub Releases,
 and the latest released version is strongly recommended. As this package is mainly provided for
 Chinese users, the following of this file and the manual documents are written in Chinese only.
 
@@ -30,7 +30,7 @@ BUCTthesis （**B**eijing **U**niversity of **C**hemical **T**echnology LaTeX **
 ## 快速使用
 
 1. 安装 TeX 发行版，推荐使用 TeX Live。
-2. [在这里下载](https://github.com/Miracle0565/BUCTthesis/releases) 模板最新发行版的压缩文件。
+2. [在这里下载](https://github.com/the-ccsn/BUCTthesis/releases) 模板最新发行版的压缩文件。
 3. 解压缩后，可在 `demo` 文件夹中找到本科、硕博两种论文类型所对应的示例文件夹；**将所选论文类型文件夹中的所有内容移动至模板的根目录**。（例如，对本科而言，需将 `demo/bachelor` 中的所有内容复制或移动到根目录， `demo` 文件夹中的剩余内容可删除。）
 4. 阅读本模板的说明文档 `buctthesis.pdf`，该文档简要地说明了模板的使用方法。
 5. 相比于重建文件，直接在示例文件上修改会更加方便：
@@ -73,11 +73,11 @@ BUCTthesis （**B**eijing **U**niversity of **C**hemical **T**echnology LaTeX **
 
 ## 提问
 
-关于模板的任何问题或新功能需求，欢迎提交 [GitHub Issues](https://github.com/Miracle0565/BUCTthesis/issues)。
+关于模板的任何问题或新功能需求，欢迎提交 [GitHub Issues](https://github.com/the-ccsn/BUCTthesis/issues)。
 
 ## 开源许可
 
-本项目的代码部分基于  [LaTeX Project Public License](http://www.latex-project.org/lppl.txt)（版本 1.3c 或更高）开源于 [GitHub](https://github.com/Miracle0565/BUCTthesis) 。同时为了方便国内用户，在 [Gitee](https://gitee.com/Miracle0565/BUCTthesis) 建有代码的镜像。
+本项目的代码部分基于  [LaTeX Project Public License](http://www.latex-project.org/lppl.txt)（版本 1.3c 或更高）开源于 [GitHub](https://github.com/the-ccsn/BUCTthesis) 。同时为了方便国内用户，在 [Gitee](https://gitee.com/Miracle0565/BUCTthesis) 建有代码的镜像。
 
 ## 迁移
 
