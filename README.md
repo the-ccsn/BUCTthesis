@@ -77,7 +77,8 @@ BUCTthesis （**B**eijing **U**niversity of **C**hemical **T**echnology LaTeX **
 
 ## 开源许可
 
-本项目的代码部分基于  [LaTeX Project Public License](http://www.latex-project.org/lppl.txt)（版本 1.3c 或更高）开源于 [GitHub](https://github.com/the-ccsn/BUCTthesis) 。同时为了方便国内用户，在 [Gitee](https://gitee.com/Miracle0565/BUCTthesis) 建有代码的镜像。
+本项目的代码部分基于  [LaTeX Project Public License](http://www.latex-project.org/lppl.txt)（版本 1.3c 或更高）开源于 [GitHub](https://github.com/the-ccsn/BUCTthesis) 。
+校徽、校名插图的版权归属于北京化工大学。
 
 ## 迁移
 
