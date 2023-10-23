@@ -72,6 +72,7 @@ BUCTthesis （**B**eijing **U**niversity of **C**hemical **T**echnology LaTeX **
 - 正文、参考文献条目的 `行间距20磅` 改为 `行距20磅`。
 
 ## 提问
+一些常见的问题列在本仓库的 [FAQ](https://github.com/the-ccsn/BUCTthesis/blob/master/FAQ.md) 中。
 
 关于模板的任何问题或新功能需求，欢迎提交 [GitHub Issues](https://github.com/the-ccsn/BUCTthesis/issues)。
 
