@@ -1,8 +1,10 @@
 # 常见问题
-Frequency Asked Question
+Frequently Asked Questions
 
 ## 开题报告中对阿司匹林的大段描述是怎么回事？我在仓库里根本找不到文本，应该去哪里删？
 
-这是因为这里使用了\zhlipsum提供的乱数假文，它在 https://ctan.org/pkg/zhlipsum 处提供
-您可以将\item后的内容改为您的实际文本以测试
-如果您不需要使用乱数假文，可以删除 https://github.com/the-ccsn/BUCTthesis/blob/5306faaa82f9950f6e85ebeb34c0e772cd49fd0e/demo/bachelor/mycfg.sty#L7 中的调用
+这是因为在 `buctproposal.sty` 中调用了 [`zhlipsum`](https://github.com/CTeX-org/zhlipsum) 宏包，
+并在文档 `proposal.tex` 中使用了由它提供的 `\zhlipsum` 命令，来生成所谓的“乱数假文”用以测试文档。
+（[这是该宏包在 CTAN 上的链接](https://ctan.org/pkg/zhlipsum)）
+
+如果需要删除文本，直接在 `.tex` 文件中删除或注释含有 `\zhlipsum` 的命令即可。
