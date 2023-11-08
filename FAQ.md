@@ -38,9 +38,11 @@ l.101   }
 Here is how much of TeX's memory you used:
 ```
 
-这是因为SimSun并不包含在Overleaf的环境中。可见：
+这是因为SimSun并不包含在Overleaf的环境中（详细的支持列表可见[Overleaf帮助文档](https://www.overleaf.com/learn/latex/Questions/Which_OTF_or_TTF_fonts_are_supported_via_fontspec%3F#Chinese)）。相关讨论可见：
 
 * https://tex.stackexchange.com/questions/685154/how-to-import-chinese-font-simsun-on-overleaf
 * https://www.cnblogs.com/shenxiaolin/p/12207345.html
+* https://github.com/CasperVector/pkuthss/issues/28
+* https://github.com/latexstudio/CUMCMThesis/issues/26
 
 建议在本地Windows计算机运行
