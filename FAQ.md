@@ -8,3 +8,12 @@ Frequently Asked Questions
 （[这是该宏包在 CTAN 上的链接](https://ctan.org/pkg/zhlipsum)）
 
 如果需要删除文本，直接在 `.tex` 文件中删除或注释含有 `\zhlipsum` 的命令即可。
+
+## 在Overleaf使用的时候遇到 Package fontspec Error: The font "SimSun" cannot be found. 报错
+
+这是因为SimSun并不包含在Overleaf的环境中。可见：
+
+* https://tex.stackexchange.com/questions/685154/how-to-import-chinese-font-simsun-on-overleaf
+* https://www.cnblogs.com/shenxiaolin/p/12207345.html
+
+建议在本地Windows计算机运行
