@@ -9,7 +9,34 @@ Frequently Asked Questions
 
 如果需要删除文本，直接在 `.tex` 文件中删除或注释含有 `\zhlipsum` 的命令即可。
 
-## 在Overleaf使用的时候遇到 Package fontspec Error: The font "SimSun" cannot be found. 报错
+## 在Overleaf使用的时候遇到 `Emergency stop.` 报错
+
+报错示例：
+
+```
+<read *> 
+         
+l.31 \RequireXeTeX
+                  
+*** (cannot \read from terminal in nonstop modes)
+```
+
+处理建议：
+
+出现这种情况是因为Overleaf默认的编译器是pdfLaTeX而非XeLaTeX，您可以在Overleaf左上角“Menu/菜单”中设置默认编译器为2022版本的XeLaTeX
+
+## 在Overleaf使用的时候遇到 `Package fontspec Error: The font "SimSun" cannot be found.` 报错
+
+报错示例：
+
+```
+For immediate help type H <return>.
+ ...                                              
+                                                  
+l.101   }
+          
+Here is how much of TeX's memory you used:
+```
 
 这是因为SimSun并不包含在Overleaf的环境中。可见：
 
