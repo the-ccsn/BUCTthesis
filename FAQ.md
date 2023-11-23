@@ -41,3 +41,12 @@ Here is how much of TeX's memory you used:
 这是因为SimSun并不包含在Overleaf的环境中（详细的支持列表可见[Overleaf帮助文档](https://www.overleaf.com/learn/latex/Questions/Which_OTF_or_TTF_fonts_are_supported_via_fontspec%3F#Chinese)）。
 
 本模板默认指定了fontset=windows，您可以在main.tex中切换为fandol来解决此问题。
+
+## 我用LaTeX写了毕业论文，答辩用的PPT还要重新排版，能不能复用论文里面的LaTeX代码内容？
+
+可以。北京化工大学风格的beamer模板不止一个，可见：
+
+* https://github.com/Miracle0565/BUCT-Beamer-Theme
+* https://github.com/Livioni/Beamer-Temlate-for-BUCT (在Overleaf可直接使用)
+
+需注意，使用[北京化工大学视觉识别系统](https://www.buct.edu.cn/xywh_11378/list.htm#)需注意其版权归北京化工大学所有，属于专有资源，而非依照本项目的LPPL-1.3c协议授权。
