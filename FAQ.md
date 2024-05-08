@@ -56,3 +56,35 @@ Here is how much of TeX's memory you used:
 本模板默认指定了fontset=windows，您可以在main.tex中切换为fandol来解决此问题。
 
 ## 合规性相关
+
+### 我发现文中有很多文字是标红的，打印出来效果非常糟糕(以至于答辩老师批评我)；我想关掉它们，怎么办？
+
+您可在.tex文件的开头处修改，取消submit的注释。
+
+```
+\documentclass[
+	type = bachelor,	% bachelor | master | doctor
+	submit,
+	%openany,			% openany | openright(default)
+	fontset = windows,  % fandol | windows (normal)
+]{buctthesis}
+```
+
+### 我发现文中每个章节前都有一个空白页，而且不能靠打印丢纸解决，因为页码在这些空白页是连续的(以至于答辩老师批评我)；我想删掉它们，怎么办？
+
+您可在.tex文件的开头处修改，取消openany的注释。
+
+```
+\documentclass[
+	type = bachelor,	% bachelor | master | doctor
+	%submit,
+	openany,			% openany | openright(default)
+	fontset = windows,  % fandol | windows (normal)
+]{buctthesis}
+```
+
+### 我发现参考文献的序号是定格的，而我所在的学院（如信息科学与技术学院）给的模板中明确规定参考文献需要首行缩进两行
+
+您可在 `buctthesis.cls` 中插入特定的代码以临时解决这一问题。
+
+相关教程可参见 [BUCTthesis 参考文献控制在序号首行缩进](https://telegra.ph/BUCTthesis-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E6%8E%A7%E5%88%B6%E5%9C%A8%E5%BA%8F%E5%8F%B7%E9%A6%96%E8%A1%8C%E7%BC%A9%E8%BF%9B-05-08) 一文，其原理可参见 [BUCTthesis 中参考文献样式调整背后的原理](https://telegra.ph/BUCTthesis-%E4%B8%AD%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E6%A0%B7%E5%BC%8F%E8%B0%83%E6%95%B4%E8%83%8C%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86-05-08) 一文
