@@ -1,0 +1,67 @@
+{
+    "name": "LaTeXspaces-prebuild",
+    "image": "ghcr.io/w0n9/images/ubuntu-latex:20241008",
+    // "remoteUser": "vscode",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // "GitHub.copilot",
+                "James-Yu.latex-workshop"
+            ],
+            "settings": {
+                // "files.autoSave": "onFocusChange",
+                // "latex-workshop.latex.autoBuild.run": "onSave",
+                // "latex-workshop.latex.recipe.default": "lastUsed",
+                // "latex-workshop.latex.outDir": "./PDF",
+                "latex-workshop.showContextMenu": true, //启用上下文LaTeX菜单
+                "latex-workshop.latex.autoBuild.run": "onSave", //手动编译
+                "latex-workshop.message.error.show": false,
+                "latex-workshop.message.warning.show": false,
+                "latex-workshop.latex.recipe.default": "lastUsed", // 编译时使用上一次使用的编译指令
+                "latex-workshop.intellisense.package.enabled": true, //根据加载的包，自动完成命令或包
+                "latex-workshop.latex.recipes": [
+                    {
+                        "name": "latexmk",
+                        "tools": [
+                            "latexmk"
+                        ]
+                    }
+                ],
+                "latex-workshop.latex.tools": [
+                    {
+                        "name": "latexmk",
+                        "command": "latexmk",
+                        "args": [
+                            "-outdir=%OUTDIR%",
+                            "%DOC%"
+                        ],
+                        "env": {}
+                    }
+                ],
+                "latex-workshop.latex.clean.fileTypes": [
+                    "*.aux",
+                    "*.bbl",
+                    "*.blg",
+                    "*.idx",
+                    "*.ind",
+                    "*.lof",
+                    "*.lot",
+                    "*.out",
+                    "*.toc",
+                    "*.acn",
+                    "*.acr",
+                    "*.alg",
+                    "*.glg",
+                    "*.glo",
+                    "*.gls",
+                    "*.ist",
+                    "*.fls",
+                    "*.log",
+                    "*.fdb_latexmk"
+                ],
+                "latex-workshop.synctex.afterBuild.enabled": true,
+            }
+        }
+    },
+    "features": {}
+}
